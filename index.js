@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+const PORT = process.env.PORT || 3000;
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -22,6 +23,6 @@ app.get('/', async (req, res) => {
     }
   })
 
-app.listen(3000, () => {
- console.log("Server running on port 3000");
+app.listen(PORT, () => {
+ console.log("Server running on port ${ PORT }");
 });
