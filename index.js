@@ -11,11 +11,13 @@ app.listen(PORT, () => {
 });
 
 var pg = require('pg');
+var pool = new pg.Pool();
 
-pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+pool.connect(process.env.DATABASE_URL, function(err, client, done) {
   client.query('SELECT * FROM merchant', function(err, result) {
     done();
     if(err) return console.error(err);
     console.log(result.rows);
   });
 });
+
