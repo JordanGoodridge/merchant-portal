@@ -21,14 +21,17 @@ client.query('SELECT * FROM merchant;', (err, res) => {
   client.end();
 });
 
+app.configure(function(){
+  app.use(express.bodyParser());
+  app.use(app.router);
+});
 
-app.use(express.json())
 app.get('/', function(request, response) {
 	response.send('Hello World!');
 });
 
 app.post("/merchant-signup", function(request, response) {
-	var new_merchant = json(request.body);
+	var new_merchant = request.body;
 	console.log(new_merchant);
 });
 
