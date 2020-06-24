@@ -1,4 +1,5 @@
 var express = require("express");
+const bodyParser = require("body-parser");
 var app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -21,9 +22,11 @@ client.query('SELECT * FROM merchant;', (err, res) => {
   client.end();
 });
 
-app.configure(function(){
-  app.use(express.bodyParser());
-  app.use(app.router);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.listen(PORT, () => {
+ console.log("Server running on port " + PORT);
 });
 
 app.get('/', function(request, response) {
@@ -36,9 +39,6 @@ app.post("/merchant-signup", function(request, response) {
 });
 
 
-app.listen(PORT, () => {
- console.log("Server running on port " + PORT);
-});
 
 
 
