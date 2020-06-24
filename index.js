@@ -25,8 +25,8 @@ app.get('/', function(request, response) {
 	response.send('Hello World!');
 });
 
-app.post("/merchant-portal", function(request, response) {
-	var new_merchant = req.body;
+app.post("/merchant-signup", function(request, response) {
+	var new_merchant = request.body;
 	console.log(new_merchant);
 });
 
