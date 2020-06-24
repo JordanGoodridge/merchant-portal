@@ -53,7 +53,9 @@ app.post("/merchant-login", function(request, response) {
   	if (err) throw err;
   	  console.log(res);	
 	  if(!res.length){
-		response.send("Login failed");
+	  	if(res){
+			response.send("Login failed");
+	  	}
 	  }
 	  else{
 	  for (let row of res.rows) {
