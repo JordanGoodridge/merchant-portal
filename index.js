@@ -58,9 +58,9 @@ app.post("/merchant-login", function(request, response) {
 	    console.log(JSON.stringify(row));
 	  }
 	  client.end();
+	  response.send("Logged in successfully")	
 	}
 	});
-	response.send("Logged in successfully")
 });
 
 
