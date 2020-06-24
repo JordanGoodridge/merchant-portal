@@ -52,16 +52,14 @@ app.post("/merchant-login", function(request, response) {
 	client.query(login_query, (err, res) => {
   	if (err) throw err;
   	  console.log(res);	
-	  if(!res.length){
-	  	if(res){
-			response.send("Login failed");
-	  	}
+	  if(res.rowCount == 0){
+	  	response.send("Login failed");		
 	  }
 	  else{
-	  for (let row of res.rows) {
-	    console.log(JSON.stringify(row));
-	  }
-	  response.send("Logged in successfully");		
+		  for (let row of res.rows) {
+		    console.log(JSON.stringify(row));
+		  }
+		  response.send("Logged in successfully");		
 	  }
 	});
 });
