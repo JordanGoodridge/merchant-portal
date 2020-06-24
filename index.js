@@ -22,10 +22,12 @@ client.query('SELECT * FROM merchant;', (err, res) => {
 });
 
 app.get('/', function(request, response) {
+	response.send('Hello World!');
 });
 
 app.post("/merchant-portal", function(request, response) {
-	response.send('Hello World!');	
+	var new_merchant = req.body;
+	console.log(new_merchant);
 });
 
 
