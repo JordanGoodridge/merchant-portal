@@ -1,5 +1,7 @@
 var express = require("express");
 const bodyParser = require("body-parser");
+const path = require('path');
+
 var app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -24,13 +26,19 @@ client.query('SELECT * FROM merchant;', (err, res) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.listen(PORT, () => {
  console.log("Server running on port " + PORT);
 });
 
-app.get('/', function(request, response) {
-	response.send('Hello World!');
+app.get('/', function (req, res, next) {
+  res.render('index', { title: 'Front Page' });
 });
+
+
 
 app.post("/merchant-signup", function(request, response) {
 	var new_merchant = request.body;
