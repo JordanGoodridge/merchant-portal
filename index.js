@@ -42,25 +42,24 @@ app.post("/merchant-signup", function(request, response) {
 	    console.log(JSON.stringify(row));
 	  }
 	});
-	response.send("Account created")
+	response.send("Account created");
 });
 
 app.post("/merchant-login", function(request, response) {
 	var new_merchant = request.body;
-	var login_query = "SELECT email FROM merchant WHERE email='" + request.body.email + "'AND password='" + request.body.password + "';"
+	var login_query = "SELECT email FROM merchant WHERE email='" + request.body.email + "'AND password='" + request.body.password + "';";
 	console.log(login_query);	
 	client.query(login_query, (err, res) => {
-  	if (err){
-  		response.send("Login failed")
-  	}
-  	else{
+	if(!Object.keys(res).length){
+		response.send("Login failed");
+	}
+  	if (err) throw err;
 	  for (let row of res.rows) {
 	    console.log(JSON.stringify(row));
 	  }
 	  client.end();
-	  response.send("Logged in successfully")	
-	}
 	});
+	response.send("Logged in successfully");
 });
 
 
