@@ -41,9 +41,21 @@ app.post("/merchant-signup", function(request, response) {
 	  for (let row of res.rows) {
 	    console.log(JSON.stringify(row));
 	  }
-	  client.end();
 	});
 	response.send("Account created")
+});
+
+app.post("/merchant-login", function(request, response) {
+	var new_merchant = request.body;
+	var signup_query = "SELECT email FROM merchant WHERE email='" + request.body.email + "', password='" + request.body.password + "';"
+	client.query(signup_query, (err, res) => {
+  	if (err) throw err;
+	  for (let row of res.rows) {
+	    console.log(JSON.stringify(row));
+	  }
+	  client.end();
+	});
+	response.send("Logged in successfully")
 });
 
 
