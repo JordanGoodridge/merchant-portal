@@ -53,13 +53,13 @@ app.post("/merchant-login", function(request, response) {
   	if (err) throw err;
   	  console.log(res);	
 	  if(res.rowCount == 0){
-	  	response.send("Login failed");		
+	  	response.json({success: false});		
 	  }
 	  else{
 		  for (let row of res.rows) {
 		    console.log(JSON.stringify(row));
 		  }
-		  response.send("Logged in successfully");		
+		  response.json( {success: true, email: request.body.email});		
 	  }
 	});
 });
