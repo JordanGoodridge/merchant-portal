@@ -51,6 +51,7 @@ app.post("/merchant-login", function(request, response) {
 	console.log(login_query);	
 	client.query(login_query, (err, res) => {
   	if (err) throw err;
+  	  console.log(res);	
 	  if(!Object.keys(res).length){
 		response.send("Login failed");
 	  }
