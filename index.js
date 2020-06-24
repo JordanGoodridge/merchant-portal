@@ -52,7 +52,7 @@ app.post("/merchant-login", function(request, response) {
 	client.query(login_query, (err, res) => {
   	if (err) throw err;
   	  console.log(res);	
-	  if(!Object.keys(res).length){
+	  if(!res.length){
 		response.send("Login failed");
 	  }
 	  else{
@@ -60,7 +60,6 @@ app.post("/merchant-login", function(request, response) {
 	    console.log(JSON.stringify(row));
 	  }
 	  response.send("Logged in successfully");		
-	  client.end();
 	  }
 	});
 });
