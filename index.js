@@ -26,7 +26,7 @@ app.get('/', function(request, response) {
 });
 
 app.post("/merchant-signup", function(request, response) {
-	var new_merchant = request.body;
+	var new_merchant = json(request.body);
 	console.log(new_merchant);
 });
 
