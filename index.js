@@ -50,15 +50,17 @@ app.post("/merchant-login", function(request, response) {
 	var login_query = "SELECT email FROM merchant WHERE email='" + request.body.email + "'AND password='" + request.body.password + "';";
 	console.log(login_query);	
 	client.query(login_query, (err, res) => {
-	if(!Object.keys(res).length){
-		response.send("Login failed");
-	}
   	if (err) throw err;
+	  if(!Object.keys(res).length){
+		response.send("Login failed");
+	  }
+	  else{
 	  for (let row of res.rows) {
 	    console.log(JSON.stringify(row));
 	  }
 	  response.send("Logged in successfully");		
 	  client.end();
+	  }
 	});
 });
 
