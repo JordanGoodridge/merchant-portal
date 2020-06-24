@@ -21,6 +21,8 @@ client.query('SELECT * FROM merchant;', (err, res) => {
   client.end();
 });
 
+
+app.use(express.json())
 app.get('/', function(request, response) {
 	response.send('Hello World!');
 });
