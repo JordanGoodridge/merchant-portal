@@ -65,6 +65,28 @@ app.post("/merchant-login", function(request, response) {
 });
 
 
+app.put("/merchant-add-item", function(request, response) {
+	var new_merchant = request.body;
+	var login_query = "SELECT merch_id,name,price FROM catalogue WHERE merch_id=" + request.body.merch_id + ";";
+	console.log(login_query);	
+	client.query(login_query, (err, res) => {
+  	if (err) throw err;
+  	  console.log(res);	
+	  if(res.rowCount == 0){
+	  	response.json({success: false});		
+	  }
+	  else{
+		  for (let row of res.rows) {
+		    var jsonRow = (JSON.stringify(row));
+		    var jsonObject.push(jsonRow);
+		  }
+		  console.log(jsonRow);
+		  response.json( {success: true, email: request.body.email});		
+	  }
+	});
+});
+
+
 
 
 
