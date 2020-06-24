@@ -22,8 +22,12 @@ client.query('SELECT * FROM merchant;', (err, res) => {
 });
 
 app.get('/', function(request, response) {
-  response.send('Hello World!');
 });
+
+app.post("/merchant-portal", function(request, response) {
+	response.send('Hello World!');	
+});
+
 
 app.listen(PORT, () => {
  console.log("Server running on port " + PORT);
