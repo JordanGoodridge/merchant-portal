@@ -19,7 +19,6 @@ client.query('SELECT * FROM merchant;', (err, res) => {
   for (let row of res.rows) {
     console.log(JSON.stringify(row));
   }
-  client.end();
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,7 +35,6 @@ app.get('/', function(request, response) {
 app.post("/merchant-signup", function(request, response) {
 	var new_merchant = request.body;
 	console.log(request.body.email);
-	client.connect();
 
 	client.query("INSERT INTO merchant (name, longitude, latitude, email, password) VALUES" + request.body.store_name + "," + request.body.longitude + "," + request.body.latitude + "," + request.body.email + "," + request.body.password + ";", (err, res) => {
   	if (err) throw err;
