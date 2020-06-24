@@ -43,7 +43,7 @@ app.post("/merchant-signup", function(request, response) {
 	  }
 	  client.end();
 	});
-	result.send("Account created")
+	response.send("Account created")
 });
 
 
