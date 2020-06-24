@@ -1,0 +1,317 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #00B7FF;
+}
+
+a {
+  color: #00B7FF;
+}
+.submit_2{
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, rgb(173, 77, 13), rgb(212, 107, 46));
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  margin-left: 35%;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  display: none;
+}
+.counter_div{
+  background-color:#B3C6C9;
+  width: 800px;
+  height: auto;
+  margin: 7em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+  padding-bottom: 20px;
+
+}
+.main {
+  background-color: #FFFFFF;
+  width: 400px;
+  height: 500px;
+  margin: 7em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgb(51, 102, 153)
+}
+
+
+.main#table_2 {
+  background-color: #FFFFFF;
+  width: 400px;
+  height: auto;
+  margin: 7em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgb(51, 102, 153)
+}
+
+form.form1 {
+  padding-top: 0px;
+}
+.button_2 {
+  background-color: #4CAF50; /* Green */
+  height:50px; 
+  width:100px; 
+  margin: -20px -50px; 
+  position:relative;
+  top:50%; 
+  left:50%;
+}
+.button {
+  background-color: #4CAF50; /* Green */
+  height:50px; 
+  width:100px; 
+  margin: -20px -50px; 
+  position:relative;
+  top:50%; 
+  left:20%;
+}
+.button_3 {
+  background-color: #4CAF50; /* Green */
+  height:50px; 
+  width:100px; 
+  margin: -20px -50px; 
+  position:relative;
+  top:50%; 
+  left:80%;
+}
+.log_out{
+  background-color: #4CAF50; /* Green */
+  height:20px; 
+  width:100px; 
+  margin: -20px -50px; 
+  position:relative;
+  top:75%; 
+  left:80%;
+
+}
+.un {
+width: 76%;
+color: rgb(38, 50, 56);
+font-weight: 700;
+font-size: 14px;
+letter-spacing: 1px;
+background: rgba(136, 126, 126, 0.04);
+padding: 10px 20px;
+border: none;
+border-radius: 20px;
+outline: none;
+box-sizing: border-box;
+border: 2px solid rgba(0, 0, 0, 0.02);
+margin-bottom: 50px;
+margin-left: 46px;
+text-align: center;
+margin-bottom: 27px;
+font-family: 'Ubuntu', sans-serif;
+}
+
+.sign {
+  padding-top: 40px;
+  background-color: rgb(230, 247, 255);
+  padding-bottom: 40px;
+  color: rgb(0, 153, 204);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+  border-bottom: 2px solid rgb(0, 153, 204);
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+}
+
+.sign_in {
+  padding-top: 5px;
+  color: rgb(0, 153, 204);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.small_l {
+  color: rgb(0, 105, 153);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+}
+.submit {
+  cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, rgb(102, 153, 255), rgb(0, 153, 204));
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 35%;
+    font-size: 15px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  }
+  .un_2 {
+    width: 10%;
+    color: rgb(36, 209, 59);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(80, 247, 2, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+   
+    }
+    
+
+
+    .log_out {
+        border-radius: 5em;
+        color: #fff;
+        background: linear-gradient(to right, rgb(102, 153, 255), rgb(0, 153, 204));
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 15px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+        width: 150px;
+        height: 40px;
+      }
+    
+
+  
+
+      #counter_table {
+        margin-top: 3%;
+        margin-left: 10%;
+      }
+
+      .count_cell {
+        font-size: 20px;
+        color: BLACK;
+        font-family: 'Ubuntu', sans-serif;
+        padding-right: 15px;
+      }
+
+
+
+      .counter_input {
+        color: rgb(0, 153, 204);
+        font-size: 15px;
+        letter-spacing: 1px;
+        background-color: rgb(255, 255, 255); /* Green */
+        border-radius: 1em;
+        border:1px solid rgb(0, 153, 204);
+        box-sizing: border-box;
+        text-align: center;
+        font-family: 'Ubuntu', sans-serif;
+        margin-left: 20px;
+        width: 25%;
+        height: 2.5em;
+        position: relative;
+        border-style:solid;
+        padding-left:10px;
+        }
+
+        .add_counter_button {
+          background-color: rgb(255, 255, 255); /* Green */
+          border-radius: 1em;
+          position:relative;
+          margin-left: 24%;
+          border-color:rgb(0, 153, 204);
+          font-size: 15px;
+          padding: 7px;
+          color: rgb(0, 153, 204);
+          float: left;
+          width: 25%;
+          height: 2.5em;
+
+        }
+  
+
+        #text_value{
+          color:black;
+        }
+
+
+        .count_cell_inc button{
+          background-color: rgb(255, 255, 255); /* Green */
+          border-radius: 1em;
+          position:relative;
+          margin-left: 24%;
+          border-color:rgb(0, 153, 204);
+          font-size: 15px;
+          padding: 7px;
+          color: rgb(0, 153, 204);
+          float: left;
+          width: 50px;
+          font-family: 'Ubuntu', sans-serif;
+
+          height: 2.5em;
+          margin-left: 20px;
+        }
+
+        .count_cell_dec button{
+          background-color: rgb(255, 255, 255); /* Green */
+          border-radius: 1em;
+          position:relative;
+          margin-left: 24%;
+          border-color:rgb(0, 153, 204);
+          font-size: 15px;
+          padding: 7px;
+          font-family: 'Ubuntu', sans-serif;
+
+          color: rgb(0, 153, 204);
+          float: left;
+          width: 50px;
+          height: 2.5em;
+          margin-left: 20px;
+        }
+        
+
+        .count_cell_del button{
+          background-color: rgb(255, 255, 255); /* Green */
+          border-radius: 1em;
+          position:relative;
+          margin-left: 24%;
+          border-color:rgb(0, 153, 204);
+          font-size: 15px;
+          padding: 7px;
+          font-family: 'Ubuntu', sans-serif;
+
+          color: rgb(0, 153, 204);
+          float: left;
+          width: 70px;
+          height: 2.5em;
+          margin-left: 20px;
+        }
+
+        .count_cell_share button{
+          background-color: rgb(255, 255, 255); /* Green */
+          border-radius: 1em;
+          position:relative;
+          margin-left: 24%;
+          border-color:rgb(0, 153, 204);
+          font-size: 15px;
+          padding: 7px;
+          color: rgb(0, 153, 204);
+          float: left;
+          width: 70px;
+          height: 2.5em;
+          margin-left: 20px;
+        }

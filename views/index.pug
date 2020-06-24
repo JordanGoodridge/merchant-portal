@@ -1,0 +1,68 @@
+extends layout
+
+block content
+  <div class = 'game_info' id = "table_4" style = "padding-left:14%; padding-right:33%">
+    <div class = 'welcome' style = "display:block-inline"> 
+      <h4 style = "float:left; padding-right: 40px;">Welcome to SpendSafe: </h4> 
+      <h4  type="text" id ="in_game_username"> </h4>
+    </div>
+    
+    
+    <button class = "log_out" id = "log_out">Log Out</button>
+    
+  </div>
+
+  <div class="counter_div" id = "table_3">
+
+    <div class = "sign"> 
+      <p class="counter_header" align="center" >Item</p>
+      <input class = "counter_input" type="number" align="center" id = "new_counter_value" placeholder="Enter Counter Value">
+
+      <button class="add_counter_button" id = "add_counter">Add Item</button>
+
+    </div>
+
+    <table class = "counter_table" id = "counter_table">
+
+    </table>
+
+
+
+  </div>
+
+   <div class="main" id = "table_2">
+
+    <h2 class="sign" align="center" >Sign up as a SpendSafe Merchant!</h2>
+    <p class="sign_in" align="center" >Sign up</p>
+    
+    <form class="form1" onSubmit="return false;">
+
+    <p class="small_l" align="center" >Choose Username:</p>
+    <input class="un " type="text" align="center" id = "sg_up_us" placeholder="Username">
+
+    <p class="small_l" align="center" id = "text_0">Enter Password:</p>
+    <input class="un " type="password" align="center" id = "sg_up_ps" placeholder="Password">
+
+    <p class="small_l" align="center" >Confirm Password:</p>
+    <input class="un " type="password" align="center" id ="sg_up_ps_2" placeholder="Confirm Password">
+    
+    <p class="small_l" align="center" >Enter Counter Amount:</p>
+    <input class="un " type="number" align="center" id = "sg_up_counter" placeholder="Enter Counter Value">
+    
+    <a class="submit" align="center" id = "submit_sg_up">submit</a>  
+
+  </div>
+
+  <div class="main" id = "table_1">
+    <h2 class="sign" align="center" >Welcome to SpendSafe Merchant Portal</h2>
+    <p class="sign_in" align="center" id = "text_0">Sign in</p>
+    <form class="form1" onSubmit="return false;">
+    <input class="un " type="text" align="center" id = "sg_in_us" value="Username">
+    <input class="un " type="password" align="center" id = "sg_in_ps" value="Password">
+    <a class="submit" align="center" id = "sin_btn">Sign in</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a class="submit" align="center" id = "sup_btn">Sign Up</a>
+  </div>
