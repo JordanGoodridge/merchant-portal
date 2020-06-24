@@ -35,7 +35,17 @@ app.get('/', function(request, response) {
 
 app.post("/merchant-signup", function(request, response) {
 	var new_merchant = request.body;
-	console.log(new_merchant);
+	console.log(request.body.email);
+
+
+	client.query('SELECT * FROM merchant;', (err, res) => {
+  	if (err) throw err;
+	  for (let row of res.rows) {
+	    console.log(JSON.stringify(row));
+	  }
+	  client.end();
+	});
+	result.send("Account created")
 });
 
 
