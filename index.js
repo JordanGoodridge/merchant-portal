@@ -21,7 +21,7 @@ const client = new Client({
 
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.set('views', path.join(__dirname, 'views'));
@@ -177,7 +177,6 @@ app.delete("/merchant-item", function(request, response) {
 app.get("/nearby-merchants", function(request, response) {
 	var nearby_query = "SELECT name, longitude, latitude FROM merchant;"
 	console.log(nearby_query);	
-	console.log(request.body);	
 	client.query(nearby_query, (err, res) => {
   	if (err) throw err;
 	  if(res.rowCount == 0){
@@ -187,8 +186,9 @@ app.get("/nearby-merchants", function(request, response) {
 	  for (let row of res.rows) {
 	    var jsonRow = (JSON.stringify(row))
 	    var jsonObj = JSON.parse(jsonRow)
-		var distance = geolib.getDistance(request.body, {longitude: jsonObj.longitude, latitude: jsonObj.latitude})
+		var distance = geolib.getDistance({longitude: request.query.longitude, latitude: request.query.latitude}, {longitude: jsonObj.longitude, latitude: jsonObj.latitude})
 		console.log(row)
+		console.log(distance)	
 		if(distance <= 1000){
 			nearby_stores.push(jsonObj)
 		}
