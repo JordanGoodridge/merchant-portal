@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #00B7FF;
 }
@@ -7,6 +7,104 @@ body {
 a {
   color: #00B7FF;
 }
+
+.header_view{
+  width: 100%;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+
+  background-color: #778da9;
+}
+
+.welcome_message{
+  display:block-inline;
+  color:white;
+  margin-left: 15%;
+}
+
+.log_out_button{
+  background-color: rgb(65, 90, 119); 
+  color: white;
+  border-radius: 12px;
+  border: 0px solid rgb(200, 200, 200);
+  height:2.5em;
+  width: 10em;
+  position:relative;
+  margin-left: 80%; 
+  margin-top: -1.5%;
+  font-size: 20px;
+  
+
+}
+
+#welcome_text{
+  float:left;
+  margin-right: 2em;
+  font-size: 20px;
+}
+
+#in_game_username{
+  margin:0;
+  font-size: 20px;
+}
+
+.add_item_header{
+  float:left;
+  padding-left: 20%;
+  margin:0;
+  color: #415A77;
+  font-size: 25px;
+}
+
+.add_item_button {
+  background-color: rgb(65, 90, 119); /* Green */
+  border-radius: 12px;
+  border:1px solid rgb(27, 38, 59);
+
+  position:relative;
+  font-size: 15px;
+  padding: 7px;
+  color: rgb(255, 255, 255);
+  margin-left: 20px;
+  width: 20%;
+  height: 2.5em;
+  margin-top: -1px;
+}
+
+.item_entry_wrapper{
+  float:right;
+  width: 70%;
+  padding-right: 20%;
+}
+
+.item_input {
+  color: rgb(13, 27, 42);
+  font-size: 15px;
+  letter-spacing: 1px;
+  background-color: rgb(255, 255, 255); /* Green */
+  border-radius: 1em;
+  border:1px solid rgb(27, 38, 59);
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  margin-left: 20px;
+  width: 20%;
+  height: 2.5em;
+  position: relative;
+  border-style:solid;
+  padding-left:10px;
+}
+
+.item_entry_view {
+  padding-top: 2.5%;
+  background-color: rgb(224, 225, 221);
+  padding-bottom: 2%;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+
+}
+
 .submit_2{
   cursor: pointer;
   border-radius: 5em;
@@ -86,16 +184,7 @@ a {
   top:50%; 
   left:80%;
 }
-.log_out{
-  background-color: #4CAF50; /* Green */
-  height:20px; 
-  width:100px; 
-  margin: -20px -50px; 
-  position:relative;
-  top:75%; 
-  left:80%;
 
-}
 .un {
 width: 76%;
 color: rgb(38, 50, 56);
@@ -216,39 +305,8 @@ font-family: 'Ubuntu', sans-serif;
 
       /* https://coolors.co/0d1b2a-1b263b-415a77-778da9-e0e1dd */
 
-      .item_input {
-        color: rgb(13, 27, 42);
-        font-size: 15px;
-        letter-spacing: 1px;
-        background-color: rgb(255, 255, 255); /* Green */
-        border-radius: 1em;
-        border:1px solid rgb(27, 38, 59);
-        box-sizing: border-box;
-        text-align: center;
-        font-family: 'Ubuntu', sans-serif;
-        margin-left: 20px;
-        width: 10%;
-        height: 2.5em;
-        position: relative;
-        border-style:solid;
-        padding-left:10px;
-        }
 
-        .add_item_button {
-          background-color: rgb(65, 90, 119); /* Green */
-          border-radius: 12px;
-          border: 0px solid rgb(200, 200, 200);
 
-          position:relative;
-          margin-left: 24%;
-          font-size: 15px;
-          padding: 7px;
-          color: rgb(255, 255, 255);
-          float: left;
-          width: 5%;
-          height: 2.5em;
-
-        }
   
 
         #text_value{

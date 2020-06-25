@@ -218,39 +218,32 @@ window.onload = function () {
 
     }
 
-    function add_counter(value) {
+    function add_item(item_name, item_price) {
         let count_array;
-        return fetch('/Counters', {
+        return fetch('/merchant-item', {
             headers: { 'Content-Type': 'application/json' },
-            method: 'get',
-        })
-            .then(function(response)  {
-                return response.json();
-            }).then(function(response){
-                console.log(response.body)
-                count_array = response.body;
-                count_array.push(parseInt(value, 10));
-                return fetch('Counters', {
-                    headers: { 'Content-Type': 'application/json' },
-                    method: 'put',
-                    body: JSON.stringify(count_array)
-                }).then(function(response) {
-                    return response.json();
-                }).then(function(response){
-                    console.log("In counter add response");
-                    console.log(response.countArray);
-                    populate_item_table(response.countArray);
-                })
+            method: 'post',
+            body: JSON.stringify({
+                item: item_name, 
+                price: item_price,
+                // merch_id: localStorage.email
+                merch_id: 1
+
+            })
+        }).then(function(response)  {
+            console.log(response);
+            return response.json();
             })
 
     }
 
-    document.getElementById('add_counter')
+    document.getElementById('add_item_button')
         .addEventListener("click", function (e) {
-            console.log("Attempting to add a counter");
-            let counter_value = this.previousElementSibling.value;
-            if(counter_value != "" && counter_value != undefined){
-                add_counter(counter_value);
+            let item_name = document.getElementById("item_name").value;
+            let item_price = document.getElementById("item_price").value;
+            if(item_name != "" && item_name != undefined && item_price != 0 && item_price != undefined){
+                add_item(item_name, item_price);
+                console.log(`Attempting to add item (${item_name}) of price (${item_price})`)
             }else {
                 window.alert("Error:  Enter counter value");
             }
@@ -322,9 +315,16 @@ window.onload = function () {
                 if (res['status'] == 409) {
                     window.alert('Error:  Account Doesnt Exist or Incorrect Credentials')
                 }
-                get_user().then(function(res){
-                    console.log(res)
-                })
+                console.log("Signin Sucess")
+                localStorage.email = userEmail;
+                console.log("Useremail: " + userEmail)
+                console.log(res)
+                // get_user().then(function(res){
+                //     console.log("Signin Sucess")
+                //     localStorage.email = userEmail;
+                //     console.log("Useremail: " + userEmail)
+                //     console.log(res)
+                // })
                 return res
 
             })
@@ -347,11 +347,11 @@ window.onload = function () {
     var login_view = document.getElementById("login_view");
     var registration_view = document.getElementById("registration_view")
     var item_entry_view = document.getElementById("item_entry_view")
-    var log_out = document.getElementById("log_out")
+    var log_out_button = document.getElementById("log_out_button")
     var header_view = document.getElementById("header_view")
     registration_view.style.display = "none"
     item_entry_view.style.display = "none"
-    log_out.style.display = "none"
+    log_out_button.style.display = "none"
     header_view.style.display = "none"
 
     //after clicking signUp button
@@ -400,8 +400,6 @@ window.onload = function () {
         .addEventListener("click", function (e) {
             username = document.getElementById("log_email")
             pass = document.getElementById("log_pass")
-            console.log(username.value)
-            console.log(pass.value)
 
             signIn(username.value, pass.value)
                 .then(function (res) {
@@ -410,20 +408,23 @@ window.onload = function () {
                     if (res['status'] == 200) {
                         login_view.style.display = "none"
                         item_entry_view.style.display = "block"
-                        log_out.style.display = "block"
+                        log_out_button.style.display = "block"
                         header_view.style.display = "block"
                         //display name
                         document.getElementById("in_game_username").innerHTML = username.value
                         console.log(username.value);
-                        console.log(username.countArray);
+                        console.log("Login Sucess")
 
+
+                    } else {
+                        console.log("Login Failed")
                     }
                 })
 
         })
 
         //after clicking log_out, delele session
-    document.getElementById("log_out")
+    document.getElementById("log_out_button")
         .addEventListener("click", function (e) {
             log_off().then(function(res){
                 item_entry_view.style.display = "none"

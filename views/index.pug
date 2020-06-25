@@ -1,26 +1,33 @@
 extends layout
 
 block content
-  <div class = 'game_info' id = "header_view" style = "padding-left:14%; padding-right:33%">
-    <div class = 'welcome' style = "display:block-inline"> 
-      <h4 style = "float:left; padding-right: 40px;">Welcome to SpendSafe: </h4> 
-      <h4  type="text" id ="in_game_username"> </h4>
+  <div class = 'header_view' id = "header_view">
+    <div class = "header_wrapper">
+      
+      <div class = 'welcome_message' id = "welcome_message"> 
+        <h4 id = "welcome_text" >Welcome to SpendSafe: </h4> 
+        <h4  type="text" id ="in_game_username"> </h4>
+      </div>
+      
+      <button class = "log_out_button" id = "log_out_button">Log Out</button>
+
     </div>
     
     
-    <button class = "log_out" id = "log_out">Log Out</button>
     
   </div>
   //- <div class="counter_div" id = "table_3">
+  
   <div class="item_entry_view" id = "item_entry_view">
 
-    <div class = "sign"> 
-      <p class="counter_header" align="center" >Item</p>
-      <input class = "item_input" type="number" align="center" id = "item_name" placeholder="Item Name">
+    <h4 class="add_item_header" align="center" >Add Items: </h4>
+
+    <div class = "item_entry_wrapper"> 
+      <input class = "item_input" type="text" align="center" id = "item_name" placeholder="Item Name">
       <input class = "item_input" type="number" align="center" id = "item_price" placeholder="Item Price">
       <input class = "item_input" type="number" align="center" id = "item_imnage" placeholder="Image Upload Placeholder">
 
-      <button class="add_item_button" id = "add_counter">Add Item</button>
+      <button class="add_item_button" id = "add_item_button">Add Item</button>
 
     </div>
 
