@@ -13,13 +13,13 @@ var getCoords;
 // PrintNearestStore = async function(session, lat, lon) {}
 // // now has a function as value, but it's too late
 
-async function getCoords(address) {
+async function getCoords(address_lookup) {
     return new Promise(function(resolve, reject) {
     let coords;
     const client = new Client({});
     client.geocode({
         params: {
-          address: "222 Kent Road Ardmore PA 19003",
+          address: address_lookup,
           key: mapsKey,
         },
         timeout: 1000, // milliseconds
