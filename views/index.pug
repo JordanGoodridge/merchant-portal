@@ -32,15 +32,17 @@ block content
 
   </div>
 
-   <div class="main" id = "registration_view">
+   <div class="reg_view" id = "registration_view">
 
     <h2 class="sign" align="center" >Sign up as a SpendSafe Merchant!</h2>
     <p class="sign_in" align="center" >Sign up</p>
     
     <form class="form1" onSubmit="return false;">
+  <p class="small_l" align="center" >Enter Name:</p>
+    <input class="un " type="text" align="center" id = "reg_name" placeholder="Name">
 
-    <p class="small_l" align="center" >Choose Username:</p>
-    <input class="un " type="text" align="center" id = "reg_username" placeholder="Username">
+    <p class="small_l" align="center" >Enter Email:</p>
+    <input class="un " type="text" align="center" id = "reg_email" placeholder="Email">
 
     <p class="small_l" align="center" id = "text_0">Enter Password:</p>
     <input class="un " type="password" align="center" id = "reg_pass" placeholder="Password">
@@ -48,23 +50,27 @@ block content
     <p class="small_l" align="center" >Confirm Password:</p>
     <input class="un " type="password" align="center" id ="reg_conf_pass" placeholder="Confirm Password">
     
+    <p class="small_l" align="center" >Store Name</p>
+    <input class="un " type="text" align="center" id = "reg_store" placeholder="Store Name">
+
+
     <p class="small_l" align="center" >Store Street Address</p>
-    <input class="un " type="number" align="center" id = "reg_street" placeholder="Street">
+    <input class="un " type="text" align="center" id = "reg_street" placeholder="Street">
 
     <p class="small_l" align="center" >City</p>
-    <input class="un " type="number" align="center" id = "reg_street" placeholder="City">
-   <p class="small_l" align="center" >State</p>
-    <input class="un " type="number" align="center" id = "reg_state" placeholder="State">
+    <input class="un " type="text" align="center" id = "reg_city" placeholder="City">
+    <p class="small_l" align="center" >State</p>
+    <input class="un " type="text" align="center" id = "reg_state" placeholder="State">
 
 
     <p class="small_l" align="center" >Zipcode</p>
     <input class="un " type="number" align="center" id = "reg_zip" placeholder="Zipcode">
     
-    <a class="submit" align="center" id = "submit_sg_up">submit</a>  
+    <a class="submit" align="center" id = "submit_signup_button">submit</a>  
 
   </div>
 
-  <div class="main" id = "login_view">
+  <div class="login_view" id = "login_view">
     <h2 class="sign" align="center" >Welcome to SpendSafe Merchant Portal</h2>
     <p class="sign_in" align="center" id = "text_0">Sign in</p>
     <form class="form1" onSubmit="return false;">
