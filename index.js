@@ -105,17 +105,18 @@ app.post("/merchant-login", function(request, response) {
 		    console.log(JSON.stringify(row));
     		output = JSON.stringify(row);	
 		  }
+		  console.log("Output:");
 		  console.log(output)
-		  response.json(output);		
+		  response.status(200).json(output);		
 	  }
 	});
 });
 
 //Takes merch_id and returns array of json of merchant items. returns 404 if failed
 app.get("/merchant-items", function(request, response) {
-	var get_items_query = "SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=" + request.body.merch_id + ";";
-	console.log(get_items_query);	
-	client.query(get_items_query, (err, res) => {
+	var login_query = "SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=" + request.query.merch_id + ";";
+	console.log(login_query);	
+	client.query(login_query, (err, res) => {
 	  if(res.rowCount == 0){
 		response.sendStatus(404)
 		
@@ -173,6 +174,7 @@ app.delete("/merchant-item", function(request, response) {
 	response.sendStatus(200)	
 });
 
+
 //gets merchants within 1000m takjes in long lat
 app.get("/nearby-merchants", function(request, response) {
 	var nearby_query = "SELECT name, longitude, latitude FROM merchant;"
@@ -197,6 +199,9 @@ app.get("/nearby-merchants", function(request, response) {
 		response.send(nearby_stores)
 	});
 });
+
+
+
 
 
 
