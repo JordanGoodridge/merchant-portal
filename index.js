@@ -173,7 +173,7 @@ app.delete("/merchant-item", function(request, response) {
 	response.sendStatus(200)	
 });
 
-//gets merchants within 1000m
+//gets merchants within 1000m takjes in long lat
 app.get("/nearby-merchants", function(request, response) {
 	var nearby_query = "SELECT name, longitude, latitude FROM merchant;"
 	console.log(nearby_query);	
