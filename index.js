@@ -186,15 +186,15 @@ app.get("/nearby-merchants", function(request, response) {
 	  for (let row of res.rows) {
 	    var jsonRow = (JSON.stringify(row))
 	    var jsonObj = JSON.parse(jsonRow)
-		var distance = geolib.getDistance({longitude: request.query.longitude, latitude: request.query.latitude}, {longitude: jsonObj.longitude, latitude: jsonObj.latitude})
+		var distance = geolib.getDistance({latitude: request.query.latitude, longitude: request.query.longitude}, {latitude: jsonObj.latitude, longitude: jsonObj.longitude})
 		console.log(row)
 		console.log(distance)	
-		if(distance <= 1000){
+		if(distance <= 2000){
 			nearby_stores.push(jsonObj)
 		}
 	  }
 	  	console.log(nearby_stores)
-		response.json(nearby_stores)
+		response.send(nearby_stores)
 	});
 });
 
