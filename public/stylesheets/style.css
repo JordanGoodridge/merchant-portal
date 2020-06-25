@@ -33,7 +33,18 @@ a {
   padding-bottom: 20px;
 
 }
-.main {
+.reg_view {
+  background-color: #FFFFFF;
+  width: 400px;
+  /* height: 500px; */
+  margin: 7em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgb(51, 102, 153)
+}
+
+
+
+.login_view {
   background-color: #FFFFFF;
   width: 400px;
   height: 500px;
@@ -43,17 +54,10 @@ a {
 }
 
 
-.main#table_2 {
-  background-color: #FFFFFF;
-  width: 400px;
-  height: auto;
-  margin: 7em auto;
-  border-radius: 1.5em;
-  box-shadow: 0px 11px 35px 2px rgb(51, 102, 153)
-}
 
-form.form1 {
-  padding-top: 0px;
+
+.form1 {
+  padding-bottom: 20px;
 }
 .button_2 {
   background-color: #4CAF50; /* Green */
@@ -114,7 +118,7 @@ font-family: 'Ubuntu', sans-serif;
 
 .sign {
   padding-top: 40px;
-  background-color: rgb(230, 247, 255);
+  background-color: rgb(224, 225, 221);
   padding-bottom: 40px;
   color: rgb(0, 153, 204);
   font-family: 'Ubuntu', sans-serif;
@@ -196,8 +200,10 @@ font-family: 'Ubuntu', sans-serif;
 
   
 
-      #counter_table {
+      #items_table_view {
         margin-top: 3%;
+        border-radius: 1em;
+        border:1px solid rgb(27, 38, 59);
         margin-left: 10%;
       }
 
@@ -208,37 +214,38 @@ font-family: 'Ubuntu', sans-serif;
         padding-right: 15px;
       }
 
+      /* https://coolors.co/0d1b2a-1b263b-415a77-778da9-e0e1dd */
 
-
-      .counter_input {
-        color: rgb(0, 153, 204);
+      .item_input {
+        color: rgb(13, 27, 42);
         font-size: 15px;
         letter-spacing: 1px;
         background-color: rgb(255, 255, 255); /* Green */
         border-radius: 1em;
-        border:1px solid rgb(0, 153, 204);
+        border:1px solid rgb(27, 38, 59);
         box-sizing: border-box;
         text-align: center;
         font-family: 'Ubuntu', sans-serif;
         margin-left: 20px;
-        width: 25%;
+        width: 10%;
         height: 2.5em;
         position: relative;
         border-style:solid;
         padding-left:10px;
         }
 
-        .add_counter_button {
-          background-color: rgb(255, 255, 255); /* Green */
-          border-radius: 1em;
+        .add_item_button {
+          background-color: rgb(65, 90, 119); /* Green */
+          border-radius: 12px;
+          border: 0px solid rgb(200, 200, 200);
+
           position:relative;
           margin-left: 24%;
-          border-color:rgb(0, 153, 204);
           font-size: 15px;
           padding: 7px;
-          color: rgb(0, 153, 204);
+          color: rgb(255, 255, 255);
           float: left;
-          width: 25%;
+          width: 5%;
           height: 2.5em;
 
         }
