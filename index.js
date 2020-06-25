@@ -1,6 +1,8 @@
 var express = require("express");
 var app = express();
 const locate = require('./location');
+const geolib = require('geolib');
+
 //locate.test("YOOOO", "MANNNN");
 
 const bodyParser = require("body-parser");
@@ -19,7 +21,7 @@ const client = new Client({
 
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.set('views', path.join(__dirname, 'views'));
@@ -140,9 +142,9 @@ app.get("/merchant-items", function(request, response) {
 
 //Pass item name, price and merch_id to add to merchant catalogue
 app.post("/merchant-item", function(request, response) {
-	var login_query = "INSERT INTO catalogue (name, price, merch_id) VALUES ('" + request.body.item + "','" + request.body.price + "','" + request.body.merch_id + "');";
-	console.log(login_query);	
-	client.query(login_query, (err, res) => {
+	var add_query = "INSERT INTO catalogue (name, price, merch_id) VALUES ('" + request.body.item + "','" + request.body.price + "','" + request.body.merch_id + "');";
+	console.log(add_query);	
+	client.query(add_query, (err, res) => {
   	if (err) throw err;
 	  if(res.rowCount == 0){
 		response.sendStatus(404)
@@ -157,9 +159,9 @@ app.post("/merchant-item", function(request, response) {
 
 //Pass item_id and merch_id of item to delete from catalogue
 app.delete("/merchant-item", function(request, response) {
-	var login_query = "DELETE FROM catalogue WHERE item_id=" + request.body.item_id  + " AND merch_id=" + request.body.merch_id + ";"
-	console.log(login_query);	
-	client.query(login_query, (err, res) => {
+	var delete_query = "DELETE FROM catalogue WHERE item_id=" + request.body.item_id  + " AND merch_id=" + request.body.merch_id + ";"
+	console.log(delete_query);	
+	client.query(delete_query, (err, res) => {
   	if (err) throw err;
 	  if(res.rowCount == 0){
 		response.sendStatus(404)
@@ -170,6 +172,31 @@ app.delete("/merchant-item", function(request, response) {
 	  }
 	});
 	response.sendStatus(200)	
+});
+
+//gets merchants within 1000m takjes in long lat
+app.get("/nearby-merchants", function(request, response) {
+	var nearby_query = "SELECT name, longitude, latitude FROM merchant;"
+	console.log(nearby_query);	
+	client.query(nearby_query, (err, res) => {
+  	if (err) throw err;
+	  if(res.rowCount == 0){
+		response.sendStatus(404)
+	  }
+	  var nearby_stores = []
+	  for (let row of res.rows) {
+	    var jsonRow = (JSON.stringify(row))
+	    var jsonObj = JSON.parse(jsonRow)
+		var distance = geolib.getDistance({longitude: request.query.longitude, latitude: request.query.latitude}, {longitude: jsonObj.longitude, latitude: jsonObj.latitude})
+		console.log(row)
+		console.log(distance)	
+		if(distance <= 1000){
+			nearby_stores.push(jsonObj)
+		}
+	  }
+	  	console.log(nearby_stores)
+		response.json(nearby_stores)
+	});
 });
 
 

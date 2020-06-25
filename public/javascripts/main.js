@@ -74,7 +74,6 @@ window.onload = function () {
             table_row.appendChild(price_col);
 
 
-
             //DELETE BUTTON
             let del_col = document.createElement("td");
             let del_button = document.createElement("button");
