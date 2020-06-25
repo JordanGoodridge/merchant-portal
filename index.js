@@ -5,16 +5,34 @@ const path = require('path');
 var app = express();
 const PORT = process.env.PORT || 3000;
 
-const { Client } = require('pg');
+const { Pool, Client } = require('pg')
 
 const client = new Client({
-  connectionString: "postgres://aczmbwlkixdtfq:e80bb0c9f8fcab36b3712ddbd4fe356981174d9c930c0f8c0202ae5c1165297e@ec2-3-216-129-140.compute-1.amazonaws.com:5432/d541m4me20fera",
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+	user: 'igstfgilrlyvry',
+	host: 'ec2-34-192-173-173.compute-1.amazonaws.com',
+	database: 'd5otfafr0g0sbe',
+	password: 'f9318944658a2da09d59b74b0ebd8e5bfd0654f1ebc0e4ad5e1fedb0c98888f5',
+	port: 5432,
+	ssl: { rejectUnauthorized: false }
+  })
+  client.connect()
 
-client.connect();
+// const pool = new Pool({
+// 	user: 'aczmbwlkixdtfq',
+// 	host: 'ec2-3-216-129-140.compute-1.amazonaws.com',
+// 	database: 'd541m4me20fera',
+// 	password: 'e80bb0c9f8fcab36b3712ddbd4fe356981174d9c930c0f8c0202ae5c1165297e',
+// 	port: 5432,
+// 	ssl:true,
+// })
+
+// const client = new Client({
+//   connectionString: "postgres://aczmbwlkixdtfq:e80bb0c9f8fcab36b3712ddbd4fe356981174d9c930c0f8c0202ae5c1165297e@ec2-3-216-129-140.compute-1.amazonaws.com:5432/d541m4me20fera",
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// });
+
 
 client.query('SELECT * FROM merchant;', (err, res) => {
   if (err) throw err;
