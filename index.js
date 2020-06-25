@@ -112,7 +112,7 @@ app.post("/merchant-login", function(request, response) {
 
 
 
-app.post("/get-merchant-items", function(request, response) {
+app.get("/merchant-items", function(request, response) {
 	var new_merchant = request.body;
 	var login_query = "SELECT merch_id,name,price FROM catalogue WHERE merch_id=" + request.body.merch_id + ";";
 	console.log(login_query);	
@@ -134,7 +134,7 @@ app.post("/get-merchant-items", function(request, response) {
 	});
 });
 
-app.post("/merchant-add-item", function(request, response) {
+app.post("/merchant-item", function(request, response) {
 	var new_merchant = request.body;
 	var login_query = "INSERT INTO catalogue (name, price, merch_id) VALUES ('" + request.body.item + "','" + request.body.price + "','" + request.body.merch_id + "');";
 	console.log(login_query);	

@@ -18,7 +18,7 @@ window.onload = function () {
 
     }
     function get_user(){
-        return fetch('/User', {
+        return fetch('/merchant-items', {
             headers: { 'Content-Type': 'application/json' },
             method: 'get'
         })
@@ -28,9 +28,9 @@ window.onload = function () {
                 return response.json()
                 .then(data => {
                     console.log(data)
-                    let items = data['countArray']
+                    let items = data['itemArray']
                     // let items = {}
-                    console.log(`in get_user with counters of type ${typeof(items)} with value ${items}`)
+                    console.log(`in get_user with items of type ${typeof(items)} with value ${items}`)
                     
                     populate_item_table(items)
 
@@ -306,10 +306,10 @@ window.onload = function () {
             
     }
 
-    function signIn(userName, password) {
+    function signIn(userEmail, userPassword) {
         let payload = {
-            email: userName,
-            password: password
+            email: userEmail,
+            password: userPassword
         };
         
         return fetch('/merchant-login', {
@@ -345,9 +345,7 @@ window.onload = function () {
 
     var username_in = document.getElementById("sg_up_us");
     var login_view = document.getElementById("login_view");
-    //registration_view is for the sign up table
     var registration_view = document.getElementById("registration_view")
-    //item_entry_view is for the main play page
     var item_entry_view = document.getElementById("item_entry_view")
     var log_out = document.getElementById("log_out")
     var header_view = document.getElementById("header_view")
@@ -398,10 +396,10 @@ window.onload = function () {
         })
 
         //after clicking signIn button
-    document.getElementById("sin_btn")
+    document.getElementById("login_button")
         .addEventListener("click", function (e) {
-            username = document.getElementById("sg_in_us")
-            pass = document.getElementById("sg_in_ps")
+            username = document.getElementById("log_email")
+            pass = document.getElementById("log_pass")
             console.log(username.value)
             console.log(pass.value)
 
