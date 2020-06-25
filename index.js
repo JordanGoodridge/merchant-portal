@@ -177,25 +177,25 @@ app.delete("/merchant-item", function(request, response) {
 app.get("/nearby-merchants", function(request, response) {
 	var nearby_query = "SELECT name, longitude, latitude FROM merchant;"
 	console.log(nearby_query);	
+	console.log(request.body);	
 	client.query(nearby_query, (err, res) => {
   	if (err) throw err;
 	  if(res.rowCount == 0){
 		response.sendStatus(404)
-		
 	  }
 	  var nearby_stores = []
 	  for (let row of res.rows) {
-	    jsonRow = (JSON.stringify(row))
-	    jsonObj = JSON.parse(jsonRow)
+	    var jsonRow = (JSON.stringify(row))
+	    var jsonObj = JSON.parse(jsonRow)
 		var distance = geolib.getDistance(request.body, {longitude: jsonObj.longitude, latitude: jsonObj.latitude})
-		console.log(distance)
-		if(distance >= 1000){
+		console.log(row)
+		if(distance <= 1000){
 			nearby_stores.push(jsonObj)
 		}
 	  }
+	  	console.log(nearby_stores)
+		response.json(nearby_stores)
 	});
-	console.log(jsonObj)
-	response.json(jsonObj)
 });
 
 
