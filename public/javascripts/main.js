@@ -17,10 +17,11 @@ window.onload = function () {
             })
 
     }
-    function get_user(){
-        return fetch('/merchant-items', {
+    function get_items(){
+        console.log("Getting items");
+        return fetch(`/merchant-items?merch_id=${localStorage.merch_id}`, {
             headers: { 'Content-Type': 'application/json' },
-            method: 'get'
+            method: 'get',
         })
             .then(function(response)  {
                 console.log(response)
@@ -28,11 +29,10 @@ window.onload = function () {
                 return response.json()
                 .then(data => {
                     console.log(data)
-                    let items = data['itemArray']
                     // let items = {}
-                    console.log(`in get_user with items of type ${typeof(items)} with value ${items}`)
+                    console.log(`in get_items with items of type ${typeof(data)} with value ${data}`)
                     
-                    populate_item_table(items)
+                    populate_item_table(data)
 
 
                   })
@@ -43,56 +43,37 @@ window.onload = function () {
 
     function populate_item_table(item_list){
         // items_table_view
+
+        console.log(item_list);
+        if(item_list == undefined)
+        {
+            return;
+        }
+
         let item_table = document.getElementById("items_table_view");
         item_table.innerHTML = "";
         for(let i = 0; i < item_list.length; i++){
-            let count = item_list[i];
+            let item = JSON.parse(item_list[i]);
+            console.log(item);
+            console.log(typeof(item));
 
             let table_row = document.createElement("tr");
             item_table.appendChild(table_row);
 
-            //COUNT VALUE
+            //ITEM NAME
+            let name_col = document.createElement("td");
+            name_col.innerHTML = `${item.name}`;
+            name_col.className = "count_cell";
+            name_col.setAttribute("index", i);
+            table_row.appendChild(name_col);
 
-            let index_col = document.createElement("td");
-            index_col.innerHTML = `Counter ${i}:`;
-            index_col.className = "count_cell";
-            index_col.setAttribute("index", i);
-            table_row.appendChild(index_col);
-
-            let count_col = document.createElement("td");
-            count_col.innerHTML = count;
-            count_col.className = "count_cell";
-            table_row.appendChild(count_col);
-
-            //INCREMENT BUTTON
-            let inc_col = document.createElement("td");
-            let inc_button = document.createElement("button");
-            inc_button.innerHTML = "+";
-            inc_col.className = "count_cell_inc";
-            inc_col.appendChild(inc_button);
-            table_row.appendChild(inc_col);
-
-            inc_button.addEventListener("click", function (e) {
-                console.log(this.parentNode.previousSibling.previousSibling.getAttribute("index"));
-                let index = this.parentNode.previousSibling.previousSibling.getAttribute("index");
-                inc_counter(index);
-            })
+            //ITEM PRICE
+            let price_col = document.createElement("td");
+            price_col.innerHTML = item.price;
+            price_col.className = "count_cell";
+            table_row.appendChild(price_col);
 
 
-            //DECREMENT BUTTON
-            let dec_col = document.createElement("td");
-            let dec_button = document.createElement("button");
-            dec_button.innerHTML = "-";
-            dec_col.className = "count_cell_dec";
-            dec_col.appendChild(dec_button);
-            table_row.appendChild(dec_col);
-
-            dec_button.addEventListener("click", function (e) {
-                console.log(this.parentNode.previousSibling.previousSibling.previousSibling.getAttribute("index"));
-                let index = this.parentNode.previousSibling.previousSibling.previousSibling.getAttribute("index");
-                console.log(this);
-                dec_counter(index);
-            })
 
             //DELETE BUTTON
             let del_col = document.createElement("td");
@@ -107,18 +88,7 @@ window.onload = function () {
                 delete_counter(index);
             })
 
-            //SHARE BUTTON
-            let share_col = document.createElement("td");
-            let share_button = document.createElement("button");
-            share_button.innerHTML = "Share";
-            share_col.className = "count_cell_share";
-            share_col.appendChild(share_button);
-            table_row.appendChild(share_col);
-            share_button.addEventListener("click", function(e){
-                console.log(this.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML);
-                let value = this.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML;
-                share_counter(value);
-            })
+
 
             //SHARE BUTTON
             // let link_col = document.createElement("td");
@@ -255,7 +225,7 @@ window.onload = function () {
     .then(function (res) {
         console.log(res)
         if (res["status"] == 200) {
-            get_user().then(function(res){
+            get_items().then(function(res){
                 console.log(res)
             })
             login_view.style.display = "none"
@@ -311,23 +281,24 @@ window.onload = function () {
             body: JSON.stringify(payload)
         })
             .then(function (res) {
-                //  console.log(res)
-                if (res['status'] == 409) {
-                    window.alert('Error:  Account Doesnt Exist or Incorrect Credentials')
-                }
-                console.log("Signin Sucess")
-                localStorage.email = userEmail;
-                console.log("Useremail: " + userEmail)
-                console.log(res)
-                // get_user().then(function(res){
-                //     console.log("Signin Sucess")
-                //     localStorage.email = userEmail;
-                //     console.log("Useremail: " + userEmail)
-                //     console.log(res)
-                // })
-                return res
-
+                return res.json();
             })
+            .then(function (res){
+                //  console.log(res)
+                if (res.status == 404) {
+                    window.alert('Error:  Account Doesnt Exist or Incorrect Credentials')
+                    return 404;
+                } else {
+                    console.log("Signin Sucess")
+                    localStorage.email = userEmail;
+                    localStorage.merch_id = JSON.parse(res).merch_id;
+                    return 200;
+                }
+
+                })
+            return res
+
+            
     }
 
 
@@ -405,7 +376,7 @@ window.onload = function () {
                 .then(function (res) {
 
                     //if res.status = success
-                    if (res['status'] == 200) {
+                    if (res == 200) {
                         login_view.style.display = "none"
                         item_entry_view.style.display = "block"
                         log_out_button.style.display = "block"
@@ -419,6 +390,8 @@ window.onload = function () {
                     } else {
                         console.log("Login Failed")
                     }
+
+                    get_items();
                 })
 
         })

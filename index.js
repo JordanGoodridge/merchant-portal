@@ -103,15 +103,16 @@ app.post("/merchant-login", function(request, response) {
 		    console.log(JSON.stringify(row));
     		output = JSON.stringify(row);	
 		  }
+		  console.log("Output:");
 		  console.log(output)
-		  response.json(output);		
+		  response.status(200).json(output);		
 	  }
 	});
 });
 
 //Takes merch_id and returns array of json of merchant items. returns 404 if failed
 app.get("/merchant-items", function(request, response) {
-	var login_query = "SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=" + request.body.merch_id + ";";
+	var login_query = "SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=" + request.query.merch_id + ";";
 	console.log(login_query);	
 	client.query(login_query, (err, res) => {
 	  if(res.rowCount == 0){
