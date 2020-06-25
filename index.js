@@ -85,67 +85,92 @@ app.post("/merchant-signup", function(request, response) {
 	});
 
 
-
-
 });
 
+//Takes merchant email and password. Returns merch_id if successfull. returns 404 if failed
 app.post("/merchant-login", function(request, response) {
 	var new_merchant = request.body;
-	var login_query = "SELECT email FROM merchant WHERE email='" + request.body.email + "'AND password='" + request.body.password + "';";
+	var login_query = "SELECT merch_id FROM merchant WHERE email='" + request.body.email + "'AND password='" + request.body.password + "';";
 	console.log(login_query);	
 	client.query(login_query, (err, res) => {
   	if (err) throw err;
   	  console.log(res);	
 	  if(res.rowCount == 0){
-	  	response.json({success: false});		
+		response.sendStatus(404)
 	  }
 	  else{
 		  for (let row of res.rows) {
 		    console.log(JSON.stringify(row));
+    		output = JSON.stringify(row);	
 		  }
-		  response.json( {success: true, email: request.body.email});		
+		  console.log(output)
+		  response.json(output);		
 	  }
 	});
 });
 
-//TO ADD: app.get("/get-merchant-items", function(request, response) {
-
-
-
+//Takes merch_id and returns array of json of merchant items. returns 404 if failed
 app.get("/merchant-items", function(request, response) {
-	var new_merchant = request.body;
-	var login_query = "SELECT merch_id,name,price FROM catalogue WHERE merch_id=" + request.body.merch_id + ";";
+	var login_query = "SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=" + request.body.merch_id + ";";
 	console.log(login_query);	
 	client.query(login_query, (err, res) => {
-  	if (err) throw err;
-  	  console.log(res);	
 	  if(res.rowCount == 0){
-	  	response.json({success: false});		
+		response.sendStatus(404)
+		
 	  }
 	  else{
+	  	  var count = 0
 		  for (let row of res.rows) {
-		    var jsonRow = (JSON.stringify(row))
-		    console.log(jsonRow);	
-		    var jsonObject = Object.assign(jsonObject, jsonRow);
+		  	if(count == 0){
+		    	var jsonObj = [(JSON.stringify(row))]
+		    	console.log(jsonObj);	
+		    	count +=1
+		  	}
+		  	else{
+			    var jsonRow = (JSON.stringify(row))
+		    	jsonObj.push(jsonRow)
+		  	}
 		  }
-		  console.log(jsonRow);
-		  response.json( {success: true, email: request.body.email});		
+		  console.log(jsonObj);
+		  response.json(jsonObj);		
 	  }
 	});
 });
 
+//Pass item name, price and merch_id to add to merchant catalogue
 app.post("/merchant-item", function(request, response) {
-	var new_merchant = request.body;
 	var login_query = "INSERT INTO catalogue (name, price, merch_id) VALUES ('" + request.body.item + "','" + request.body.price + "','" + request.body.merch_id + "');";
 	console.log(login_query);	
 	client.query(login_query, (err, res) => {
   	if (err) throw err;
+	  if(res.rowCount == 0){
+		response.sendStatus(404)
+	  }
 	  for (let row of res.rows) {
 	    console.log(JSON.stringify(row));
 	  }
 	});
-	response.send("Item added");	
+	response.sendStatus(200)	
 });
+
+
+//Pass item_id and merch_id of item to delete from catalogue
+app.delete("/merchant-item", function(request, response) {
+	var login_query = "DELETE FROM catalogue WHERE item_id=" + request.body.item_id  + " AND merch_id=" + request.body.merch_id + ";"
+	console.log(login_query);	
+	client.query(login_query, (err, res) => {
+  	if (err) throw err;
+	  if(res.rowCount == 0){
+		response.sendStatus(404)
+		
+	  }
+	  for (let row of res.rows) {
+	    console.log(JSON.stringify(row));
+	  }
+	});
+	response.sendStatus(200)	
+});
+
 
 
 
