@@ -30,7 +30,7 @@ window.onload = function () {
                     console.log(data)
                     let counters = data['countArray']
                     console.log(`in get_user with counters of type ${typeof(counters)} with value ${counters}`)
-                    populate_count_table(counters)
+                    populate_item_table(counters)
 
 
                   })
@@ -39,14 +39,15 @@ window.onload = function () {
     }
 
 
-    function populate_count_table(counters){
-        let counter_table = document.getElementById("counter_table");
-        counter_table.innerHTML = "";
-        for(let i = 0; i < counters.length; i++){
-            let count = counters[i];
+    function populate_item_table(item_list){
+        // items_table_view
+        let item_table = document.getElementById("items_table_view");
+        item_table.innerHTML = "";
+        for(let i = 0; i < item_list.length; i++){
+            let count = item_list[i];
 
             let table_row = document.createElement("tr");
-            counter_table.appendChild(table_row);
+            item_table.appendChild(table_row);
 
             //COUNT VALUE
 
@@ -155,7 +156,7 @@ window.onload = function () {
         }).then(function(response){
             let countArray = response.countArray;
             console.log(response.countArray);
-            populate_count_table(countArray);
+            populate_item_table(countArray);
 
         })
     }
@@ -182,7 +183,7 @@ window.onload = function () {
                 }).then(function(response){
                     console.log("In counter add response");
                     console.log(response.countArray);
-                    populate_count_table(response.countArray);
+                    populate_item_table(response.countArray);
                 })
         })
     }
@@ -209,7 +210,7 @@ window.onload = function () {
                 }).then(function(response){
                     console.log("In counter dec response");
                     console.log(response.countArray);
-                    populate_count_table(response.countArray);
+                    populate_item_table(response.countArray);
                 })
         })
 
@@ -236,7 +237,7 @@ window.onload = function () {
                 }).then(function(response){
                     console.log("In counter add response");
                     console.log(response.countArray);
-                    populate_count_table(response.countArray);
+                    populate_item_table(response.countArray);
                 })
             })
 
@@ -262,24 +263,22 @@ window.onload = function () {
             get_user().then(function(res){
                 console.log(res)
             })
-            table_1.style.display = "none"
-            table_3.style.display = "block"
+            login_view.style.display = "none"
+            item_entry_view.style.display = "block"
             log_out.style.display = "block"
-            table_4.style.display = "block"
+            header_view.style.display = "block"
         }
     })
 
    
 
-    function signUp(userName, password, initCounter) {
-        console.log(`Passed ${initCounter} to signUp`)
-        let counterArray = []
-        console.log(`Type of initCounter: ${typeof(initCounter)}`)
-        counterArray.push(Number(initCounter))
+    function signUp(userName, userEmail ,userLong, userLat, password, userPassword) {
         let payload = {
-            Username: userName,
-            password: password,
-            countArray: counterArray
+            name: userName,
+            email: userEmail,
+            longitude: userLong,
+            latitude: userLat,
+            password: userPassword
         };
 
         console.log(payload)
@@ -303,10 +302,11 @@ window.onload = function () {
 
     function signIn(userName, password) {
         let payload = {
-            Username: userName,
+            email: userName,
             password: password
         };
-        return fetch('/SignIn', {
+        
+        return fetch('/merchant-login', {
             headers: { 'Content-Type': 'application/json' },
             method: 'post',
             body: JSON.stringify(payload)
@@ -338,33 +338,32 @@ window.onload = function () {
 
 
     var username_in = document.getElementById("sg_up_us");
-    var table1 = document.getElementById("table_1");
-    //table_2 is for the sign up table
-    var table_2 = document.getElementById("table_2")
-    //table_3 is for the main play page
-    var table_3 = document.getElementById("table_3")
+    var login_view = document.getElementById("login_view");
+    //registration_view is for the sign up table
+    var registration_view = document.getElementById("registration_view")
+    //item_entry_view is for the main play page
+    var item_entry_view = document.getElementById("item_entry_view")
     var log_out = document.getElementById("log_out")
-    var table_4 = document.getElementById("table_4")
-    table_2.style.display = "none"
-    table_3.style.display = "none"
+    var header_view = document.getElementById("header_view")
+    registration_view.style.display = "none"
+    item_entry_view.style.display = "none"
     log_out.style.display = "none"
-    table_4.style.display = "none"
+    header_view.style.display = "none"
 
     //after clicking signUp button
     document.getElementById("sup_btn")
         .addEventListener("click", function (e) {
             table1.style.display = "none"
-            table_2.style.display = "block"
+            registration_view.style.display = "block"
         })
     //after clicking submit button in signUp page
     document.getElementById("submit_sg_up")
         .addEventListener("click", function (e) {
             pass_1 = document.getElementById("sg_up_ps").value
             pass_2 = document.getElementById("sg_up_ps_2").value
-            counter = document.getElementById("sg_up_counter").value
             if (pass_1 == pass_2 && pass_1 != "" && pass_2 != "" && counter !="") {
-                console.log(`Counter Value: ${counter}`)
-                signUp(username_in.value, pass_1, counter)
+                // signUp(username_in.value, pass_1)
+                signUp(userName, userEmail ,userLong, userLat, password, userPassword)
                     .then(function (res) {
                         console.log(res)
                 
@@ -372,8 +371,8 @@ window.onload = function () {
                             window.alert('username already registered')
                         }
                         else{
-                            table_1.style.display = "block"
-                            table_2.style.display = "none"
+                            login_view.style.display = "block"
+                            registration_view.style.display = "none"
                         }
                     })
             }
@@ -396,10 +395,10 @@ window.onload = function () {
 
                     //if res.status = success
                     if (res['status'] == 200) {
-                        table_1.style.display = "none"
-                        table_3.style.display = "block"
+                        login_view.style.display = "none"
+                        item_entry_view.style.display = "block"
                         log_out.style.display = "block"
-                        table_4.style.display = "block"
+                        header_view.style.display = "block"
                         //display name
                         document.getElementById("in_game_username").innerHTML = username.value
                         console.log(username.value);
@@ -414,9 +413,9 @@ window.onload = function () {
     document.getElementById("log_out")
         .addEventListener("click", function (e) {
             log_off().then(function(res){
-                table_3.style.display = "none"
-                table_1.style.display = "block"
-                table_4.style.display = "none"
+                item_entry_view.style.display = "none"
+                login_view.style.display = "block"
+                header_view.style.display = "none"
         })
             
         })
@@ -425,9 +424,9 @@ window.onload = function () {
     document.getElementById("counter_share_table")
     .addEventListener("click", function (e) {
         log_off().then(function(res){
-            table_3.style.display = "none"
-            table_1.style.display = "block"
-            table_4.style.display = "none"
+            item_entry_view.style.display = "none"
+            login_view.style.display = "block"
+            header_view.style.display = "none"
     })
         
     })

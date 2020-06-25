@@ -72,6 +72,9 @@ app.post("/merchant-login", function(request, response) {
 	});
 });
 
+//TO ADD: app.get("/get-merchant-items", function(request, response) {
+
+
 
 app.post("/get-merchant-items", function(request, response) {
 	var new_merchant = request.body;

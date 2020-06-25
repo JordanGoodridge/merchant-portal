@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  <div class = 'game_info' id = "table_4" style = "padding-left:14%; padding-right:33%">
+  <div class = 'game_info' id = "header_view" style = "padding-left:14%; padding-right:33%">
     <div class = 'welcome' style = "display:block-inline"> 
       <h4 style = "float:left; padding-right: 40px;">Welcome to SpendSafe: </h4> 
       <h4  type="text" id ="in_game_username"> </h4>
@@ -11,18 +11,20 @@ block content
     <button class = "log_out" id = "log_out">Log Out</button>
     
   </div>
-
-  <div class="counter_div" id = "table_3">
+  //- <div class="counter_div" id = "table_3">
+  <div class="item_entry_view" id = "item_entry_view">
 
     <div class = "sign"> 
       <p class="counter_header" align="center" >Item</p>
-      <input class = "counter_input" type="number" align="center" id = "new_counter_value" placeholder="Enter Counter Value">
+      <input class = "item_input" type="number" align="center" id = "item_name" placeholder="Item Name">
+      <input class = "item_input" type="number" align="center" id = "item_price" placeholder="Item Price">
+      <input class = "item_input" type="number" align="center" id = "item_imnage" placeholder="Image Upload Placeholder">
 
-      <button class="add_counter_button" id = "add_counter">Add Item</button>
+      <button class="add_item_button" id = "add_counter">Add Item</button>
 
     </div>
 
-    <table class = "counter_table" id = "counter_table">
+    <table class = "items_table_view" id = "items_table_view">
 
     </table>
 
@@ -30,7 +32,7 @@ block content
 
   </div>
 
-   <div class="main" id = "table_2">
+   <div class="main" id = "registration_view">
 
     <h2 class="sign" align="center" >Sign up as a SpendSafe Merchant!</h2>
     <p class="sign_in" align="center" >Sign up</p>
@@ -38,22 +40,31 @@ block content
     <form class="form1" onSubmit="return false;">
 
     <p class="small_l" align="center" >Choose Username:</p>
-    <input class="un " type="text" align="center" id = "sg_up_us" placeholder="Username">
+    <input class="un " type="text" align="center" id = "reg_username" placeholder="Username">
 
     <p class="small_l" align="center" id = "text_0">Enter Password:</p>
-    <input class="un " type="password" align="center" id = "sg_up_ps" placeholder="Password">
+    <input class="un " type="password" align="center" id = "reg_pass" placeholder="Password">
 
     <p class="small_l" align="center" >Confirm Password:</p>
-    <input class="un " type="password" align="center" id ="sg_up_ps_2" placeholder="Confirm Password">
+    <input class="un " type="password" align="center" id ="reg_conf_pass" placeholder="Confirm Password">
     
-    <p class="small_l" align="center" >Enter Counter Amount:</p>
-    <input class="un " type="number" align="center" id = "sg_up_counter" placeholder="Enter Counter Value">
+    <p class="small_l" align="center" >Store Street Address</p>
+    <input class="un " type="number" align="center" id = "reg_street" placeholder="Street">
+
+    <p class="small_l" align="center" >City</p>
+    <input class="un " type="number" align="center" id = "reg_street" placeholder="City">
+   <p class="small_l" align="center" >State</p>
+    <input class="un " type="number" align="center" id = "reg_state" placeholder="State">
+
+
+    <p class="small_l" align="center" >Zipcode</p>
+    <input class="un " type="number" align="center" id = "reg_zip" placeholder="Zipcode">
     
     <a class="submit" align="center" id = "submit_sg_up">submit</a>  
 
   </div>
 
-  <div class="main" id = "table_1">
+  <div class="main" id = "login_view">
     <h2 class="sign" align="center" >Welcome to SpendSafe Merchant Portal</h2>
     <p class="sign_in" align="center" id = "text_0">Sign in</p>
     <form class="form1" onSubmit="return false;">
