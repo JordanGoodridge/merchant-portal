@@ -65,7 +65,7 @@ client.query('SELECT * FROM merchant;', (err, res) => {
 app.post("/merchant-signup", function(request, response) {
 	var new_merchant = request.body;
 	
-	locate.getCoords("222 Kent Road Ardmore PA 19003").then(res => {
+	locate.getCoords(`${request.body.street} ${request.body.city} ${request.body.state} ${request.body.zip}`).then(res => {
 		console.log(res.lat);
 		console.log(res.lng);
 		// var lat = res[lat];
@@ -82,8 +82,6 @@ app.post("/merchant-signup", function(request, response) {
 		});
 		response.sendStatus(200)
 
-	
-	
 	});
 
 
