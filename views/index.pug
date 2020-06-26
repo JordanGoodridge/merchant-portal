@@ -5,7 +5,7 @@ block content
     <div class = "header_wrapper">
       
       <div class = 'welcome_message' id = "welcome_message"> 
-        <h4 id = "welcome_text" >Welcome to SpendSafe: </h4> 
+        <h4 id = "login_header" >Welcome to SpendSafe: </h4> 
         <h4  type="text" id ="in_game_username"> </h4>
       </div>
       
@@ -81,15 +81,16 @@ block content
   </div>
 
   <div class="login_view" id = "login_view">
-    <h2 class="sign" align="center" >Welcome to SpendSafe Merchant Portal</h2>
-    <p class="sign_in" align="center" id = "text_0">Sign in</p>
-    <form class="form1" onSubmit="return false;">
-    <input class="un " type="text" align="center" id = "log_email" value="email">
-    <input class="un " type="password" align="center" id = "log_pass" value="Password">
-    <a class="submit" align="center" id = "login_button">Sign in</a>
-    <br>
-    <br>
-    <br>
-    <br>
-    <a class="submit" align="center" id = "sup_btn">Sign Up</a>
+    <h2 class="login_header" align="center" >Welcome to the SpendSafe Merchant Portal</h2>
+
+    <div id = login_input_wrapper>
+      <p class="sign_in" align="center" id = "text_0">Sign in</p>
+      <form class="form1" onSubmit="return false;">
+      <input class="login_input_field" type="text" align="center" id = "log_email" value="email">
+      <input class="login_input_field" type="password" align="center" id = "log_pass" value="Password">
+    </div>
+    <div id = login_button_wrapper>
+      <button class="login_submit_button" align="center" id = "login_button">Sign in</button>
+      <button class="login_submit_button" align="center" id = "sup_btn">Sign Up</button>
+    </div>
   </div>
