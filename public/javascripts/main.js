@@ -66,19 +66,25 @@ window.onload = function () {
 
             let table_row = document.createElement("tr");
             table_row.className = "item_row"
+            table_row.setAttribute("index", i);
+            table_row.setAttribute("item_id", item.item_id);
+
             item_table.appendChild(table_row);
+
 
             //ITEM NAME
             let name_col = document.createElement("td");
             name_col.innerHTML = `${item.name}`;
             name_col.className = "count_cell";
-            name_col.setAttribute("index", i);
+            //name_col.setAttribute("index", i);
             table_row.appendChild(name_col);
 
             //ITEM PRICE
             let price_col = document.createElement("td");
             price_col.innerHTML = item.price;
             price_col.className = "count_cell";
+            //price_col.setAttribute("index", i);
+
             table_row.appendChild(price_col);
 
             //ITEM ID/QR
@@ -89,7 +95,7 @@ window.onload = function () {
                 // `${item.item_id}`,
                 // `${item.item_id}, ${item.price},${item.name}`,
 
-            `{item_id: ${item.item_id},price: ${item.price},name: ${item.name}}`,
+            `{item_id: ${item.item_id},price: ${item.price},name: ${item.name},merch_id: ${localStorage.merch_id}}`,
                 width: 60,
                 height: 60,
                 colorDark : "#000000",
@@ -120,9 +126,10 @@ window.onload = function () {
             del_col.appendChild(del_button);
             table_row.appendChild(del_col);
             del_button.addEventListener("click", function(e){
-                console.log(this.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.getAttribute("index"));
-                let index = this.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.getAttribute("index")
-                delete_counter(index);
+                console.log(this.parentNode.parentNode.getAttribute("item_id"));
+                let item_id = this.parentNode.parentNode.getAttribute("item_id")
+                console.log(item_id);
+                delete_item(item_id);
             })
 
 
@@ -155,19 +162,17 @@ window.onload = function () {
         })
     }
 
-    function delete_counter(index){
-        return fetch('/Counters', {
+    function delete_item(item_rem_id){
+        console.log(`Deleting item ${item_rem_id} from merchant: ${localStorage.merch_id}`)
+        return fetch('/merchant-item', {
             headers: { 'Content-Type': 'application/json' },
             method: 'delete',
-            body: JSON.stringify({i: index})
+            body: JSON.stringify({item_id: item_rem_id, merch_id: localStorage.merch_id})
         }).then(function(response)  {
-            return response.json();
-        }).then(function(response){
-            let countArray = response.countArray;
-            console.log(response.countArray);
-            populate_item_table(countArray);
-
+            get_items();
+            return;
         })
+
     }
 
     function inc_counter(index) {
