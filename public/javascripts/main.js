@@ -4,6 +4,8 @@
 
 //Run once broswer has loaded everything
 window.onload = function () {
+
+
     function get_session() {
       
         return fetch('/Session', {
@@ -36,6 +38,9 @@ window.onload = function () {
 
 
                   })
+            }).catch((error) => {
+                console.log("Error getting item data")
+                populate_item_table()
             })
           
     }
@@ -44,20 +49,23 @@ window.onload = function () {
     function populate_item_table(item_list){
         // items_table_view
 
+        let item_table = document.getElementById("items_table_view");
+        item_table.innerHTML = "";
+        
         console.log(item_list);
         if(item_list == undefined)
         {
+
             return;
         }
 
-        let item_table = document.getElementById("items_table_view");
-        item_table.innerHTML = "";
         for(let i = 0; i < item_list.length; i++){
             let item = JSON.parse(item_list[i]);
             console.log(item);
             console.log(typeof(item));
 
             let table_row = document.createElement("tr");
+            table_row.className = "item_row"
             item_table.appendChild(table_row);
 
             //ITEM NAME
@@ -73,12 +81,29 @@ window.onload = function () {
             price_col.className = "count_cell";
             table_row.appendChild(price_col);
 
+            //ITEM ID/QR
+            let qr = document.createElement(`td`);
+            qr.className = "qr_cell";
+            console.log("ITEM ID: "+item.item_id);
+            var qrcode = new QRCode(qr, {
+                text: String(item.item_id),
+                width: 60,
+                height: 60,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            table_row.appendChild(qr);
+
+
+
 
             //DELETE BUTTON
             let del_col = document.createElement("td");
             let del_button = document.createElement("button");
-            del_button.innerHTML = "Delete";
-            del_col.className = "count_cell_del";
+            del_button.innerHTML = "Remove";
+            del_col.className = "remove_button_col";
+            del_button.className = "remove_item_button";
             del_col.appendChild(del_button);
             table_row.appendChild(del_col);
             del_button.addEventListener("click", function(e){
@@ -228,7 +253,7 @@ window.onload = function () {
                 console.log(res)
             })
             login_view.style.display = "none"
-            item_entry_view.style.display = "block"
+            item_page_view.style.display = "block"
             log_out.style.display = "block"
             header_view.style.display = "block"
         }
@@ -294,7 +319,10 @@ window.onload = function () {
                     return 200;
                 }
 
-                })
+            })
+
+
+
             return res
 
             
@@ -302,6 +330,8 @@ window.onload = function () {
 
 
     function log_off(){
+        localStorage.email = undefined;
+        localStorage.merch_id = undefined;
         return fetch('/LogOff', {
             headers: { 'Content-Type': 'application/json' },
             method: 'post'
@@ -316,11 +346,11 @@ window.onload = function () {
     var username_in = document.getElementById("sg_up_us");
     var login_view = document.getElementById("login_view");
     var registration_view = document.getElementById("registration_view")
-    var item_entry_view = document.getElementById("item_entry_view")
+    var item_page_view = document.getElementById("item_page_view")
     var log_out_button = document.getElementById("log_out_button")
     var header_view = document.getElementById("header_view")
     registration_view.style.display = "none"
-    item_entry_view.style.display = "none"
+    item_page_view.style.display = "none"
     log_out_button.style.display = "none"
     header_view.style.display = "none"
 
@@ -377,7 +407,7 @@ window.onload = function () {
                     //if res.status = success
                     if (res == 200) {
                         login_view.style.display = "none"
-                        item_entry_view.style.display = "block"
+                        item_page_view.style.display = "block"
                         log_out_button.style.display = "block"
                         header_view.style.display = "block"
                         //display name
@@ -399,9 +429,11 @@ window.onload = function () {
     document.getElementById("log_out_button")
         .addEventListener("click", function (e) {
             log_off().then(function(res){
-                item_entry_view.style.display = "none"
+                item_page_view.style.display = "none"
                 login_view.style.display = "block"
                 header_view.style.display = "none"
+
+
         })
             
         })
@@ -410,7 +442,7 @@ window.onload = function () {
     document.getElementById("counter_share_table")
     .addEventListener("click", function (e) {
         log_off().then(function(res){
-            item_entry_view.style.display = "none"
+            item_page_view.style.display = "none"
             login_view.style.display = "block"
             header_view.style.display = "none"
     })

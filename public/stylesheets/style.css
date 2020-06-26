@@ -96,13 +96,45 @@ a {
 }
 
 .item_entry_view {
-  padding-top: 2.5%;
+  padding-top: 1.5%;
   background-color: rgb(224, 225, 221);
-  padding-bottom: 2%;
+  padding-bottom: 3%;
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
   font-size: 23px;
 
+}
+
+.item_table_wrapper{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.items_table_view{
+  width:100%;
+  margin-top: 3%;
+}
+
+
+.remove_item_button{
+  background-color: rgb(65, 90, 119); /* Green */
+  border-radius: 12px;
+  border:1px solid rgb(27, 38, 59);
+
+  position:relative;
+  font-size: 15px;
+  padding: 7px;
+  color: rgb(255, 255, 255);
+  margin-left: 20px;
+  width: 20%;
+  height: 2.5em;
+  margin-top: -1px;
+  float:right;
+}
+tr.item_row>td {
+  padding-bottom: 2.5em;
+  border-top: 1px dashed #415A77;
+  padding-top: 2.5em;
 }
 
 .submit_2{
@@ -289,12 +321,7 @@ font-family: 'Ubuntu', sans-serif;
 
   
 
-      #items_table_view {
-        margin-top: 3%;
-        border-radius: 1em;
-        border:1px solid rgb(27, 38, 59);
-        margin-left: 10%;
-      }
+
 
       .count_cell {
         font-size: 20px;
