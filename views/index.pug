@@ -5,6 +5,7 @@ block content
     <div class = "header_wrapper">
       
       <div class = 'welcome_message' id = "welcome_message"> 
+        img(id = 'welcome_logo' src='./img/SpendSafeLogoLarge.png' alt='login')
         <h4 id = "login_header" >Welcome to SpendSafe: </h4> 
         <h4  type="text" id ="in_game_username"> </h4>
       </div>
@@ -44,53 +45,53 @@ block content
 
    <div class="reg_view" id = "registration_view">
 
-    <h2 class="sign" align="center" >Sign up as a SpendSafe Merchant!</h2>
-    <p class="sign_in" align="center" >Sign up</p>
+    <div class = "login_header">
+      img(id = 'login_logo' src='./img/SpendSafeLogoXLarge.png' alt='login')
+      <h2 class="login_toast" align="center" >Merchant Portal</h2>
+
+    </div>   
     
-    <form class="form1" onSubmit="return false;">
-  <p class="small_l" align="center" >Enter Name:</p>
-    <input class="un " type="text" align="center" id = "reg_name" placeholder="Name">
+    <div id = "signup_input_wrapper">
 
-    <p class="small_l" align="center" >Enter Email:</p>
-    <input class="un " type="text" align="center" id = "reg_email" placeholder="Email">
-
-    <p class="small_l" align="center" id = "text_0">Enter Password:</p>
-    <input class="un " type="password" align="center" id = "reg_pass" placeholder="Password">
-
-    <p class="small_l" align="center" >Confirm Password:</p>
-    <input class="un " type="password" align="center" id ="reg_conf_pass" placeholder="Confirm Password">
+      <p id="sign_up" align="center" >Sign up</p>
     
-    <p class="small_l" align="center" >Store Name</p>
-    <input class="un " type="text" align="center" id = "reg_store" placeholder="Store Name">
-
-
-    <p class="small_l" align="center" >Store Street Address</p>
-    <input class="un " type="text" align="center" id = "reg_street" placeholder="Street">
-
-    <p class="small_l" align="center" >City</p>
-    <input class="un " type="text" align="center" id = "reg_city" placeholder="City">
-    <p class="small_l" align="center" >State</p>
-    <input class="un " type="text" align="center" id = "reg_state" placeholder="State">
-
-
-    <p class="small_l" align="center" >Zipcode</p>
-    <input class="un " type="number" align="center" id = "reg_zip" placeholder="Zipcode">
+      <form class="form1" onSubmit="return false;">
+      <input class="signup_input_field" type="text" align="center" id = "reg_name" placeholder="Enter Name">
+      <input class="signup_input_field" type="text" align="center" id = "reg_email" placeholder="Enter Email">
+      <input class="signup_input_field" type="password" align="center" id = "reg_pass" placeholder="Enter Password">
+      <input class="signup_input_field" type="password" align="center" id ="reg_conf_pass" placeholder="Enter Confirm Password">
+      <input class="signup_input_field" type="text" align="center" id = "reg_store" placeholder="Enter Store Name">
+      <input class="signup_input_field" type="text" align="center" id = "reg_street" placeholder="Enter Street">
+      <input class="signup_input_field" type="text" align="center" id = "reg_city" placeholder="Enter City">
+      <input class="signup_input_field" type="text" align="center" id = "reg_state" placeholder="Enter State">
+      <input class="signup_input_field" type="number" align="center" id = "reg_zip" placeholder="Enter Zipcode">
     
-    <a class="submit" align="center" id = "submit_signup_button">submit</a>  
+    </div>
 
+    <div id = signup_button_wrapper>
+      <button class="signup_submit_button" align="center" id = "submit_signup_button">Submit</button>  
+    </div>
   </div>
 
   <div class="login_view" id = "login_view">
-    <h2 class="login_header" align="center" >Welcome to the SpendSafe Merchant Portal</h2>
 
+    <div class = "login_header">
+      img(id = 'login_logo' src='./img/SpendSafeLogoXLarge.png' alt='login')
+      <h2 class="login_toast" align="center" >Merchant Portal</h2>
+
+    </div>
     <div id = login_input_wrapper>
+
       <p class="sign_in" align="center" id = "text_0">Sign in</p>
       <form class="form1" onSubmit="return false;">
-      <input class="login_input_field" type="text" align="center" id = "log_email" value="email">
-      <input class="login_input_field" type="password" align="center" id = "log_pass" value="Password">
+      <input class="login_input_field" type="text" align="center" id = "log_email" placeholder="Enter Email">
+      <input class="login_input_field" type="password" align="center" id = "log_pass" placeholder="Enter Password">
     </div>
+
     <div id = login_button_wrapper>
       <button class="login_submit_button" align="center" id = "login_button">Sign in</button>
       <button class="login_submit_button" align="center" id = "sup_btn">Sign Up</button>
     </div>
+
+
   </div>
