@@ -83,16 +83,29 @@ window.onload = function () {
 
             //ITEM ID/QR
             let qr = document.createElement(`td`);
-            qr.className = "qr_cell";
             console.log("ITEM ID: "+item.item_id);
             var qrcode = new QRCode(qr, {
-                text: String(item.item_id),
+                text:  
+                // `${item.item_id}`,
+                // `${item.item_id}, ${item.price},${item.name}`,
+
+            `{item_id: ${item.item_id},price: ${item.price},name: ${item.name}}`,
                 width: 60,
                 height: 60,
                 colorDark : "#000000",
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
+            let qr_img = qr.childNodes[1]
+            qr_img.className = "qr_small";
+            qr_img.addEventListener('click', function(e){
+                if(qr_img.className === 'qr_small'){
+                    qr_img.className = 'qr_large';
+                } else {
+                    qr_img.className = 'qr_small';
+                }
+            })
+
             table_row.appendChild(qr);
 
 
@@ -226,6 +239,7 @@ window.onload = function () {
             })
         }).then(function(response)  {
             console.log(response);
+            get_items();
             return response.json();
             })
 
