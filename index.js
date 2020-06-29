@@ -137,7 +137,7 @@ app.get('/merchant-items', function(request, response) {
 				}
 			}
 			console.log(jsonObj);
-			response.json(jsonObj);
+			response.json({ success: true, items: jsonObj });
 		}
 	});
 });
