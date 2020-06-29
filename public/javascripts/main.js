@@ -379,14 +379,7 @@ window.onload = function () {
             
         })
 
-    //after clicking log_out, delele session
-    document.getElementById("counter_share_table")
-    .addEventListener("click", function (e) {
-        log_off().then(function(res){
-            item_page_view.style.display = "none"
-            login_view.style.display = "block"
-            header_view.style.display = "none"
-    })
+
         
     })
 
