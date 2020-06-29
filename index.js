@@ -203,7 +203,7 @@ app.get('/nearby-merchants', function(request, response) {
 			);
 			console.log(row);
 			console.log(distance);
-			if (distance <= 2000) {
+			if (distance <= 20000) {
 				nearby_stores.push(jsonObj);
 			}
 		}
