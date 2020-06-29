@@ -18,7 +18,10 @@
 		"geolib": "^3.3.1",
 		"jsonwebtoken": "^8.5.1",
 		"pg": "^8.2.1",
-		"pug": "^3.0.0"
+		"pug": "^3.0.0",
+		"cybersource-rest-client": "0.0.17",
+		"eslint": "^5.9.0",
+		"jwk-to-pem": "^2.0.0"
 	},
 	"engines": {
 		"node": "12.18.1"
