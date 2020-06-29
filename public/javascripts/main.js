@@ -134,33 +134,9 @@ window.onload = function () {
 
 
 
-            //SHARE BUTTON
-            // let link_col = document.createElement("td");
-            // let link_button = document.createElement("p");
-            // //link_button.innerHTML;
-            // link_col.className = "count_cell_share";
-            // link_col.appendChild(link_button);
-            // table_row.appendChild(link_col);
-            // link_button.addEventListener("click", function(e){
-            //     //Add code to copy to clipboard
-            // })
-
         }
     }
 
-    function share_counter(value){
-        return fetch('/Share', {            
-            headers: { 'Content-Type': 'application/json' },
-            method: 'post',
-            body: JSON.stringify({val: value})
-        }).then(function(response){
-            return response.json();
-        }).then(function(response){
-            console.log(response)
-            alert(`http://localhost:3000/Share/?id=${response._id}`)
-
-        })
-    }
 
     function delete_item(item_rem_id){
         console.log(`Deleting item ${item_rem_id} from merchant: ${localStorage.merch_id}`)
@@ -175,60 +151,7 @@ window.onload = function () {
 
     }
 
-    function inc_counter(index) {
-        return fetch('/Counters', {
-            headers: { 'Content-Type': 'application/json' },
-            method: 'get',
-        })
-        .then(function(response)  {
-            return response.json();
-        }).then(function(response){
-                count_array = response.body;
-                console.log(count_array)
-                count_array[index] = count_array[index] + 1;
-                console.log(count_array)
 
-                return fetch('Counters', {
-                    headers: { 'Content-Type': 'application/json' },
-                    method: 'put',
-                    body: JSON.stringify(count_array)
-                }).then(function(response) {
-                    return response.json();
-                }).then(function(response){
-                    console.log("In counter add response");
-                    console.log(response.countArray);
-                    populate_item_table(response.countArray);
-                })
-        })
-    }
-
-    function dec_counter(index) {
-        return fetch('/Counters', {
-            headers: { 'Content-Type': 'application/json' },
-            method: 'get',
-        })
-        .then(function(response)  {
-            return response.json();
-        }).then(function(response){
-                count_array = response.body;
-                console.log(count_array)
-                count_array[index] = count_array[index] - 1;
-                console.log(count_array)
-
-                return fetch('Counters', {
-                    headers: { 'Content-Type': 'application/json' },
-                    method: 'put',
-                    body: JSON.stringify(count_array)
-                }).then(function(response) {
-                    return response.json();
-                }).then(function(response){
-                    console.log("In counter dec response");
-                    console.log(response.countArray);
-                    populate_item_table(response.countArray);
-                })
-        })
-
-    }
 
     function add_item(item_name, item_price) {
         let count_array;
@@ -238,9 +161,7 @@ window.onload = function () {
             body: JSON.stringify({
                 item: item_name, 
                 price: item_price,
-                // merch_id: localStorage.email
-                merch_id: 1
-
+                merch_id: localStorage.merch_id
             })
         }).then(function(response)  {
             console.log(response);
@@ -333,6 +254,7 @@ window.onload = function () {
                     return 404;
                 } else {
                     console.log("Signin Sucess")
+                    console.log("Merch_ID: " + localStorage.merch_id);
                     localStorage.email = userEmail;
                     localStorage.merch_id = JSON.parse(res).merch_id;
                     return 200;
