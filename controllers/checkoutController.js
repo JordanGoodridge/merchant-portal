@@ -7,7 +7,7 @@ var configuration = require(filePath);
 const { sign } = require('jsonwebtoken');
 const client = require('../database/client');
 
-const postCheckout = async (request, response) => {
+const postCheckout = async (request, resp) => {
     try {
         console.log("In post checkout")
         console.log("Request: " + request);
@@ -95,7 +95,7 @@ const postCheckout = async (request, response) => {
 					console.log('\nResponse : ' + JSON.stringify(response));
                     console.log('\nResponse Code of Capture a Payment : ' + JSON.stringify(response['status']));
                     
-                        response.json({ success: true }); 
+                        resp.json({ success: true }); 
                     
 					callback(error, data, response);
 				});
@@ -103,15 +103,16 @@ const postCheckout = async (request, response) => {
 
 			console.log('\nResponse : ' + JSON.stringify(response));
 			console.log('\nResponse Code of Process a Payment : ' + JSON.stringify(response['status']));
-            response.json({ success: true }); 
+            resp.json({ success: true }); 
 
             callback(error, data, response);
-            response.json({ success: true }); 
+            resp.json({ success: true }); 
 
 		});
 	}
 	catch (error) {
-		console.log('\nException on calling the API : ' + error);
+        console.log('\nException on calling the API : ' + error);
+        resp.json({sucess:false})
 	}
 
     
