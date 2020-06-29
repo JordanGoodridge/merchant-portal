@@ -208,6 +208,6 @@ app.get('/nearby-merchants', function(request, response) {
 			}
 		}
 		console.log(nearby_stores);
-		response.send(nearby_stores);
+		response.json(nearby_stores);
 	});
 });
