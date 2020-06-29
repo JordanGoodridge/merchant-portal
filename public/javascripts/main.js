@@ -51,7 +51,7 @@ window.onload = function () {
 
         let item_table = document.getElementById("items_table_view");
         item_table.innerHTML = "";
-        
+        item_list = item_list.items;
         console.log(item_list);
         if(item_list == undefined)
         {
