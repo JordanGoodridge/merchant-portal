@@ -26,41 +26,36 @@ window.onload = function () {
             method: 'get',
         })
             .then(function(response)  {
-                console.log(response)
-
                 return response.json()
                 .then(data => {
-                    console.log(data)
-                    // let items = {}
-                    console.log(`in get_items with items of type ${typeof(data)} with value ${data}`)
-                    
                     populate_item_table(data)
-
-
                   })
             }).catch((error) => {
                 console.log("Error getting item data")
-                populate_item_table()
+                console.log(error)
+                //populate_item_table()
             })
           
     }
 
 
-    function populate_item_table(item_list){
+    function populate_item_table(data){
         // items_table_view
-
-        let item_table = document.getElementById("items_table_view");
-        item_table.innerHTML = "";
-        item_list = item_list.items;
-        console.log(item_list);
-        if(item_list == undefined)
+        if(data == undefined)
         {
-
             return;
         }
+        let item_table = document.getElementById("items_table_view");
+        item_table.innerHTML = "";
 
+        let item_list = data['items'];
+
+  
+        console.log(item_list);
+
+        console.log("Length: " + item_list.length)
         for(let i = 0; i < item_list.length; i++){
-            let item = JSON.parse(item_list[i]);
+            let item = item_list[i];
             console.log(item);
             console.log(typeof(item));
 
@@ -131,7 +126,6 @@ window.onload = function () {
                 console.log(item_id);
                 delete_item(item_id);
             })
-
 
 
         }
@@ -377,16 +371,9 @@ window.onload = function () {
 
         })
             
-        })
 
-    //after clicking log_out, delele session
-    document.getElementById("counter_share_table")
-    .addEventListener("click", function (e) {
-        log_off().then(function(res){
-            item_page_view.style.display = "none"
-            login_view.style.display = "block"
-            header_view.style.display = "none"
-    })
+
+
         
     })
 
