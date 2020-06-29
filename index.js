@@ -7,6 +7,7 @@ const client = require('./database/client');
 
 const registerRouter = require('./routers/registerRouter');
 const loginRouter = require('./routers/loginRouter');
+const checkoutRouter = require('./routers/checkoutRouter');
 
 //locate.test("YOOOO", "MANNNN");
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
+app.use('/checkout', checkoutRouter);
 
 app.listen(PORT, () => {
 	console.log('Server running on port ' + PORT);
