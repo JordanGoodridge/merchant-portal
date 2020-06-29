@@ -128,18 +128,20 @@ app.get('/merchant-items', function(request, response) {
 			response.sendStatus(404);
 		} else {
 			var count = 0;
+			const items = [];
 			for (let row of res.rows) {
-				if (count == 0) {
-					var jsonObj = [ JSON.stringify(row) ];
-					console.log(jsonObj);
-					count += 1;
-				} else {
-					var jsonRow = JSON.stringify(row);
-					jsonObj.push(jsonRow);
-				}
+				// if (count == 0) {
+				// 	var jsonObj = [ JSON.stringify(row) ];
+				// 	console.log(jsonObj);
+				// 	count += 1;
+				// } else {
+				// 	var jsonRow = JSON.stringify(row);
+				// 	jsonObj.push(jsonRow);
+				// }
+				items.push(row);
 			}
-			console.log(jsonObj);
-			response.json({ success: true, items: jsonObj });
+			console.log(items);
+			response.json({ success: true, items });
 		}
 	});
 });
