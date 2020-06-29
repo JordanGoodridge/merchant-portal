@@ -12,7 +12,7 @@ a {
   width: 100%;
   padding-top: 2.5%;
   padding-bottom: 2.5%;
-  height: auto;
+  height: 200px;
   background-color: #778da9;
 }
 
@@ -33,7 +33,11 @@ a {
   font-size: 20px;
 }
 
-.log_out_button{
+#log_out_button{
+  margin-bottom: 10px;
+}
+
+.header_button{
   background-color: rgb(65, 90, 119); 
   color: white;
   border-radius: 12px;
@@ -41,11 +45,19 @@ a {
   height:2.5em;
   width: 10em;
   position:relative;
-  margin-left: 80%; 
-  margin-top: -1.5%;
   font-size: 20px;
   
+}
 
+#header_wrapper{
+  width: 80%;
+  margin-right: 0;
+  float:left;
+}
+
+#header_button_wrapper{
+  float: right;
+  margin-right: 7%;
 }
 
 #welcome_text{
@@ -436,131 +448,93 @@ font-family: 'Ubuntu', sans-serif;
   font-size: 15px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
   }
-  .un_2 {
-    width: 10%;
-    color: rgb(36, 209, 59);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 1px;
-    background: rgba(80, 247, 2, 0.04);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    outline: none;
-    box-sizing: border-box;
-    border: 2px solid rgba(0, 0, 0, 0.02);
-    margin-bottom: 50px;
-    margin-left: 46px;
-    text-align: center;
-    margin-bottom: 27px;
-    font-family: 'Ubuntu', sans-serif;
-   
-    }
     
+  .log_out {
+      border-radius: 5em;
+      color: #fff;
+      background: linear-gradient(to right, rgb(102, 153, 255), rgb(0, 153, 204));
+      border: 0;
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 15px;
+      box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+      width: 150px;
+      height: 40px;
+    }
+
+    .count_cell {
+      font-size: 20px;
+      color: BLACK;
+      font-family: 'Ubuntu', sans-serif;
+      padding-right: 15px;
+    }
+
+    #text_value{
+      color:black;
+    }
 
 
-    .log_out {
+    #setting_input_wrapper{
+      margin-left: 20%;
+      margin-right: 20%;
+      width: 60%;
+      margin-top: 50px;
+      background-color: #E0E1DD;
+      padding-top: 50px;
+      border-radius: 5px;
+    }
+
+    .settings_input_field
+    {
+      width: 80%;
+      color: rgb(38, 50, 56);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.02);
+      margin-bottom: 50px;
+      margin-left: 10%;
+      text-align: center;
+      margin-bottom: 27px;
+      font-family: 'Ubuntu', sans-serif;
+      }
+
+      .settings_button {
+        cursor: pointer;
+        outline:none;
+        width:30%;
+        margin-bottom: 20px;
         border-radius: 5em;
         color: #fff;
-        background: linear-gradient(to right, rgb(102, 153, 255), rgb(0, 153, 204));
+        background: #415A77;
         border: 0;
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-left: 1%;
+        padding-right: 1%;
         padding-bottom: 10px;
         padding-top: 10px;
         font-family: 'Ubuntu', sans-serif;
         font-size: 15px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-        width: 150px;
-        height: 40px;
-      }
-    
-
-  
-
-
-
-      .count_cell {
-        font-size: 20px;
-        color: BLACK;
-        font-family: 'Ubuntu', sans-serif;
-        padding-right: 15px;
-      }
-
-      /* https://coolors.co/0d1b2a-1b263b-415a77-778da9-e0e1dd */
-
-
-
-  
-
-        #text_value{
-          color:black;
-        }
-
-
-        .count_cell_inc button{
-          background-color: rgb(255, 255, 255); /* Green */
-          border-radius: 1em;
-          position:relative;
-          margin-left: 24%;
-          border-color:rgb(0, 153, 204);
-          font-size: 15px;
-          padding: 7px;
-          color: rgb(0, 153, 204);
-          float: left;
-          width: 50px;
-          font-family: 'Ubuntu', sans-serif;
-
-          height: 2.5em;
-          margin-left: 20px;
-        }
-
-        .count_cell_dec button{
-          background-color: rgb(255, 255, 255); /* Green */
-          border-radius: 1em;
-          position:relative;
-          margin-left: 24%;
-          border-color:rgb(0, 153, 204);
-          font-size: 15px;
-          padding: 7px;
-          font-family: 'Ubuntu', sans-serif;
-
-          color: rgb(0, 153, 204);
-          float: left;
-          width: 50px;
-          height: 2.5em;
-          margin-left: 20px;
-        }
         
-
-        .count_cell_del button{
-          background-color: rgb(255, 255, 255); /* Green */
-          border-radius: 1em;
-          position:relative;
-          margin-left: 24%;
-          border-color:rgb(0, 153, 204);
-          font-size: 15px;
-          padding: 7px;
-          font-family: 'Ubuntu', sans-serif;
-
-          color: rgb(0, 153, 204);
-          float: left;
-          width: 70px;
-          height: 2.5em;
-          margin-left: 20px;
         }
 
-        .count_cell_share button{
-          background-color: rgb(255, 255, 255); /* Green */
-          border-radius: 1em;
-          position:relative;
-          margin-left: 24%;
-          border-color:rgb(0, 153, 204);
-          font-size: 15px;
-          padding: 7px;
-          color: rgb(0, 153, 204);
-          float: left;
-          width: 70px;
-          height: 2.5em;
-          margin-left: 20px;
+        #settings_button_wrapper{
+          margin-left: 10%;
+          margin-right:10%;
+          width: auto;
+          margin-bottom: 50px;
         }
+
+        #save_button{
+          float:right;
+        }
+

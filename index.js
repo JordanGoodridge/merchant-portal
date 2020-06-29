@@ -219,8 +219,8 @@ app.get('/nearby-merchants', function(request, response) {
 
 //POST put in database merch_id, visa merch id, shared key, id
 
-app.post('/merchant-setting', function(request, response) {
-	var add_query = "UPDATE merchant SET visa_merchant_id=' + request.body.visa_merchant_id + ', key_id='" + request.body.key_id + "', shared_key='" + request.body.shared_key + "' WHERE merch_id='" + request.body.merch_id + "';"
+app.put('/merchant-setting', function(request, response) {
+	var add_query = "UPDATE merchant SET visa_merchant_id='" + request.body.visa_merchant_id + "', key_id='" + request.body.key_id + "', shared_key='" + request.body.shared_key + "' WHERE merch_id='" + request.body.merch_id + "';"
 	console.log(add_query);
 	client.query(add_query, (err, res) => {
 		if (err) throw err;

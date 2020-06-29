@@ -33,7 +33,7 @@ window.onload = function () {
             }).catch((error) => {
                 console.log("Error getting item data")
                 console.log(error)
-                //populate_item_table()
+                populate_item_table()
             })
           
     }
@@ -50,10 +50,6 @@ window.onload = function () {
 
         let item_list = data['items'];
 
-  
-        console.log(item_list);
-
-        console.log("Length: " + item_list.length)
         for(let i = 0; i < item_list.length; i++){
             let item = item_list[i];
             console.log(item);
@@ -284,10 +280,13 @@ window.onload = function () {
     var item_page_view = document.getElementById("item_page_view")
     var log_out_button = document.getElementById("log_out_button")
     var header_view = document.getElementById("header_view")
+    var setting_view = document.getElementById("settings_view")
     registration_view.style.display = "none"
     item_page_view.style.display = "none"
     log_out_button.style.display = "none"
     header_view.style.display = "none"
+    setting_view.style.display = "none"
+
 
     //after clicking signUp button
     document.getElementById("sup_btn")
@@ -345,6 +344,8 @@ window.onload = function () {
                         item_page_view.style.display = "block"
                         log_out_button.style.display = "block"
                         header_view.style.display = "block"
+                        setting_view.style.display = "none"
+
                         //display name
                         document.getElementById("in_game_username").innerHTML = username.value
                         console.log(username.value);
@@ -367,14 +368,65 @@ window.onload = function () {
                 item_page_view.style.display = "none"
                 login_view.style.display = "block"
                 header_view.style.display = "none"
+                setting_view.style.display = "none"
 
-
-        })
-            
-
-
-
-        
+        })    
     })
+
+
+    document.getElementById("settings_button")
+        .addEventListener("click", function (e) {
+                item_page_view.style.display = "none"
+                login_view.style.display = "none"
+                header_view.style.display = "block"   
+                setting_view.style.display = "block"
+    })
+
+    document.getElementById("back_button")
+        .addEventListener("click", function (e) {
+                item_page_view.style.display = "block"
+                login_view.style.display = "none"
+                header_view.style.display = "block"   
+                setting_view.style.display = "none"
+    })
+
+    document.getElementById("save_button")
+    .addEventListener("click", function (e) {
+        updateSettings().then(function() { 
+            // item_page_view.style.display = "block"
+            // login_view.style.display = "none"
+            // header_view.style.display = "block"   
+            // setting_view.style.display = "none"
+        })
+})
+
+    function checkSettings(){
+        return fetch(`/merchant-setting?merch_id=${localStorage.merch_id}`, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'get',
+        }).then(function(response){
+            console.log("Response: " + response);
+        })
+    }
+
+    function updateSettings(){
+        let visa_merch_id_ = document.getElementById("setting_merch_id").value;
+        let key_id = document.getElementById("setting_key_id").value;
+        let key = document.getElementById("setting_secret_key").value;
+        console.log(`Updating: ${visa_merch_id_}, ${key_id}, ${key}`)
+        return fetch('/merchant-setting', {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT',
+            body: JSON.stringify({
+                visa_merchant_id: visa_merch_id_, 
+                key_id: key_id,
+                shared_key: key,
+                merch_id: localStorage.merch_id
+            })
+        }).then(function(response)  {
+            console.log(response);
+            return
+            })
+    }
 
 };
