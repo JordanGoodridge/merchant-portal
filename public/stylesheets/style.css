@@ -12,7 +12,7 @@ a {
   width: 100%;
   padding-top: 2.5%;
   padding-bottom: 2.5%;
-
+  height: auto;
   background-color: #778da9;
 }
 
@@ -20,6 +20,17 @@ a {
   display:block-inline;
   color:white;
   margin-left: 15%;
+  height: auto;
+}
+
+#welcome_logo{
+  float:left;
+  margin-right: 1%;
+  margin-top: -30px;
+}
+
+#login_header{
+  font-size: 20px;
 }
 
 .log_out_button{
@@ -96,13 +107,57 @@ a {
 }
 
 .item_entry_view {
-  padding-top: 2.5%;
+  padding-top: 1.5%;
   background-color: rgb(224, 225, 221);
-  padding-bottom: 2%;
+  padding-bottom: 3%;
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
   font-size: 23px;
 
+}
+
+.item_table_wrapper{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.items_table_view{
+  width:100%;
+  margin-top: 3%;
+}
+
+
+.remove_item_button{
+  background-color: rgb(65, 90, 119); /* Green */
+  border-radius: 12px;
+  border:1px solid rgb(27, 38, 59);
+
+  position:relative;
+  font-size: 15px;
+  padding: 7px;
+  color: rgb(255, 255, 255);
+  margin-left: 20px;
+  width: 30%;
+  height: 2.5em;
+  margin-top: -1px;
+  float:right;
+}
+tr.item_row>td {
+  padding-bottom: 2.5em;
+  border-top: 1px dashed #415A77;
+  padding-top: 2.5em;
+}
+
+
+.qr_small{
+  width: 60px;
+  height: 60px;
+  margin-left: 25px;
+}
+
+.qr_large{
+  width:120px;
+  height: 120px;
 }
 
 .submit_2{
@@ -133,26 +188,160 @@ a {
 }
 .reg_view {
   background-color: #FFFFFF;
-  width: 400px;
+  width: 25%;
+
   /* height: 500px; */
   margin: 7em auto;
   border-radius: 1.5em;
   box-shadow: 0px 11px 35px 2px rgb(51, 102, 153)
 }
 
+#login_logo{
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 
 
 .login_view {
   background-color: #FFFFFF;
-  width: 400px;
-  height: 500px;
+  width: 25%;
+  height: auto;
   margin: 7em auto;
   border-radius: 1.5em;
   box-shadow: 0px 11px 35px 2px rgb(51, 102, 153)
 }
 
 
+.login_header {
+  padding-top: 40px;
+  background-color: #778DA9;
+  padding-bottom: 40px;
+  color: #FFFFFF;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+}
 
+.login_input_field {
+  width: 80%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  margin-left: 10%;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: 'Ubuntu', sans-serif;
+  }
+
+  .login_submit_button {
+    cursor: pointer;
+    outline:none;
+    width:30%;
+    margin-bottom: 20px;
+    border-radius: 5em;
+    color: #fff;
+    background: #415A77;
+    border: 0;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 35%;
+    font-size: 15px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    
+    }
+
+    .login_submit_button:active {
+      border-radius: 1em;
+      border: 1px #1b263b solid;
+    }
+
+    .login_submit_button:hover {
+      background-color: #778da9;
+    }
+    #login_button_wrapper{
+
+      margin-bottom: 8%;
+    }
+    #login_input_wrapper{
+      margin-top: 8%;
+    
+    }
+
+    
+
+  #sign_up{
+    padding-top: 5px;
+    color: #415A77;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+  } 
+
+  .signup_input_field{
+    width: 80%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 10%;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+
+
+    #signup_input_wrapper{
+      margin-top: 8%;
+    }
+
+    #signup_button_wrapper{
+      margin-bottom: 8%;
+    }
+
+    .signup_submit_button {
+      cursor: pointer;
+      outline:none;
+      width:30%;
+      margin-bottom: 20px;
+      border-radius: 5em;
+      color: #fff;
+      background: #415A77;
+      border: 0;
+      padding-left: 1%;
+      padding-right: 1%;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      font-family: 'Ubuntu', sans-serif;
+      margin-left: 35%;
+      font-size: 15px;
+      box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+      
+      }
 
 .form1 {
   padding-bottom: 20px;
@@ -220,7 +409,7 @@ font-family: 'Ubuntu', sans-serif;
 
 .sign_in {
   padding-top: 5px;
-  color: rgb(0, 153, 204);
+  color: #415A77;
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
   font-size: 18px;
@@ -234,18 +423,18 @@ font-family: 'Ubuntu', sans-serif;
 }
 .submit {
   cursor: pointer;
-    border-radius: 5em;
-    color: #fff;
-    background: linear-gradient(to right, rgb(102, 153, 255), rgb(0, 153, 204));
-    border: 0;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    font-family: 'Ubuntu', sans-serif;
-    margin-left: 35%;
-    font-size: 15px;
-    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, rgb(102, 153, 255), rgb(0, 153, 204));
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  margin-left: 35%;
+  font-size: 15px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
   }
   .un_2 {
     width: 10%;
@@ -289,12 +478,7 @@ font-family: 'Ubuntu', sans-serif;
 
   
 
-      #items_table_view {
-        margin-top: 3%;
-        border-radius: 1em;
-        border:1px solid rgb(27, 38, 59);
-        margin-left: 10%;
-      }
+
 
       .count_cell {
         font-size: 20px;

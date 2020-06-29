@@ -4,6 +4,8 @@
 
 //Run once broswer has loaded everything
 window.onload = function () {
+
+
     function get_session() {
       
         return fetch('/Session', {
@@ -36,6 +38,9 @@ window.onload = function () {
 
 
                   })
+            }).catch((error) => {
+                console.log("Error getting item data")
+                populate_item_table()
             })
           
     }
@@ -44,148 +49,109 @@ window.onload = function () {
     function populate_item_table(item_list){
         // items_table_view
 
+        let item_table = document.getElementById("items_table_view");
+        item_table.innerHTML = "";
+        
         console.log(item_list);
         if(item_list == undefined)
         {
+
             return;
         }
 
-        let item_table = document.getElementById("items_table_view");
-        item_table.innerHTML = "";
         for(let i = 0; i < item_list.length; i++){
             let item = JSON.parse(item_list[i]);
             console.log(item);
             console.log(typeof(item));
 
             let table_row = document.createElement("tr");
+            table_row.className = "item_row"
+            table_row.setAttribute("index", i);
+            table_row.setAttribute("item_id", item.item_id);
+
             item_table.appendChild(table_row);
+
 
             //ITEM NAME
             let name_col = document.createElement("td");
             name_col.innerHTML = `${item.name}`;
             name_col.className = "count_cell";
-            name_col.setAttribute("index", i);
+            //name_col.setAttribute("index", i);
             table_row.appendChild(name_col);
 
             //ITEM PRICE
             let price_col = document.createElement("td");
             price_col.innerHTML = item.price;
             price_col.className = "count_cell";
+            //price_col.setAttribute("index", i);
+
             table_row.appendChild(price_col);
+
+            //ITEM ID/QR
+            let qr = document.createElement(`td`);
+            console.log("ITEM ID: "+item.item_id);
+            var qrcode = new QRCode(qr, {
+                text:  
+                // `${item.item_id}`,
+                // `${item.item_id}, ${item.price},${item.name}`,
+
+            `{item_id: ${item.item_id},price: ${item.price},name: ${item.name},merch_id: ${localStorage.merch_id}}`,
+                width: 60,
+                height: 60,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            let qr_img = qr.childNodes[1]
+            qr_img.className = "qr_small";
+            qr_img.addEventListener('click', function(e){
+                if(qr_img.className === 'qr_small'){
+                    qr_img.className = 'qr_large';
+                } else {
+                    qr_img.className = 'qr_small';
+                }
+            })
+
+            table_row.appendChild(qr);
+
+
 
 
             //DELETE BUTTON
             let del_col = document.createElement("td");
             let del_button = document.createElement("button");
-            del_button.innerHTML = "Delete";
-            del_col.className = "count_cell_del";
+            del_button.innerHTML = "Remove";
+            del_col.className = "remove_button_col";
+            del_button.className = "remove_item_button";
             del_col.appendChild(del_button);
             table_row.appendChild(del_col);
             del_button.addEventListener("click", function(e){
-                console.log(this.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.getAttribute("index"));
-                let index = this.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.getAttribute("index")
-                delete_counter(index);
+                console.log(this.parentNode.parentNode.getAttribute("item_id"));
+                let item_id = this.parentNode.parentNode.getAttribute("item_id")
+                console.log(item_id);
+                delete_item(item_id);
             })
 
 
 
-            //SHARE BUTTON
-            // let link_col = document.createElement("td");
-            // let link_button = document.createElement("p");
-            // //link_button.innerHTML;
-            // link_col.className = "count_cell_share";
-            // link_col.appendChild(link_button);
-            // table_row.appendChild(link_col);
-            // link_button.addEventListener("click", function(e){
-            //     //Add code to copy to clipboard
-            // })
-
         }
     }
 
-    function share_counter(value){
-        return fetch('/Share', {            
-            headers: { 'Content-Type': 'application/json' },
-            method: 'post',
-            body: JSON.stringify({val: value})
-        }).then(function(response){
-            return response.json();
-        }).then(function(response){
-            console.log(response)
-            alert(`http://localhost:3000/Share/?id=${response._id}`)
 
-        })
-    }
-
-    function delete_counter(index){
-        return fetch('/Counters', {
+    function delete_item(item_rem_id){
+        console.log(`Deleting item ${item_rem_id} from merchant: ${localStorage.merch_id}`)
+        return fetch('/merchant-item', {
             headers: { 'Content-Type': 'application/json' },
             method: 'delete',
-            body: JSON.stringify({i: index})
+            body: JSON.stringify({item_id: item_rem_id, merch_id: localStorage.merch_id})
         }).then(function(response)  {
-            return response.json();
-        }).then(function(response){
-            let countArray = response.countArray;
-            console.log(response.countArray);
-            populate_item_table(countArray);
-
-        })
-    }
-
-    function inc_counter(index) {
-        return fetch('/Counters', {
-            headers: { 'Content-Type': 'application/json' },
-            method: 'get',
-        })
-        .then(function(response)  {
-            return response.json();
-        }).then(function(response){
-                count_array = response.body;
-                console.log(count_array)
-                count_array[index] = count_array[index] + 1;
-                console.log(count_array)
-
-                return fetch('Counters', {
-                    headers: { 'Content-Type': 'application/json' },
-                    method: 'put',
-                    body: JSON.stringify(count_array)
-                }).then(function(response) {
-                    return response.json();
-                }).then(function(response){
-                    console.log("In counter add response");
-                    console.log(response.countArray);
-                    populate_item_table(response.countArray);
-                })
-        })
-    }
-
-    function dec_counter(index) {
-        return fetch('/Counters', {
-            headers: { 'Content-Type': 'application/json' },
-            method: 'get',
-        })
-        .then(function(response)  {
-            return response.json();
-        }).then(function(response){
-                count_array = response.body;
-                console.log(count_array)
-                count_array[index] = count_array[index] - 1;
-                console.log(count_array)
-
-                return fetch('Counters', {
-                    headers: { 'Content-Type': 'application/json' },
-                    method: 'put',
-                    body: JSON.stringify(count_array)
-                }).then(function(response) {
-                    return response.json();
-                }).then(function(response){
-                    console.log("In counter dec response");
-                    console.log(response.countArray);
-                    populate_item_table(response.countArray);
-                })
+            get_items();
+            return;
         })
 
     }
+
+
 
     function add_item(item_name, item_price) {
         let count_array;
@@ -195,12 +161,11 @@ window.onload = function () {
             body: JSON.stringify({
                 item: item_name, 
                 price: item_price,
-                // merch_id: localStorage.email
-                merch_id: 1
-
+                merch_id: localStorage.merch_id
             })
         }).then(function(response)  {
             console.log(response);
+            get_items();
             return response.json();
             })
 
@@ -228,7 +193,7 @@ window.onload = function () {
                 console.log(res)
             })
             login_view.style.display = "none"
-            item_entry_view.style.display = "block"
+            item_page_view.style.display = "block"
             log_out.style.display = "block"
             header_view.style.display = "block"
         }
@@ -289,12 +254,16 @@ window.onload = function () {
                     return 404;
                 } else {
                     console.log("Signin Sucess")
+                    console.log("Merch_ID: " + localStorage.merch_id);
                     localStorage.email = userEmail;
                     localStorage.merch_id = JSON.parse(res).merch_id;
                     return 200;
                 }
 
-                })
+            })
+
+
+
             return res
 
             
@@ -302,6 +271,8 @@ window.onload = function () {
 
 
     function log_off(){
+        localStorage.email = undefined;
+        localStorage.merch_id = undefined;
         return fetch('/LogOff', {
             headers: { 'Content-Type': 'application/json' },
             method: 'post'
@@ -316,11 +287,11 @@ window.onload = function () {
     var username_in = document.getElementById("sg_up_us");
     var login_view = document.getElementById("login_view");
     var registration_view = document.getElementById("registration_view")
-    var item_entry_view = document.getElementById("item_entry_view")
+    var item_page_view = document.getElementById("item_page_view")
     var log_out_button = document.getElementById("log_out_button")
     var header_view = document.getElementById("header_view")
     registration_view.style.display = "none"
-    item_entry_view.style.display = "none"
+    item_page_view.style.display = "none"
     log_out_button.style.display = "none"
     header_view.style.display = "none"
 
@@ -377,7 +348,7 @@ window.onload = function () {
                     //if res.status = success
                     if (res == 200) {
                         login_view.style.display = "none"
-                        item_entry_view.style.display = "block"
+                        item_page_view.style.display = "block"
                         log_out_button.style.display = "block"
                         header_view.style.display = "block"
                         //display name
@@ -399,9 +370,11 @@ window.onload = function () {
     document.getElementById("log_out_button")
         .addEventListener("click", function (e) {
             log_off().then(function(res){
-                item_entry_view.style.display = "none"
+                item_page_view.style.display = "none"
                 login_view.style.display = "block"
                 header_view.style.display = "none"
+
+
         })
             
         })
@@ -410,7 +383,7 @@ window.onload = function () {
     document.getElementById("counter_share_table")
     .addEventListener("click", function (e) {
         log_off().then(function(res){
-            item_entry_view.style.display = "none"
+            item_page_view.style.display = "none"
             login_view.style.display = "block"
             header_view.style.display = "none"
     })
