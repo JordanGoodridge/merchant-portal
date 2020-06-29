@@ -186,7 +186,7 @@ app.delete('/merchant-item', function(request, response) {
 app.get('/nearby-merchants', function(request, response) {
 	console.log('input geo', request.query.latitude, request.query.longitude);
 
-	var nearby_query = 'SELECT name, longitude, latitude FROM merchant;';
+	var nearby_query = 'SELECT merch_id, name, longitude, latitude FROM merchant;';
 	console.log(nearby_query);
 	client.query(nearby_query, (err, res) => {
 		if (err) throw err;
