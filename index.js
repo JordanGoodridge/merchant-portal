@@ -184,7 +184,9 @@ app.delete('/merchant-item', function(request, response) {
 
 //gets merchants within 1000m takjes in long lat
 app.get('/nearby-merchants', function(request, response) {
-	var nearby_query = 'SELECT name, longitude, latitude FROM merchant;';
+	console.log('input geo', request.query.latitude, request.query.longitude);
+
+	var nearby_query = 'SELECT merch_id, name, longitude, latitude FROM merchant;';
 	console.log(nearby_query);
 	client.query(nearby_query, (err, res) => {
 		if (err) throw err;
@@ -206,6 +208,6 @@ app.get('/nearby-merchants', function(request, response) {
 			}
 		}
 		console.log(nearby_stores);
-		response.send(nearby_stores);
+		response.json({ success: true, nearby_stores });
 	});
 });
