@@ -215,3 +215,40 @@ app.get('/nearby-merchants', function(request, response) {
 		response.json({ success: true, nearby_stores });
 	});
 });
+
+
+//POST put in database merch_id, visa merch id, shared key, id
+
+app.post('/merchant-setting', function(request, response) {
+	var add_query = "UPDATE merchant SET visa_merchant_id=' + request.body.visa_merchant_id + ', key_id='" + request.body.key_id + "', shared_key='" + request.body.shared_key + "' WHERE merch_id='" + request.body.merch_id + "';"
+	console.log(add_query);
+	client.query(add_query, (err, res) => {
+		if (err) throw err;
+		for (let row of res.rows) {
+			console.log(JSON.stringify(row));
+		}
+	});
+	response.sendStatus(200);
+});
+
+//GET check if they have these values filled
+
+app.get('/merchant-setting', function(request, response) {
+	var add_query = "SELECT * FROM merchant WHERE merch_id='" + request.query.merch_id + "';"
+	console.log(add_query);
+	client.query(add_query, (err, res) => {
+		for (let row of res.rows) {
+			console.log(JSON.stringify(row))
+			jsonRow = JSON.stringify(row);
+			var jsonObj = JSON.parse(jsonRow);
+			console.log(jsonObj.key_id);
+			if (jsonObj.key_id == undefined || jsonObj.shared_key == undefined || jsonObj.visa_merchant_id == undefined){
+				response.sendStatus(404);
+			}
+			else{
+				response.sendStatus(200);
+			}
+		}
+	});
+});
+
