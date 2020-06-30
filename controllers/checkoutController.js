@@ -70,6 +70,11 @@ const postCheckout = async (request, resp) => {
 
 		requestObj.orderInformation = orderInformation;
 
+    const query_feedback = await client.query("SELECT * FROM merchant WHERE merchant.merch_id = '" + request.body.merch_id + "' ;");
+
+    var key_id = query_feedback.rows[0].key_id;
+    var visa_merchant_id = query_feedback.rows[0].visa_merchant_id;
+
 
 		var instance = new cybersourceRestApi.PaymentsApi(configObject, apiClient);
 		var cap_instance = new cybersourceRestApi.CaptureApi(configObject, apiClient);
@@ -94,19 +99,19 @@ const postCheckout = async (request, resp) => {
 
 					console.log('\nResponse : ' + JSON.stringify(response));
                     console.log('\nResponse Code of Capture a Payment : ' + JSON.stringify(response['status']));
-                    
-                        resp.json({ success: true }); 
-                    
+
+                        resp.json({ success: true });
+
 					callback(error, data, response);
 				});
 			}
 
 			console.log('\nResponse : ' + JSON.stringify(response));
 			console.log('\nResponse Code of Process a Payment : ' + JSON.stringify(response['status']));
-            resp.json({ success: true }); 
+            resp.json({ success: true });
 
             callback(error, data, response);
-            resp.json({ success: true }); 
+            resp.json({ success: true });
 
 		});
 	}
@@ -115,7 +120,7 @@ const postCheckout = async (request, resp) => {
         resp.json({sucess:false})
 	}
 
-    
+
 };
 
 
@@ -216,7 +221,7 @@ const postCheckout = async (request, resp) => {
 // 	simple_authorization_internet(function () {
 // 		console.log('\nCreatePayment end.');
 //     });
-    
+
 // }
 
 
