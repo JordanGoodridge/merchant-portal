@@ -1,6 +1,6 @@
 import { verify } from 'jsonwebtoken';
 
-export const isAuth = (request, response, next) => {
+const isAuth = (request, response, next) => {
 	const givenToken = request.headers.authorization;
 
 	if (!givenToken) {
@@ -22,3 +22,5 @@ export const isAuth = (request, response, next) => {
 
 	next();
 };
+
+module.exports = isAuth;
