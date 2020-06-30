@@ -40,13 +40,18 @@ a {
 .header_button{
   background-color: rgb(65, 90, 119); 
   color: white;
-  border-radius: 12px;
-  border: 0px solid rgb(200, 200, 200);
-  height:2.5em;
+  height: 2.5em;
   width: 10em;
   position:relative;
   font-size: 20px;
-  
+  border-radius: 12px;
+  border:1px solid rgb(27, 38, 59);
+  font-size: 15px;
+  padding: 7px;
+  color: rgb(255, 255, 255);
+  margin-left: 20px;
+  width: 12em;
+
 }
 
 #header_wrapper{
@@ -88,7 +93,7 @@ a {
   font-size: 15px;
   padding: 7px;
   color: rgb(255, 255, 255);
-  margin-left: 20px;
+  margin-left: 13%;
   width: 20%;
   height: 2.5em;
   margin-top: -1px;
@@ -110,7 +115,7 @@ a {
   box-sizing: border-box;
   text-align: center;
   font-family: 'Ubuntu', sans-serif;
-  margin-left: 20px;
+  margin-left: 12%;
   width: 20%;
   height: 2.5em;
   position: relative;
@@ -465,10 +470,9 @@ font-family: 'Ubuntu', sans-serif;
       height: 40px;
     }
 
-    .count_cell {
-      font-size: 20px;
-      color: BLACK;
-      font-family: 'Ubuntu', sans-serif;
+    .item_cell {
+      font-size: 14px;
+      color: #415A77;
       padding-right: 15px;
     }
 
@@ -527,6 +531,48 @@ font-family: 'Ubuntu', sans-serif;
         
         }
 
+        .settings_status_no {
+          cursor: pointer;
+
+          float:right;
+          outline:none;
+          width:30%;
+          margin-right: 5%;
+          border-radius: 5em;
+          color: #fff;
+          background: rgb(143, 63, 63);
+          border: 0;
+          padding-left: 1%;
+          padding-right: 1%;
+          padding-bottom: 8px;
+          padding-top: 8px;
+          font-family: 'Ubuntu', sans-serif;
+          font-size: 15px;
+          box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+          
+          }
+
+        .settings_status_yes {
+          cursor: pointer;
+
+          float:right;
+          outline:none;
+          width:30%;
+          margin-right: 5%;
+          border-radius: 5em;
+          color: #fff;
+          background: rgb(72, 148, 76);
+          border: 0;
+          padding-left: 1%;
+          padding-right: 1%;
+          padding-bottom: 8px;
+          padding-top: 8px;
+          font-family: 'Ubuntu', sans-serif;
+          font-size: 15px;
+          box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+          
+          }
+
         #settings_button_wrapper{
           margin-left: 10%;
           margin-right:10%;
@@ -538,3 +584,11 @@ font-family: 'Ubuntu', sans-serif;
           float:right;
         }
 
+        #setting_text_wrapper{
+          margin-left: 10%;
+          margin-right: 10%;
+          margin-top: 2%;
+          color: #415A77;
+          margin-bottom: 100px;
+          padding-bottom: 100px;
+        }

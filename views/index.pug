@@ -28,7 +28,7 @@ block content
       <div class = "item_entry_wrapper"> 
         <input class = "item_input" type="text" align="center" id = "item_name" placeholder="Item Name">
         <input class = "item_input" type="number" align="center" id = "item_price" placeholder="Item Price">
-        <input class = "item_input" type="number" align="center" id = "item_imnage" placeholder="Image Upload Placeholder">
+        //- <input class = "item_input" type="number" align="center" id = "item_imnage" placeholder="Image Upload Placeholder">
 
         <button class="add_item_button" id = "add_item_button">Add Item</button>
 
@@ -106,14 +106,32 @@ block content
 
     <div id = "setting_input_wrapper">
 
-      <div id = settings_button_wrapper>
+      <div id = "settings_button_wrapper">
         <button class="settings_button" align="center" id = "back_button">Back</button>
         <button class="settings_button" align="center" id = "save_button">Save</button>
+        <p class="settings_status_no" align="center" id = "settings_status">Status</p>
+
       </div>
 
       <input class="settings_input_field" type="text" align="center" id = "setting_merch_id" placeholder="Enter Merchant ID">
       <input class="settings_input_field" type="text" align="center" id = "setting_key_id" placeholder="Enter Merchant KEY ID">
       <input class="settings_input_field" type="text" align="center" id = "setting_secret_key" placeholder="Enter Merchant Secret Key">
+
+      <div id = "setting_text_wrapper">
+        <h1 style="text-align:center">Getting Started</h1>
+        <p>1. Follow the steps on https://support.cybersource.com/s/article/CyberSource-Account-Registration-Guide to create a CyberSource Account</p>
+        <p>2. Copy your Merchant ID into the field above</p>
+        <p>3. On the dashboard, select "View All Keys"</p>
+        <p>4. On the dashboard, select "View All Keys"</p>
+        <p>5. Click on generate key</p>
+        <p>6. Select "API cert / Serect", then "Shared Secret"</p>
+        <p>7. Copy the key into the field above</p>
+        <p>8. Go to key management, and select "Keys: API Keys", copy the "Key Details: xxxx.." value into the key id field above</p>
+        <p>9. Once these values are configired the status icon will appear green</p>
+        <p>10. For security reasons, these values will not be displayed above</p>
+
+
+      </div>
     </div>
 
 

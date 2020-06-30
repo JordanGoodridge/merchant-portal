@@ -66,14 +66,14 @@ window.onload = function () {
             //ITEM NAME
             let name_col = document.createElement("td");
             name_col.innerHTML = `${item.name}`;
-            name_col.className = "count_cell";
+            name_col.className = "item_cell";
             //name_col.setAttribute("index", i);
             table_row.appendChild(name_col);
 
             //ITEM PRICE
             let price_col = document.createElement("td");
             price_col.innerHTML = item.price;
-            price_col.className = "count_cell";
+            price_col.className = "item_cell";
             //price_col.setAttribute("index", i);
 
             table_row.appendChild(price_col);
@@ -376,12 +376,12 @@ window.onload = function () {
 
     document.getElementById("settings_button")
         .addEventListener("click", function (e) {
+            checkSettings();
                 item_page_view.style.display = "none"
                 login_view.style.display = "none"
                 header_view.style.display = "block"   
                 setting_view.style.display = "block"
     })
-
     document.getElementById("back_button")
         .addEventListener("click", function (e) {
                 item_page_view.style.display = "block"
@@ -405,7 +405,9 @@ window.onload = function () {
             headers: { 'Content-Type': 'application/json' },
             method: 'get',
         }).then(function(response){
-            console.log("Response: " + response);
+            if(response.status == 200){
+                document.getElementById("settings_status").className = "settings_status_yes"
+            }
         })
     }
 
