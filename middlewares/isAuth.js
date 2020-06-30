@@ -1,4 +1,4 @@
-import { verify } from 'jsonwebtoken';
+const { verify } = require('jsonwebtoken');
 
 const isAuth = (request, response, next) => {
 	const givenToken = request.headers.authorization;
