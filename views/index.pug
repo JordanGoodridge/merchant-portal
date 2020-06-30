@@ -1,6 +1,9 @@
 extends layout
 
 block content
+
+
+
   <div class = 'header_view' id = "header_view">
     <div id = "header_wrapper">
       
@@ -12,13 +15,18 @@ block content
 
 
     </div>
-    <div id = "header_button_wrapper">
-        <button class = "header_button" id = "log_out_button">Log Out</button>
-        <button class = "header_button" id = "settings_button">Settings</button>
+    <div id = "header_button_container">
+      <div id = "header_button_wrapper">
+          <button class = "header_button" id = "log_out_button">Log Out</button>
+          <button class = "header_button" id = "settings_button">Settings</button>
+      </div>
     </div>
     
   </div>
-  //- <div class="counter_div" id = "table_3">
+
+
+
+
   <div class ="item_page_view" id = "item_page_view">
 
     <div class="item_entry_view" id = "item_entry_view">
@@ -26,23 +34,30 @@ block content
       <h4 class="add_item_header" align="center" >Add Items: </h4>
 
       <div class = "item_entry_wrapper"> 
+        <button class="add_item_button" id = "add_item_button">Add Item</button>
         <input class = "item_input" type="text" align="center" id = "item_name" placeholder="Item Name">
         <input class = "item_input" type="number" align="center" id = "item_price" placeholder="Item Price">
-        //- <input class = "item_input" type="number" align="center" id = "item_imnage" placeholder="Image Upload Placeholder">
-
-        <button class="add_item_button" id = "add_item_button">Add Item</button>
-
       </div>
+
     </div>
+
     <div class = "item_table_wrapper"> 
+      <table class = "items_table_view" id = "items_table_view_header">
+        <tr> 
+          <th class = "item_table_header">Item Name</th>
+          <th class = "item_table_header">Item Price</th>
+          <th class = "item_table_header">Item QR Code</th>
+          <th class = "item_table_header" id = "table_remove_header">Remove Item</th>
+        </tr>
+      </table>
       <table class = "items_table_view" id = "items_table_view"></table>
 
     </div>
-
-
-
-
   </div>
+
+
+
+
 
    <div class="reg_view" id = "registration_view">
 
@@ -70,9 +85,16 @@ block content
     </div>
 
     <div id = signup_button_wrapper>
-      <button class="signup_submit_button" align="center" id = "submit_signup_button">Submit</button>  
+      <button class="signup_button"  id = "signup_back_button">Back</button>  
+      <button class="signup_button"  id = "submit_signup_button">Submit</button>  
     </div>
   </div>
+
+
+
+
+  //- LOGIN VIEW
+
 
   <div class="login_view" id = "login_view">
 
@@ -94,15 +116,13 @@ block content
       <button class="login_submit_button" align="center" id = "sup_btn">Sign Up</button>
     </div>
 
-
   </div>
 
 
 
 
+
   <div class = "settings_view" id = "settings_view"> 
-
-
 
     <div id = "setting_input_wrapper">
 

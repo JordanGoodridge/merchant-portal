@@ -178,12 +178,13 @@ app.delete('/merchant-item', function(request, response) {
 		if (err) throw err;
 		if (res.rowCount == 0) {
 			response.sendStatus(404);
+		} else {
+			response.sendStatus(200);
 		}
 		for (let row of res.rows) {
 			console.log(JSON.stringify(row));
 		}
 	});
-	response.sendStatus(200);
 });
 
 //gets merchants within 1000m takjes in long lat

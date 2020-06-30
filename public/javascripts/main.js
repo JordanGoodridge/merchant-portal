@@ -400,6 +400,15 @@ window.onload = function () {
         })
 })
 
+
+    document.getElementById("signup_back_button").addEventListener("click", function(e) {
+            item_page_view.style.display = "none"
+            login_view.style.display = "block"
+            header_view.style.display = "none"   
+            setting_view.style.display = "none"
+            registration_view.style.display = "none"
+    })
+
     function checkSettings(){
         return fetch(`/merchant-setting?merch_id=${localStorage.merch_id}`, {
             headers: { 'Content-Type': 'application/json' },
