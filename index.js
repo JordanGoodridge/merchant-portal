@@ -220,16 +220,6 @@ app.get('/nearby-merchants', function(request, response) {
 
 });
 
-
-<<<<<<< HEAD
-//POST put in database merch_id, visa merch id, shared key, id
-
-<<<<<<< HEAD
-app.put('/merchant-setting', function(request, response) {
-=======
-app.post('/merchant-setting', function(request, response) {
->>>>>>> 8522f5260514dcaf7f3301019bb63b3179d80781
-=======
 //PUT put in database merch_id, visa merch id, shared key, id
 app.put('/merchant-setting', function(request, response) {
 >>>>>>> 255e55079bf5886d27a65d9673567635c23188ab
