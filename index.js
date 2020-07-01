@@ -192,7 +192,6 @@ app.get('/nearby-merchants', function(request, response) {
 	console.log('input geo', request.query.latitude, request.query.longitude);
 
 	var nearby_query = 'SELECT merch_id, name, longitude, latitude FROM merchant;';
-	console.log(nearby_query);
 	client.query(nearby_query, (err, res) => {
 		if (err) throw err;
 		if (res.rowCount == 0) {
@@ -215,6 +214,8 @@ app.get('/nearby-merchants', function(request, response) {
 		console.log(nearby_stores);
 		response.json({ success: true, nearby_stores });
 	});
+	console.log(nearby_query);
+	
 });
 
 
@@ -253,3 +254,26 @@ app.get('/merchant-setting', function(request, response) {
 	});
 });
 
+
+app.get('/transactions', function(request, response) {
+	var add_query = "SELECT * FROM orders WHERE merch_id='" + request.query.merch_id + "';"
+	console.log(add_query);
+	client.query(add_query, (err, res) => {
+		if (err) throw err;
+		if (res === undefined || res.rowCount == 0) {
+			response.sendStatus(404);
+		}
+		var transactions = [];
+		for (let row of res.rows) {
+			var jsonRow = JSON.stringify(row);
+			var jsonObj = JSON.parse(jsonRow);
+			console.log(row);
+			console.log(distance);
+			if (distance <= 20000) {
+				nearby_stores.push(jsonObj);
+			}
+		}
+		console.log(transactions);
+		response.json({ success: true, nearby_stores });
+	});
+});
