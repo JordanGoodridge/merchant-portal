@@ -256,24 +256,22 @@ app.get('/merchant-setting', function(request, response) {
 
 
 app.get('/transactions', function(request, response) {
-	var add_query = "SELECT * FROM orders WHERE merch_id='" + request.query.merch_id + "';"
-	console.log(add_query);
-	client.query(add_query, (err, res) => {
-		if (err) throw err;
-		if (res === undefined || res.rowCount == 0) {
-			response.sendStatus(404);
-		}
-		var transactions = [];
-		for (let row of res.rows) {
-			var jsonRow = JSON.stringify(row);
-			var jsonObj = JSON.parse(jsonRow);
-			console.log(row);
-			console.log(distance);
-			if (distance <= 20000) {
-				nearby_stores.push(jsonObj);
-			}
-		}
-		console.log(transactions);
-		response.json({ success: true, nearby_stores });
-	});
+    var transaction = 'SELECT * FROM orders WHERE merch_id=' + request.query.merch_id + ';'
+    console.log(transaction);
+    client.query(transaction, (err, res) => {
+        var orders = [];    
+        if (res.rowCount == 0) {
+            response.sendStatus(404);
+        }
+        else{
+            for (let row of res.rows) {
+                var jsonRow = JSON.stringify(row);
+                var jsonObj = JSON.parse(jsonRow);
+                orders.push(jsonObj);    
+                console.log(JSON.stringify(row));
+        }
+        response.json({ success: true, orders });
+        }
+
+    });
 });

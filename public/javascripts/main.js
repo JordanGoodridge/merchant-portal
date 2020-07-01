@@ -365,6 +365,7 @@ window.onload = function () {
                 login_view.style.display = "block"
                 header_view.style.display = "none"
                 setting_view.style.display = "none"
+                trans_view.style.display = "none"
 
         })    
     })
@@ -377,6 +378,8 @@ window.onload = function () {
                 login_view.style.display = "none"
                 header_view.style.display = "block"   
                 setting_view.style.display = "block"
+                trans_view.style.display = "none"
+
     })
     document.getElementById("back_button")
         .addEventListener("click", function (e) {
@@ -384,6 +387,8 @@ window.onload = function () {
                 login_view.style.display = "none"
                 header_view.style.display = "block"   
                 setting_view.style.display = "none"
+                trans_view.style.display = "none"
+
     })
 
     document.getElementById("save_button")
@@ -397,6 +402,7 @@ window.onload = function () {
     }) 
 
     document.getElementById("trans_button").addEventListener("click", function(e){
+        get_transactions();
         item_page_view.style.display = "none"
         login_view.style.display = "none"
         header_view.style.display = "block"   
@@ -454,89 +460,90 @@ window.onload = function () {
     }
 
 
+
+    function get_transactions(){
+        console.log("Transactions items");
+        return fetch(`/transactions?merch_id=${localStorage.merch_id}`, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'get',
+        })
+            .then(function(response)  {
+                return response.json()
+                .then(data => {
+                    populate_trans_table(data)
+                  })
+            }).catch((error) => {
+                console.log("Error getting transaction data")
+                console.log(error)
+            })
+          
+    }
+
+
     function populate_trans_table(data){
         // items_table_view
         if(data == undefined)
         {
             return;
         }
-        let item_table = document.getElementById("trans_table_view");
-        item_table.innerHTML = "";
+        let trans_table = document.getElementById("trans_table_view");
+        trans_table.innerHTML = "";
 
-        let item_list = data['items'];
+        let trans_list = data['orders'];
 
-        for(let i = 0; i < item_list.length; i++){
-            let item = item_list[i];
-            console.log(item);
-            console.log(typeof(item));
+        for(let i = 0; i < trans_list.length; i++){
+            let transaction = trans_list[i];
+            console.log(transaction);
+            console.log(typeof(transaction));
+
 
             let table_row = document.createElement("tr");
-            table_row.className = "item_row"
+            table_row.className = "trans_row"
             table_row.setAttribute("index", i);
-            table_row.setAttribute("item_id", item.item_id);
+            table_row.setAttribute("item_id", transaction.item_id);
 
-            item_table.appendChild(table_row);
+            trans_table.appendChild(table_row);
 
 
-            //ITEM NAME
-            let name_col = document.createElement("td");
-            name_col.innerHTML = `${item.name}`;
-            name_col.className = "item_cell";
+            //ORDER ID
+            let orderID_col = document.createElement("td");
+            orderID_col.innerHTML = `${transaction.order_id}`;
+            orderID_col.className = "trans_cell";
             //name_col.setAttribute("index", i);
-            table_row.appendChild(name_col);
+            table_row.appendChild(orderID_col);
+
+            //EMAIL
+            let email_col = document.createElement("td");
+            email_col.innerHTML = `${transaction.cust_id}`;
+            email_col.className = "trans_cell";
+            //name_col.setAttribute("index", i);
+            table_row.appendChild(email_col);
 
             //ITEM PRICE
             let price_col = document.createElement("td");
-            price_col.innerHTML = item.price;
-            price_col.className = "item_cell";
+            price_col.innerHTML = `PLACEHOLDER`;
+            price_col.className = "trans_cell";
             //price_col.setAttribute("index", i);
 
             table_row.appendChild(price_col);
 
-            //ITEM ID/QR
-            let qr = document.createElement(`td`);
-            console.log("ITEM ID: "+item.item_id);
-            var qrcode = new QRCode(qr, {
-                text:  
-                // `${item.item_id}`,
-                // `${item.item_id}, ${item.price},${item.name}`,
+            //DATE
+            let date_col = document.createElement("td");
+            date_col.innerHTML = `${transaction.order_date}`;
+            date_col.className = "trans_cell";
+            table_row.appendChild(date_col);
 
-            `{item_id: ${item.item_id},price: ${item.price},name: ${item.name},merch_id: ${localStorage.merch_id}}`,
-                width: 60,
-                height: 60,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
-            let qr_img = qr.childNodes[1]
-            qr_img.className = "qr_small";
-            qr_img.addEventListener('click', function(e){
-                if(qr_img.className === 'qr_small'){
-                    qr_img.className = 'qr_large';
-                } else {
-                    qr_img.className = 'qr_small';
-                }
-            })
+            //price_col.setAttribute("index", i);
 
-            table_row.appendChild(qr);
-
-
-
-
-            //DELETE BUTTON
-            let del_col = document.createElement("td");
-            let del_button = document.createElement("button");
-            del_button.innerHTML = "Remove";
-            del_col.className = "remove_button_col";
-            del_button.className = "remove_item_button";
-            del_col.appendChild(del_button);
-            table_row.appendChild(del_col);
-            del_button.addEventListener("click", function(e){
-                console.log(this.parentNode.parentNode.getAttribute("item_id"));
-                let item_id = this.parentNode.parentNode.getAttribute("item_id")
-                console.log(item_id);
-                delete_item(item_id);
-            })
+            //DATE
+            let status_col = document.createElement("td");
+            if(transaction.status === true){
+                status_col.innerHTML = `Completed`;
+            }
+            status_col.className = "trans_cell";
+            table_row.appendChild(status_col);
+            
+            
 
 
         }
