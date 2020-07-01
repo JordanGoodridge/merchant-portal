@@ -56,7 +56,10 @@ block content
           <th class = "item_table_header" id = "table_remove_header">Remove Item</th>
         </tr>
       </table>
+
+      <div id = "item_overflow_wrapper">
       <table class = "items_table_view" id = "items_table_view"></table>
+      </div>
 
     </div>
   </div>
@@ -177,6 +180,7 @@ block content
         <div class = "trans_table_wrapper"> 
           <table class = "trans_table_view" id = "trans_table_view_header">
             <tr> 
+              <th class = "trans_table_header">Order ID</th>
               <th class = "trans_table_header">Customer Email</th>
               <th class = "trans_table_header">Total Price</th>
               <th class = "trans_table_header">Date</th>
@@ -185,7 +189,9 @@ block content
             </tr>
           </table>
           
-          <table class = "trans_table_view" id = "trans_table_view"></table>
+          <div id = "trans_overflow_wrapper">
+            <table class = "trans_table_view" id = "trans_table_view"></table>
+          </div>
 
          
 

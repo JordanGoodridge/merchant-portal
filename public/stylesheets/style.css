@@ -152,22 +152,32 @@ a {
 }
 
 .item_table_wrapper{
-  padding-right: 20%;
+    padding-right: 20%;
     padding-left: 20%;
     width: 100%;
     background: white;
     height: 100%;
-    overflow-y:auto;
 }
 
 .items_table_view{
   width:100%;
 }
+#items_table_view{
+    height: 100%;
+}
 
 .item_page_view{
   height:100%;
-  overflow:hidden;
   width: 100%;
+}
+
+#item_overflow_wrapper{
+  height: 50%;
+  overflow-y: auto;
+}
+
+#item_overflow_wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 
@@ -712,7 +722,31 @@ font-family: 'Ubuntu', sans-serif;
         .trans_table_header{
           font-size: 14px;
           color: #415A77;
-          float:left;
-          width:25%;
+          width:18%;
           text-align: center;
         }
+
+        tr.trans_row>td {
+          padding-bottom: 2.5em;
+          border-bottom: .5px dashed #415A77;
+          padding-top: 2.5em;
+        }
+
+        .trans_cell {
+          font-size: 14px;
+          color: #415A77;
+          margin-right: 17%;
+          width:18%;
+          text-align:center;
+        }
+    
+    
+        #trans_overflow_wrapper{
+          height: 50%;
+          overflow-y: auto;
+        }
+        
+        #trans_overflow_wrapper::-webkit-scrollbar {
+          display: none;
+        }
+       

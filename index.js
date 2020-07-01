@@ -121,7 +121,8 @@ app.post('/merchant-login', function(request, response) {
 //Takes merch_id and returns array of json of merchant items. returns 404 if failed
 app.get('/merchant-items', function(request, response) {
 	var login_query =
-		'SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=' + request.query.merch_id + ';';
+		'SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=' + request.query.merch_id + ' AND in_stock = TRUE;';
+		//'SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=' + request.query.merch_id + ';';
 	console.log(login_query);
 	client.query(login_query, (err, res) => {
 		if (res.rowCount == 0) {
@@ -172,7 +173,8 @@ app.post('/merchant-item', function(request, response) {
 //Pass item_id and merch_id of item to delete from catalogue
 app.delete('/merchant-item', function(request, response) {
 	var delete_query =
-		'DELETE FROM catalogue WHERE item_id=' + request.body.item_id + ' AND merch_id=' + request.body.merch_id + ';';
+		'UPDATE cataloge SET in_stock = FALSE WHERE item_id=' + request.body.item_id + ' AND merch_id=' + request.body.merch_id + ';';
+		//'DELETE FROM catalogue WHERE item_id=' + request.body.item_id + ' AND merch_id=' + request.body.merch_id + ';';
 	console.log(delete_query);
 	client.query(delete_query, (err, res) => {
 		if (err) throw err;
@@ -215,7 +217,7 @@ app.get('/nearby-merchants', function(request, response) {
 		response.json({ success: true, nearby_stores });
 	});
 	console.log(nearby_query);
-	
+
 });
 
 
@@ -285,16 +287,16 @@ app.get('/transactions', function(request, response) {
 =======
 async function innerLoop(transaction){
 	return new Promise(function(resolve) {
-	var items = []	
+	var items = []
 	client.query(transaction, (err2, res2) => {
 		if (res2.rowCount == 0) {
 			resolve(items)
 		}
 		else{
 			for (let row of res2.rows) {
-				items.push(row);	
+				items.push(row);
 			}
-			//console.log(items)	
+			//console.log(items)
 			resolve(items)
 		}
 		});
@@ -336,7 +338,7 @@ app.get('/transactions', async function(request, response) {
 			//console.log(items)
 			row_test['items'] = items
 			//console.log(row_test)
-			orders.push(row_test);	
+			orders.push(row_test);
 		}
 		console.log(orders)
 		response.json({ success: true, orders });
