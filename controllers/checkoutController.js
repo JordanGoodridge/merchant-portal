@@ -83,6 +83,7 @@ const postCheckout = async (request, response) => {
 	console.log(phoneNumber);
 	console.log(merchantId);
 	console.log(cart);
+	console.log('email is', email);
 
 	console.log('finished logging');
 
