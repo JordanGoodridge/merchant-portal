@@ -174,7 +174,7 @@ app.post('/merchant-item', function(request, response) {
 //Pass item_id and merch_id of item to delete from catalogue
 app.delete('/merchant-item', function(request, response) {
 	var delete_query =
-	'UPDATE cataloge SET in_stock = FALSE WHERE item_id=' + request.body.item_id + ' AND merch_id=' + request.body.merch_id + ';';
+	'UPDATE catalogue SET in_stock = FALSE WHERE item_id=' + request.body.item_id + ' AND merch_id=' + request.body.merch_id + ';';
 	//'DELETE FROM catalogue WHERE item_id=' + request.body.item_id + ' AND merch_id=' + request.body.merch_id + ';';
 	console.log(delete_query);
 	client.query(delete_query, (err, res) => {
