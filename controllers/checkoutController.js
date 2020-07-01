@@ -59,6 +59,7 @@ const postCheckout = async (request, resp) => {
 		console.log("Phone: " + phoneNumber)
 		console.log("Email: " + email)
 		console.log("MerchID: " +merch_id)
+		console.log(cart);
 		
 		const query_feedback = await client.query("SELECT * FROM merchant WHERE merchant.merch_id = '" + request.body.merch_id + "' ;");
 		var key_id = query_feedback.rows[0].key_id;
