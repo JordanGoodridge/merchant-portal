@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 
 const isAuth = (request, response, next) => {
 	const givenToken = request.headers.authorization;
-	console.log(givenToken, typeof givenToken);
-	console.log('token is', givenToken);
+	console.log(givenToken);
+	console.log('token is', JSON.stringify(givenToken));
 
 	if (!givenToken) {
 		return response.json({ success: false, errorMessage: 'NO TOKEN' });
