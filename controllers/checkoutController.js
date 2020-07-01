@@ -45,7 +45,6 @@ const client = require('../database/client');
 
 const postCheckout = async (request, response) => {
 	console.log('post checkout called');
-	// const email = request.email;
 	const {
 		number,
 		expirationMonth,
@@ -83,7 +82,6 @@ const postCheckout = async (request, response) => {
 	console.log(phoneNumber);
 	console.log(merchantId);
 	console.log(cart);
-	console.log('email is', email);
 
 	console.log('finished logging');
 
