@@ -43,8 +43,6 @@ function config(MerchantId, MerchantKeyId, MerchantSecretKey) {
 }
 
 const postCheckout = async (request, resp) => {
-	const email = request.email;
-
 	try {
 		console.log('Request: ' + request);
 		const {
@@ -65,7 +63,8 @@ const postCheckout = async (request, resp) => {
 			country,
 			email,
 			phoneNumber,
-			merch_id
+			merch_id,
+			email
 		} = request.body;
 		console.log('Checkout request with:');
 		console.log('CC:' + number);
