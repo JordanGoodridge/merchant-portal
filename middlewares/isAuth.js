@@ -1,6 +1,7 @@
 const { verify } = require('jsonwebtoken');
 
 const isAuth = (request, response, next) => {
+	console.log('now checking the JWT');
 	const givenToken = request.headers.authorization;
 
 	if (!givenToken) {
