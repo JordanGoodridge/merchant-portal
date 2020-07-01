@@ -63,8 +63,7 @@ const postCheckout = async (request, resp) => {
 			country,
 			email,
 			phoneNumber,
-			merch_id,
-			email
+			merch_id
 		} = request.body;
 		console.log('Checkout request with:');
 		console.log('CC:' + number);
