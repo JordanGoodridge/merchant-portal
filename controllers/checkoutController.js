@@ -22,6 +22,24 @@ function config(MerchantId, MerchantKeyId, MerchantSecretKey) {
 	const LogDirectory = '../log';
 	const LogfileMaxSize = '5242880'; //10 MB In Bytes
 	var configObj = {
+<<<<<<< HEAD
+		'authenticationType': AuthenticationType,
+		'runEnvironment': RunEnvironment,
+
+		'merchantID': MerchantId,
+		'merchantKeyId': MerchantKeyId,
+		'merchantsecretKey': MerchantSecretKey,
+
+		'keyAlias': KeyAlias,
+		'keyPass': KeyPass,
+		'keyFileName': KeyFileName,
+		'keysDirectory': KeysDirectory,
+
+		'enableLog': EnableLog,
+		'logFilename': LogFileName,
+		'logDirectory': LogDirectory,
+		'logFileMaxSize': LogfileMaxSize
+=======
 		authenticationType: AuthenticationType,
 		runEnvironment: RunEnvironment,
 
@@ -38,6 +56,7 @@ function config(MerchantId, MerchantKeyId, MerchantSecretKey) {
 		logFilename: LogFileName,
 		logDirectory: LogDirectory,
 		logFileMaxSize: LogfileMaxSize
+>>>>>>> f76f99693283369fd19ed19f880bcb3b3c250206
 	};
 	return configObj;
 }
@@ -78,9 +97,13 @@ const postCheckout = async (request, resp) => {
 		console.log('MerchID: ' + merch_id);
 		console.log(cart);
 
+<<<<<<< HEAD
+		const query_feedback = await client.query("SELECT * FROM merchant WHERE merchant.merch_id = '" + request.body.merch_id + "' ;");
+=======
 		const query_feedback = await client.query(
 			"SELECT * FROM merchant WHERE merchant.merch_id = '" + request.body.merch_id + "' ;"
 		);
+>>>>>>> f76f99693283369fd19ed19f880bcb3b3c250206
 		var key_id = query_feedback.rows[0].key_id;
 		var visa_merchant_id = query_feedback.rows[0].visa_merchant_id;
 		var shared_key = query_feedback.rows[0].shared_key;
@@ -171,19 +194,24 @@ const postCheckout = async (request, resp) => {
 			callback(error, data, response);
 			resp.json({ success: true });
 		});
+
+		const new_cust_id_results = await client.query("SELECT customer.cust_id FROM customer WHERE customer.email = '" + request.body.email + "';");
+		var new_cust_id = new_cust_id_results.rows[0].cust_id;
+
 		const new_order = await client.query(
 			'INSERT INTO orders (cust_id, order_date, status, merch_id) VALUES(' +
-				request.body.cust_id +
+				new_cust_id +
 				', CURRENT_TIMESTAMP, TRUE, ' +
 				request.body.merch_id +
 				') ;'
 		);
 		const new_order_results = await client.query(
 			'SELECT orders.order_id FROM orders WHERE orders.cust_id = ' +
-				request.body.cust_id +
+				new_cust_id +
 				' ORDER BY orders.order_id DESC LIMIT 1;'
 		);
 		var new_order_id = new_order_results.rows[0].order_id;
+
 		console.log(new_order_id);
 		for (var id = 0; id < request.body.cart.length; id++) {
 			console.log('Adding order: ');
