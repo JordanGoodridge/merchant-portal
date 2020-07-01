@@ -178,10 +178,12 @@ const postCheckout = async (request, resp) => {
 		var new_cust_id = new_cust_id_results.rows[0].cust_id;
 
 		const new_order = await client.query(
-			'INSERT INTO orders (cust_id, order_date, status, merch_id) VALUES(' +
+			'INSERT INTO orders (cust_id, order_date, status, merch_id, price) VALUES(' +
 				new_cust_id +
 				', CURRENT_TIMESTAMP, TRUE, ' +
 				request.body.merch_id +
+				',' + 
+				totalAmount + 
 				') ;'
 		);
 		const new_order_results = await client.query(
