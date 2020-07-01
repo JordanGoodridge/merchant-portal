@@ -1,23 +1,38 @@
 extends layout
 
 block content
+
+
+
   <div class = 'header_view' id = "header_view">
-    <div class = "header_wrapper">
+    <div id = "header_wrapper">
       
       <div class = 'welcome_message' id = "welcome_message"> 
         img(id = 'welcome_logo' src='./img/SpendSafeLogoLarge.png' alt='login')
         <h4 id = "login_header" >Welcome to SpendSafe: </h4> 
-        <h4  type="text" id ="in_game_username"> </h4>
+        <h4  type="text" id ="username"> </h4>
       </div>
-      
-      <button class = "log_out_button" id = "log_out_button">Log Out</button>
+
 
     </div>
-    
-    
+    <div id = "header_button_container">
+      <div id = "header_button_wrapper">
+          <button class = "header_button" id = "settings_button">Settings</button>
+          <button class = "header_button" id = "cat_button">Catalouge</button>
+          <button class = "header_button" id = "trans_button">Transactions</button>
+          <button class = "header_button" id = "log_out_button">Log Out</button>
+
+          
+
+
+      </div>
+    </div>
     
   </div>
-  //- <div class="counter_div" id = "table_3">
+
+
+
+
   <div class ="item_page_view" id = "item_page_view">
 
     <div class="item_entry_view" id = "item_entry_view">
@@ -25,23 +40,33 @@ block content
       <h4 class="add_item_header" align="center" >Add Items: </h4>
 
       <div class = "item_entry_wrapper"> 
+        <button class="add_item_button" id = "add_item_button">Add Item</button>
         <input class = "item_input" type="text" align="center" id = "item_name" placeholder="Item Name">
         <input class = "item_input" type="number" align="center" id = "item_price" placeholder="Item Price">
-        <input class = "item_input" type="number" align="center" id = "item_imnage" placeholder="Image Upload Placeholder">
-
-        <button class="add_item_button" id = "add_item_button">Add Item</button>
-
       </div>
+
     </div>
+
     <div class = "item_table_wrapper"> 
+      <table class = "items_table_view" id = "items_table_view_header">
+        <tr> 
+          <th class = "item_table_header">Item Name</th>
+          <th class = "item_table_header">Item Price</th>
+          <th class = "item_table_header">Item QR Code</th>
+          <th class = "item_table_header" id = "table_remove_header">Remove Item</th>
+        </tr>
+      </table>
+
+      <div id = "item_overflow_wrapper">
       <table class = "items_table_view" id = "items_table_view"></table>
+      </div>
 
     </div>
-
-
-
-
   </div>
+
+
+
+
 
    <div class="reg_view" id = "registration_view">
 
@@ -51,27 +76,39 @@ block content
 
     </div>   
     
-    <div id = "signup_input_wrapper">
+    <div id = "signup_container">
 
-      <p id="sign_up" align="center" >Sign up</p>
-    
-      <form class="form1" onSubmit="return false;">
-      <input class="signup_input_field" type="text" align="center" id = "reg_name" placeholder="Enter Name">
-      <input class="signup_input_field" type="text" align="center" id = "reg_email" placeholder="Enter Email">
-      <input class="signup_input_field" type="password" align="center" id = "reg_pass" placeholder="Enter Password">
-      <input class="signup_input_field" type="password" align="center" id ="reg_conf_pass" placeholder="Enter Confirm Password">
-      <input class="signup_input_field" type="text" align="center" id = "reg_store" placeholder="Enter Store Name">
-      <input class="signup_input_field" type="text" align="center" id = "reg_street" placeholder="Enter Street">
-      <input class="signup_input_field" type="text" align="center" id = "reg_city" placeholder="Enter City">
-      <input class="signup_input_field" type="text" align="center" id = "reg_state" placeholder="Enter State">
-      <input class="signup_input_field" type="number" align="center" id = "reg_zip" placeholder="Enter Zipcode">
-    
-    </div>
+      <div id = "signup_input_wrapper">
 
-    <div id = signup_button_wrapper>
-      <button class="signup_submit_button" align="center" id = "submit_signup_button">Submit</button>  
+        <p id="sign_up" align="center" >Sign up</p>
+      
+        <form class="form1" onSubmit="return false;">
+        <input class="signup_input_field" type="text" align="center" id = "reg_name" placeholder="Enter Name">
+        <input class="signup_input_field" type="text" align="center" id = "reg_email" placeholder="Enter Email">
+        <input class="signup_input_field" type="password" align="center" id = "reg_pass" placeholder="Enter Password">
+        <input class="signup_input_field" type="password" align="center" id ="reg_conf_pass" placeholder="Enter Confirm Password">
+        <input class="signup_input_field" type="text" align="center" id = "reg_store" placeholder="Enter Store Name">
+        <input class="signup_input_field" type="text" align="center" id = "reg_street" placeholder="Enter Street">
+        <input class="signup_input_field" type="text" align="center" id = "reg_city" placeholder="Enter City">
+        <input class="signup_input_field" type="text" align="center" id = "reg_state" placeholder="Enter State">
+        <input class="signup_input_field" type="number" align="center" id = "reg_zip" placeholder="Enter Zipcode">
+      
+      </div>
+
+      <div id = signup_button_wrapper>
+        <button class="signup_button"  id = "signup_back_button">Back</button>  
+        <button class="signup_button"  id = "submit_signup_button">Submit</button>  
+      </div>
+
+
     </div>
   </div>
+
+
+
+
+  //- LOGIN VIEW
+
 
   <div class="login_view" id = "login_view">
 
@@ -93,5 +130,69 @@ block content
       <button class="login_submit_button" align="center" id = "sup_btn">Sign Up</button>
     </div>
 
+  </div>
+
+
+
+
+
+  <div class = "settings_view" id = "settings_view"> 
+
+    <div id = "setting_input_wrapper">
+
+      <div id = "settings_button_wrapper">
+        <button class="settings_button" align="center" id = "back_button">Back</button>
+        <button class="settings_button" align="center" id = "save_button">Save</button>
+        <p class="settings_status_no" align="center" id = "settings_status">Status</p>
+
+      </div>
+
+      <input class="settings_input_field" type="text" align="center" id = "setting_merch_id" placeholder="Enter Merchant ID">
+      <input class="settings_input_field" type="text" align="center" id = "setting_key_id" placeholder="Enter Merchant KEY ID">
+      <input class="settings_input_field" type="text" align="center" id = "setting_secret_key" placeholder="Enter Merchant Secret Key">
+
+      <div id = "setting_text_wrapper">
+        <h1 style="text-align:center">Getting Started</h1>
+        <p>1. Follow the steps on https://support.cybersource.com/s/article/CyberSource-Account-Registration-Guide to create a CyberSource Account</p>
+        <p>2. Copy your Merchant ID into the field above</p>
+        <p>3. On the dashboard, select "View All Keys"</p>
+        <p>4. On the dashboard, select "View All Keys"</p>
+        <p>5. Click on generate key</p>
+        <p>6. Select "API cert / Serect", then "Shared Secret"</p>
+        <p>7. Copy the key into the field above</p>
+        <p>8. Go to key management, and select "Keys: API Keys", copy the "Key Details: xxxx.." value into the key id field above</p>
+        <p>9. Once these values are configired the status icon will appear green</p>
+        <p>10. For security reasons, these values will not be displayed above</p>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class ="transaction_view" id = "transaction_view">
+
+        <h4 class="transaction_header_text" align="center" >Customer Transactions</h4>
+       
+
+        <div class = "trans_table_wrapper"> 
+          <table class = "trans_table_view" id = "trans_table_view_header">
+            <tr> 
+              <th class = "trans_table_header">Order ID</th>
+              <th class = "trans_table_header">Customer Email</th>
+              <th class = "trans_table_header">Total Price</th>
+              <th class = "trans_table_header">Date</th>
+              <th class = "trans_table_header">Status</th>
+
+            </tr>
+          </table>
+          
+          <div id = "trans_overflow_wrapper">
+            <table class = "trans_table_view" id = "trans_table_view"></table>
+          </div>
+
+         
 
   </div>

@@ -178,12 +178,13 @@ app.delete('/merchant-item', function(request, response) {
 		if (err) throw err;
 		if (res.rowCount == 0) {
 			response.sendStatus(404);
+		} else {
+			response.sendStatus(200);
 		}
 		for (let row of res.rows) {
 			console.log(JSON.stringify(row));
 		}
 	});
-	response.sendStatus(200);
 });
 
 //gets merchants within 1000m takjes in long lat
@@ -191,7 +192,6 @@ app.get('/nearby-merchants', function(request, response) {
 	console.log('input geo', request.query.latitude, request.query.longitude);
 
 	var nearby_query = 'SELECT merch_id, name, longitude, latitude FROM merchant;';
-	console.log(nearby_query);
 	client.query(nearby_query, (err, res) => {
 		if (err) throw err;
 		if (res.rowCount == 0) {
@@ -214,12 +214,18 @@ app.get('/nearby-merchants', function(request, response) {
 		console.log(nearby_stores);
 		response.json({ success: true, nearby_stores });
 	});
+	console.log(nearby_query);
+	
 });
 
 
 //POST put in database merch_id, visa merch id, shared key, id
 
+<<<<<<< HEAD
 app.post('/merchant-setting', function(request, response) {
+=======
+app.put('/merchant-setting', function(request, response) {
+>>>>>>> fb79aedeadfebb6de22cefcb9d1ef7b76d5f9b6a
 	var add_query = "UPDATE merchant SET visa_merchant_id='" + request.body.visa_merchant_id + "', key_id='" + request.body.key_id + "', shared_key='" + request.body.shared_key + "' WHERE merch_id='" + request.body.merch_id + "';"
 	console.log(add_query);
 	client.query(add_query, (err, res) => {

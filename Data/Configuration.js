@@ -7,9 +7,8 @@
 // common parameters
 const AuthenticationType = 'http_signature';
 const RunEnvironment = 'cybersource.environment.SANDBOX';
-const MerchantId = 'thinking_ot_hackaton';
 
-// http_signature parameters
+const MerchantId = 'thinking_ot_hackaton';
 const MerchantKeyId = '67beca04-92b8-41aa-b290-d1e342d6c988';
 const MerchantSecretKey = 'hmXIIKU7pSLArJD/NnyU4aFY3FOffMhE+XpKl52mo7Q=';
 
