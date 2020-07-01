@@ -1,8 +1,4 @@
-/*
- * This files holds all the code to for your card game
- */
 
-//Run once broswer has loaded everything
 window.onload = function () {
 
 
@@ -334,7 +330,6 @@ window.onload = function () {
         .addEventListener("click", function (e) {
             username = document.getElementById("log_email")
             pass = document.getElementById("log_pass")
-
             signIn(username.value, pass.value)
                 .then(function (res) {
 
@@ -347,7 +342,7 @@ window.onload = function () {
                         setting_view.style.display = "none"
 
                         //display name
-                        document.getElementById("in_game_username").innerHTML = username.value
+                        document.getElementById("username").innerHTML = username.value
                         console.log(username.value);
                         console.log("Login Sucess")
 
@@ -355,7 +350,6 @@ window.onload = function () {
                     } else {
                         console.log("Login Failed")
                     }
-
                     get_items();
                 })
 

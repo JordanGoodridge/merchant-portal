@@ -10,7 +10,7 @@ block content
       <div class = 'welcome_message' id = "welcome_message"> 
         img(id = 'welcome_logo' src='./img/SpendSafeLogoLarge.png' alt='login')
         <h4 id = "login_header" >Welcome to SpendSafe: </h4> 
-        <h4  type="text" id ="in_game_username"> </h4>
+        <h4  type="text" id ="username"> </h4>
       </div>
 
 
@@ -67,26 +67,31 @@ block content
 
     </div>   
     
-    <div id = "signup_input_wrapper">
+    <div id = "signup_container">
 
-      <p id="sign_up" align="center" >Sign up</p>
-    
-      <form class="form1" onSubmit="return false;">
-      <input class="signup_input_field" type="text" align="center" id = "reg_name" placeholder="Enter Name">
-      <input class="signup_input_field" type="text" align="center" id = "reg_email" placeholder="Enter Email">
-      <input class="signup_input_field" type="password" align="center" id = "reg_pass" placeholder="Enter Password">
-      <input class="signup_input_field" type="password" align="center" id ="reg_conf_pass" placeholder="Enter Confirm Password">
-      <input class="signup_input_field" type="text" align="center" id = "reg_store" placeholder="Enter Store Name">
-      <input class="signup_input_field" type="text" align="center" id = "reg_street" placeholder="Enter Street">
-      <input class="signup_input_field" type="text" align="center" id = "reg_city" placeholder="Enter City">
-      <input class="signup_input_field" type="text" align="center" id = "reg_state" placeholder="Enter State">
-      <input class="signup_input_field" type="number" align="center" id = "reg_zip" placeholder="Enter Zipcode">
-    
-    </div>
+      <div id = "signup_input_wrapper">
 
-    <div id = signup_button_wrapper>
-      <button class="signup_button"  id = "signup_back_button">Back</button>  
-      <button class="signup_button"  id = "submit_signup_button">Submit</button>  
+        <p id="sign_up" align="center" >Sign up</p>
+      
+        <form class="form1" onSubmit="return false;">
+        <input class="signup_input_field" type="text" align="center" id = "reg_name" placeholder="Enter Name">
+        <input class="signup_input_field" type="text" align="center" id = "reg_email" placeholder="Enter Email">
+        <input class="signup_input_field" type="password" align="center" id = "reg_pass" placeholder="Enter Password">
+        <input class="signup_input_field" type="password" align="center" id ="reg_conf_pass" placeholder="Enter Confirm Password">
+        <input class="signup_input_field" type="text" align="center" id = "reg_store" placeholder="Enter Store Name">
+        <input class="signup_input_field" type="text" align="center" id = "reg_street" placeholder="Enter Street">
+        <input class="signup_input_field" type="text" align="center" id = "reg_city" placeholder="Enter City">
+        <input class="signup_input_field" type="text" align="center" id = "reg_state" placeholder="Enter State">
+        <input class="signup_input_field" type="number" align="center" id = "reg_zip" placeholder="Enter Zipcode">
+      
+      </div>
+
+      <div id = signup_button_wrapper>
+        <button class="signup_button"  id = "signup_back_button">Back</button>  
+        <button class="signup_button"  id = "submit_signup_button">Submit</button>  
+      </div>
+
+
     </div>
   </div>
 

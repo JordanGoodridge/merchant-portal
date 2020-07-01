@@ -1,11 +1,49 @@
 'use strict';
-
 var cybersourceRestApi = require('cybersource-rest-client');
 var path = require('path');
 var filePath = path.resolve('Data/Configuration.js');
 var configuration = require(filePath);
-const { sign } = require('jsonwebtoken');
+const {verify} = require('jsonwebtoken')
 const client = require('../database/client');
+
+
+function config(MerchantId, MerchantKeyId, MerchantSecretKey){
+
+	const AuthenticationType = 'http_signature';
+	const RunEnvironment = 'cybersource.environment.SANDBOX';
+
+	// jwt parameters
+	const KeysDirectory = 'Resource';
+	const KeyFileName = 'testrest';
+	const KeyAlias = 'testrest';
+	const KeyPass = 'testrest';
+
+	// logging parameters
+	const EnableLog = true;
+	const LogFileName = 'cybs';
+	const LogDirectory = '../log';
+	const LogfileMaxSize = '5242880'; //10 MB In Bytes
+	var configObj = {
+		'authenticationType': AuthenticationType,	
+		'runEnvironment': RunEnvironment,
+
+		'merchantID': MerchantId,
+		'merchantKeyId': MerchantKeyId,
+		'merchantsecretKey': MerchantSecretKey,
+		
+		'keyAlias': KeyAlias,
+		'keyPass': KeyPass,
+		'keyFileName': KeyFileName,
+		'keysDirectory': KeysDirectory,
+		
+		'enableLog': EnableLog,
+		'logFilename': LogFileName,
+		'logDirectory': LogDirectory,
+		'logFileMaxSize': LogfileMaxSize
+	};
+	return configObj;
+}
+
 
 const postCheckout = async (request, resp) => {
     try {
@@ -19,10 +57,19 @@ const postCheckout = async (request, resp) => {
         console.log(currency)
         console.log(firstName)
         console.log(lastName)
-        console.log(address1)
+		console.log(address1)
+		
+		const query_feedback = await client.query("SELECT * FROM merchant WHERE merchant.merch_id = '" + request.body.merch_id + "' ;");
+		var key_id = query_feedback.rows[0].key_id;
+		var visa_merchant_id = query_feedback.rows[0].visa_merchant_id;
+		var shared_key = query_feedback.rows[0].shared_key;
+		var configObject = config(visa_merchant_id, key_id, shared_key);
+
+
+
         var enable_capture = true;
 
-		var configObject = new configuration();
+		// var configObject = new configuration();
 		var apiClient = new cybersourceRestApi.ApiClient();
 		var requestObj = new cybersourceRestApi.CreatePaymentRequest();
 
@@ -70,11 +117,7 @@ const postCheckout = async (request, resp) => {
 
 		requestObj.orderInformation = orderInformation;
 
-    const query_feedback = await client.query("SELECT * FROM merchant WHERE merchant.merch_id = '" + request.body.merch_id + "' ;");
-
-    var key_id = query_feedback.rows[0].key_id;
-    var visa_merchant_id = query_feedback.rows[0].visa_merchant_id;
-
+    
 
 		var instance = new cybersourceRestApi.PaymentsApi(configObject, apiClient);
 		var cap_instance = new cybersourceRestApi.CaptureApi(configObject, apiClient);
