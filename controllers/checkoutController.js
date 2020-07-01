@@ -159,9 +159,13 @@ const postCheckout = async (request, resp) => {
             resp.json({ success: true });
 
 		});
-		const new_order = await client.query("INSERT INTO orders (cust_id, order_date, status, merch_id) VALUES(" + request.body.cust_id + ", CURRENT_TIMESTAMP, TRUE, "+ request.body.merch_id+") ;");
-        const new_order_results = await client.query("SELECT orders.order_id FROM orders WHERE orders.cust_id = " + request.body.cust_id + " ORDER BY orders.order_id DESC LIMIT 1;");
+
+		const new_cust_id_results = await client.query("SELECT customer.cust_id FROM customer WHERE customer.email = '" + request.body.email + "';");
+		var new_cust_id = new_cust_id_results.rows[0].cust_id;
+		const new_order = await client.query("INSERT INTO orders (cust_id, order_date, status, merch_id) VALUES(" + new_cust_id + ", CURRENT_TIMESTAMP, TRUE, "+ request.body.merch_id+") ;");
+        const new_order_results = await client.query("SELECT orders.order_id FROM orders WHERE orders.cust_id = " + new_cust_id + " ORDER BY orders.order_id DESC LIMIT 1;");
 		var new_order_id = new_order_results.rows[0].order_id;
+
 		console.log(new_order_id);
         for (var id = 0; id < request.body.cart.length; id++){
 			console.log("Adding order: ")
