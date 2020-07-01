@@ -121,7 +121,9 @@ app.post('/merchant-login', function(request, response) {
 //Takes merch_id and returns array of json of merchant items. returns 404 if failed
 app.get('/merchant-items', function(request, response) {
 	var login_query =
-		'SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=' + request.query.merch_id + ';';
+	'SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=' + request.query.merch_id + ' AND in_stock = TRUE;';
+			//'SELECT item_id,merch_id,name,price FROM catalogue WHERE merch_id=' + request.query.merch_id + ';';
+
 	console.log(login_query);
 	client.query(login_query, (err, res) => {
 		if (res.rowCount == 0) {
@@ -172,7 +174,8 @@ app.post('/merchant-item', function(request, response) {
 //Pass item_id and merch_id of item to delete from catalogue
 app.delete('/merchant-item', function(request, response) {
 	var delete_query =
-		'DELETE FROM catalogue WHERE item_id=' + request.body.item_id + ' AND merch_id=' + request.body.merch_id + ';';
+	'UPDATE cataloge SET in_stock = FALSE WHERE item_id=' + request.body.item_id + ' AND merch_id=' + request.body.merch_id + ';';
+	//'DELETE FROM catalogue WHERE item_id=' + request.body.item_id + ' AND merch_id=' + request.body.merch_id + ';';
 	console.log(delete_query);
 	client.query(delete_query, (err, res) => {
 		if (err) throw err;
@@ -219,12 +222,7 @@ app.get('/nearby-merchants', function(request, response) {
 });
 
 
-<<<<<<< HEAD
-//POST put in database merch_id, visa merch id, shared key, id
-
-=======
 //PUT put in database merch_id, visa merch id, shared key, id
->>>>>>> 255e55079bf5886d27a65d9673567635c23188ab
 app.put('/merchant-setting', function(request, response) {
 	var add_query = "UPDATE merchant SET visa_merchant_id='" + request.body.visa_merchant_id + "', key_id='" + request.body.key_id + "', shared_key='" + request.body.shared_key + "' WHERE merch_id='" + request.body.merch_id + "';"
 	console.log(add_query);
