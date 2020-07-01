@@ -571,7 +571,14 @@ font-family: 'Ubuntu', sans-serif;
       background-color: #E0E1DD;
       padding-top: 50px;
       border-radius: 5px;
+      height: 60%;
+      overflow-y: auto;
     }
+
+    #setting_input_wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
 
     .settings_input_field
     {
@@ -668,6 +675,10 @@ font-family: 'Ubuntu', sans-serif;
 
         #save_button{
           float:right;
+        }
+
+        #settings_view{
+          height:100%;
         }
 
         #setting_text_wrapper{
