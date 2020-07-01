@@ -200,7 +200,7 @@ const postCheckout = async (request, response) => {
 
 		});
 
-		const new_order = await client.query("INSERT INTO orders (cust_id, order_date, status) VALUES(" + request.body.cust_id + ", CURRENT_TIMESTAMP, TRUE) ;");
+		const new_order = await client.query("INSERT INTO orders (cust_id, order_date, status, merch_id) VALUES(" + request.body.cust_id + ", CURRENT_TIMESTAMP, TRUE, "+ request.body.merch_id+") ;");
 		const new_order_results = await client.query("SELECT orders.order_id FROM orders WHERE orders.cust_id = " + request.body.cust_id + " ORDER BY orders.order_id DESC LIMIT 1;");
 		var new_order_id = new_order_results.rows[0].order_id;
 		for (var id = 0; i < request.body.cart.length; id++){
