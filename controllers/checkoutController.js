@@ -182,8 +182,8 @@ const postCheckout = async (request, resp) => {
 				new_cust_id +
 				', CURRENT_TIMESTAMP, TRUE, ' +
 				request.body.merch_id +
-				',' + 
-				totalAmount + 
+				',' +
+				totalAmount +
 				') ;'
 		);
 		const new_order_results = await client.query(
@@ -210,7 +210,7 @@ const postCheckout = async (request, resp) => {
 		}
 	} catch (error) {
 		console.log('\nException on calling the API : ' + error);
-		resp.json({ sucess: false });
+		resp.json({ success: false });
 	}
 };
 
