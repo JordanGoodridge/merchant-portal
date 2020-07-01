@@ -49,7 +49,7 @@ const postCheckout = async (request, resp) => {
     try {
 
         console.log("Request: " + request);
-        const { number, expirationMonth, expirationYear, securityCode, totalAmount,currency, firstName, lastName, address1, address2, locality, administrativeArea, postalCode, country, email, phoneNumber, merch_id  } = request.body;
+        const { cart, number, expirationMonth, expirationYear, securityCode, totalAmount,currency, firstName, lastName, address1, address2, locality, administrativeArea, postalCode, country, email, phoneNumber, merch_id  } = request.body;
 		console.log("Checkout request with:")
 		console.log("CC:"+number);
         console.log("Expiration"+ expirationMonth +"/" + expirationYear)
