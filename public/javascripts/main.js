@@ -514,14 +514,14 @@ window.onload = function () {
 
             //EMAIL
             let email_col = document.createElement("td");
-            email_col.innerHTML = `${transaction.cust_id}`;
+            email_col.innerHTML = `${transaction.email}`;
             email_col.className = "trans_cell";
             //name_col.setAttribute("index", i);
             table_row.appendChild(email_col);
 
             //ITEM PRICE
             let price_col = document.createElement("td");
-            price_col.innerHTML = `PLACEHOLDER`;
+            price_col.innerHTML = `${transaction.price}`;
             price_col.className = "trans_cell";
             //price_col.setAttribute("index", i);
 
