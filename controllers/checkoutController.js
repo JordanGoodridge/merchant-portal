@@ -45,6 +45,11 @@ const client = require('../database/client');
 
 const postCheckout = async (request, response) => {
 	console.log('post checkout called');
+
+	const email = request.email;
+
+	console.log('email is', email);
+
 	const {
 		number,
 		expirationMonth,
