@@ -1,23 +1,27 @@
-const { verify } = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const isAuth = (request, response, next) => {
-	console.log('now checking the JWT');
 	const givenToken = request.headers.authorization;
+	console.log(givenToken);
+	console.log('token is', JSON.stringify(givenToken));
 
 	if (!givenToken) {
 		return response.json({ success: false, errorMessage: 'NO TOKEN' });
 	}
 
-	let verifiedToken;
-	try {
-		verifiedToken = verify(givenToken, 'secret');
-	} catch (error) {
-		return response.json({ success: false, errorMessage: 'PROBLEM VERIFYING TOKEN' });
-	}
+	const verifiedToken = jwt.verify(givenToken, 'secret');
+	// try {
+	// 	verifiedToken = jwt.verify(givenToken, 'secret');
+	// } catch (error) {
+	// 	return response.json({ success: false, errorMessage: 'PROBLEM VERIFYING TOKEN' });
+	// }
 
 	if (!verifiedToken) {
 		return response.json({ success: false, errorMessage: 'BAD TOKEN' });
 	}
+
+	console.log(verifiedToken);
+	console.log(verifiedToken.email);
 
 	request.email = verifiedToken.email;
 
