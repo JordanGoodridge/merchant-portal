@@ -220,7 +220,7 @@ app.get('/nearby-merchants', function(request, response) {
 //POST put in database merch_id, visa merch id, shared key, id
 
 app.post('/merchant-setting', function(request, response) {
-	var add_query = "UPDATE merchant SET visa_merchant_id=' + request.body.visa_merchant_id + ', key_id='" + request.body.key_id + "', shared_key='" + request.body.shared_key + "' WHERE merch_id='" + request.body.merch_id + "';"
+	var add_query = "UPDATE merchant SET visa_merchant_id='" + request.body.visa_merchant_id + "', key_id='" + request.body.key_id + "', shared_key='" + request.body.shared_key + "' WHERE merch_id='" + request.body.merch_id + "';"
 	console.log(add_query);
 	client.query(add_query, (err, res) => {
 		if (err) throw err;
@@ -252,3 +252,63 @@ app.get('/merchant-setting', function(request, response) {
 	});
 });
 
+
+async function innerLoop(transaction){
+	return new Promise(function(resolve) {
+	var items = []	
+	client.query(transaction, (err2, res2) => {
+		if (res2.rowCount == 0) {
+			resolve(items)
+		}
+		else{
+			for (let row of res2.rows) {
+				items.push(row);	
+			}
+			//console.log(items)	
+			resolve(items)
+		}
+		});
+	});
+}
+
+async function getEmail(cust_id){
+	return new Promise(function(resolve) {
+	var query = 'SELECT email FROM customer WHERE cust_id=' + cust_id + ';'
+	client.query(query, (err2, res2) => {
+		if (res2.rowCount == 0) {
+			resolve("")
+		}
+		else{
+			for (let row of res2.rows) {
+				//console.log(row.email)
+				resolve(row.email)
+			}
+		}
+		});
+	});
+}
+
+//Pass merch_id of item to delete from catalogue
+app.get('/transactions', async function(request, response) {
+	var transaction = 'SELECT * FROM orders WHERE merch_id=' + request.query.merch_id + ';'
+	console.log(transaction);
+	client.query(transaction, async (err, res) => {
+		var orders = [];
+		for (let row_row of res.rows) {
+			var row_test = row_row
+			var transaction2 = 'SELECT * FROM orderitems WHERE order_id=' + row_row.order_id + ';'
+			console.log(transaction2);
+			email = await getEmail(row_row.cust_id);
+			row_test['cust_id'] = email
+			row_test['email'] = row_test['cust_id'];
+			delete row_test.cust_id
+			items = await innerLoop(transaction2);
+			//console.log(items)
+			row_test['items'] = items
+			//console.log(row_test)
+			orders.push(row_test);	
+		}
+		console.log(orders)
+		response.json({ success: true, orders });
+	});
+});
