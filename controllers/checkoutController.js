@@ -47,17 +47,18 @@ function config(MerchantId, MerchantKeyId, MerchantSecretKey){
 
 const postCheckout = async (request, resp) => {
     try {
-        console.log("In post checkout")
+
         console.log("Request: " + request);
-        const { number, expirationMonth, expirationYear, securityCode, totalAmount,currency, firstName, lastName, address1, address2, locality, administrativeArea, postalCode, country, email, phoneNumber  } = request.body;
-        console.log(number);
-        console.log(expirationMonth)
-        console.log(expirationYear)
-        console.log(totalAmount)
-        console.log(currency)
-        console.log(firstName)
-        console.log(lastName)
-		console.log(address1)
+        const { number, expirationMonth, expirationYear, securityCode, totalAmount,currency, firstName, lastName, address1, address2, locality, administrativeArea, postalCode, country, email, phoneNumber, merch_id  } = request.body;
+		console.log("Checkout request with:")
+		console.log("CC:"+number);
+        console.log("Expiration"+ expirationMonth +"/" + expirationYear)
+		console.log("Amount" + totalAmount + " " +currency)
+        console.log("Name: " + firstName+ " " + lastName)
+		console.log("Address:" + address1 + " " + locality + " " + administrativeArea+ " " + postalCode + " " + country)
+		console.log("Phone: " + phoneNumber)
+		console.log("Email: " + email)
+		console.log("MerchID: " +merch_id)
 		
 		const query_feedback = await client.query("SELECT * FROM merchant WHERE merchant.merch_id = '" + request.body.merch_id + "' ;");
 		var key_id = query_feedback.rows[0].key_id;
