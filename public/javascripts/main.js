@@ -277,11 +277,13 @@ window.onload = function () {
     var log_out_button = document.getElementById("log_out_button")
     var header_view = document.getElementById("header_view")
     var setting_view = document.getElementById("settings_view")
+    var trans_view = document.getElementById("transaction_view")
     registration_view.style.display = "none"
     item_page_view.style.display = "none"
     log_out_button.style.display = "none"
     header_view.style.display = "none"
     setting_view.style.display = "none"
+    trans_view.style.display = "none"
 
 
     //after clicking signUp button
@@ -392,7 +394,24 @@ window.onload = function () {
             // header_view.style.display = "block"   
             // setting_view.style.display = "none"
         })
-})
+    }) 
+
+    document.getElementById("trans_button").addEventListener("click", function(e){
+        item_page_view.style.display = "none"
+        login_view.style.display = "none"
+        header_view.style.display = "block"   
+        setting_view.style.display = "none"
+        trans_view.style.display = "block"
+    })
+
+    document.getElementById("cat_button").addEventListener("click", function(e){
+        item_page_view.style.display = "block"
+        login_view.style.display = "none"
+        header_view.style.display = "block"   
+        setting_view.style.display = "none"
+        trans_view.style.display = "none"
+    })
+
 
 
     document.getElementById("signup_back_button").addEventListener("click", function(e) {
