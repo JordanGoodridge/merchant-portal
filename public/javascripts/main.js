@@ -453,4 +453,94 @@ window.onload = function () {
             })
     }
 
+
+    function populate_trans_table(data){
+        // items_table_view
+        if(data == undefined)
+        {
+            return;
+        }
+        let item_table = document.getElementById("trans_table_view");
+        item_table.innerHTML = "";
+
+        let item_list = data['items'];
+
+        for(let i = 0; i < item_list.length; i++){
+            let item = item_list[i];
+            console.log(item);
+            console.log(typeof(item));
+
+            let table_row = document.createElement("tr");
+            table_row.className = "item_row"
+            table_row.setAttribute("index", i);
+            table_row.setAttribute("item_id", item.item_id);
+
+            item_table.appendChild(table_row);
+
+
+            //ITEM NAME
+            let name_col = document.createElement("td");
+            name_col.innerHTML = `${item.name}`;
+            name_col.className = "item_cell";
+            //name_col.setAttribute("index", i);
+            table_row.appendChild(name_col);
+
+            //ITEM PRICE
+            let price_col = document.createElement("td");
+            price_col.innerHTML = item.price;
+            price_col.className = "item_cell";
+            //price_col.setAttribute("index", i);
+
+            table_row.appendChild(price_col);
+
+            //ITEM ID/QR
+            let qr = document.createElement(`td`);
+            console.log("ITEM ID: "+item.item_id);
+            var qrcode = new QRCode(qr, {
+                text:  
+                // `${item.item_id}`,
+                // `${item.item_id}, ${item.price},${item.name}`,
+
+            `{item_id: ${item.item_id},price: ${item.price},name: ${item.name},merch_id: ${localStorage.merch_id}}`,
+                width: 60,
+                height: 60,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            let qr_img = qr.childNodes[1]
+            qr_img.className = "qr_small";
+            qr_img.addEventListener('click', function(e){
+                if(qr_img.className === 'qr_small'){
+                    qr_img.className = 'qr_large';
+                } else {
+                    qr_img.className = 'qr_small';
+                }
+            })
+
+            table_row.appendChild(qr);
+
+
+
+
+            //DELETE BUTTON
+            let del_col = document.createElement("td");
+            let del_button = document.createElement("button");
+            del_button.innerHTML = "Remove";
+            del_col.className = "remove_button_col";
+            del_button.className = "remove_item_button";
+            del_col.appendChild(del_button);
+            table_row.appendChild(del_col);
+            del_button.addEventListener("click", function(e){
+                console.log(this.parentNode.parentNode.getAttribute("item_id"));
+                let item_id = this.parentNode.parentNode.getAttribute("item_id")
+                console.log(item_id);
+                delete_item(item_id);
+            })
+
+
+        }
+    }
+
+
 };
