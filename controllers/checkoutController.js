@@ -87,118 +87,126 @@ const postCheckout = async (request, response) => {
 
 	response.json({ success: true });
 
-	//   try {
-	//       console.log("In post checkout")
-	//       console.log("Request: " + request);
-	//       const { number, expirationMonth, expirationYear, securityCode, totalAmount,currency, firstName, lastName, address1, address2, locality, administrativeArea, postalCode, country, email, phoneNumber  } = request.body;
-	//       console.log(number);
-	//       console.log(expirationMonth)
-	//       console.log(expirationYear)
-	//       console.log(totalAmount)
-	//       console.log(currency)
-	//       console.log(firstName)
-	//       console.log(lastName)
-	// 	console.log(address1)
+	  try {
+	      console.log("In post checkout")
+	      console.log("Request: " + request);
+	      const { number, expirationMonth, expirationYear, securityCode, totalAmount,currency, firstName, lastName, address1, address2, locality, administrativeArea, postalCode, country, email, phoneNumber  } = request.body;
+	      console.log(number);
+	      console.log(expirationMonth)
+	      console.log(expirationYear)
+	      console.log(totalAmount)
+	      console.log(currency)
+	      console.log(firstName)
+	      console.log(lastName)
+				console.log(address1)
 
-	// 	const query_feedback = await client.query("SELECT * FROM merchant WHERE merchant.merch_id = '" + request.body.merch_id + "' ;");
-	// 	var key_id = query_feedback.rows[0].key_id;
-	// 	var visa_merchant_id = query_feedback.rows[0].visa_merchant_id;
-	// 	var shared_key = query_feedback.rows[0].shared_key;
-	// 	var configObject = config(visa_merchant_id, key_id, shared_key);
+		const query_feedback = await client.query("SELECT * FROM merchant WHERE merchant.merch_id = '" + request.body.merch_id + "' ;");
+		var key_id = query_feedback.rows[0].key_id;
+		var visa_merchant_id = query_feedback.rows[0].visa_merchant_id;
+		var shared_key = query_feedback.rows[0].shared_key;
+		var configObject = config(visa_merchant_id, key_id, shared_key);
 
-	//       var enable_capture = true;
+	       var enable_capture = true;
 
-	// 	// var configObject = new configuration();
-	// 	var apiClient = new cybersourceRestApi.ApiClient();
-	// 	var requestObj = new cybersourceRestApi.CreatePaymentRequest();
+	  var configObject = new configuration();
+		var apiClient = new cybersourceRestApi.ApiClient();
+		var requestObj = new cybersourceRestApi.CreatePaymentRequest();
 
-	// 	var clientReferenceInformation = new cybersourceRestApi.Ptsv2paymentsClientReferenceInformation();
-	// 	clientReferenceInformation.code = 'TC50171_34';
-	// 	requestObj.clientReferenceInformation = clientReferenceInformation;
+		var clientReferenceInformation = new cybersourceRestApi.Ptsv2paymentsClientReferenceInformation();
+		clientReferenceInformation.code = 'TC50171_34';
+		requestObj.clientReferenceInformation = clientReferenceInformation;
 
-	// 	var processingInformation = new cybersourceRestApi.Ptsv2paymentsProcessingInformation();
-	// 	processingInformation.capture = false;
-	// 	if (enable_capture === true) {
-	// 		processingInformation.capture = true;
-	// 	}
+		var processingInformation = new cybersourceRestApi.Ptsv2paymentsProcessingInformation();
+		processingInformation.capture = false;
+		if (enable_capture === true) {
+			processingInformation.capture = true;
+		}
 
-	// 	processingInformation.commerceIndicator = 'internet';
-	// 	requestObj.processingInformation = processingInformation;
+		processingInformation.commerceIndicator = 'internet';
+		requestObj.processingInformation = processingInformation;
 
-	// 	var paymentInformation = new cybersourceRestApi.Ptsv2paymentsPaymentInformation();
-	// 	var paymentInformationCard = new cybersourceRestApi.Ptsv2paymentsPaymentInformationCard();
-	// 	paymentInformationCard.number = number;
-	// 	paymentInformationCard.expirationMonth = expirationMonth;
-	// 	paymentInformationCard.expirationYear = expirationYear;
-	// 	paymentInformationCard.securityCode = securityCode;
-	// 	paymentInformation.card = paymentInformationCard;
+		var paymentInformation = new cybersourceRestApi.Ptsv2paymentsPaymentInformation();
+		var paymentInformationCard = new cybersourceRestApi.Ptsv2paymentsPaymentInformationCard();
+		paymentInformationCard.number = number;
+		paymentInformationCard.expirationMonth = expirationMonth;
+		paymentInformationCard.expirationYear = expirationYear;
+		paymentInformationCard.securityCode = securityCode;
+		paymentInformation.card = paymentInformationCard;
 
-	// 	requestObj.paymentInformation = paymentInformation;
+		requestObj.paymentInformation = paymentInformation;
 
-	// 	var orderInformation = new cybersourceRestApi.Ptsv2paymentsOrderInformation();
-	// 	var orderInformationAmountDetails = new cybersourceRestApi.Ptsv2paymentsOrderInformationAmountDetails();
-	// 	orderInformationAmountDetails.totalAmount = totalAmount;
-	// 	orderInformationAmountDetails.currency = currency;
-	// 	orderInformation.amountDetails = orderInformationAmountDetails;
+		var orderInformation = new cybersourceRestApi.Ptsv2paymentsOrderInformation();
+		var orderInformationAmountDetails = new cybersourceRestApi.Ptsv2paymentsOrderInformationAmountDetails();
+		orderInformationAmountDetails.totalAmount = totalAmount;
+		orderInformationAmountDetails.currency = currency;
+		orderInformation.amountDetails = orderInformationAmountDetails;
 
-	// 	var orderInformationBillTo = new cybersourceRestApi.Ptsv2paymentsOrderInformationBillTo();
-	// 	orderInformationBillTo.firstName = firstName;
-	// 	orderInformationBillTo.lastName = lastName;
-	// 	orderInformationBillTo.address1 = address1;
-	// 	orderInformationBillTo.address2 = address2;
-	// 	orderInformationBillTo.locality = locality;
-	// 	orderInformationBillTo.administrativeArea = administrativeArea;
-	// 	orderInformationBillTo.postalCode = postalCode;
-	// 	orderInformationBillTo.country = country;
-	// 	orderInformationBillTo.email = email;
-	// 	orderInformationBillTo.phoneNumber = phoneNumber;
-	// 	orderInformation.billTo = orderInformationBillTo;
+		var orderInformationBillTo = new cybersourceRestApi.Ptsv2paymentsOrderInformationBillTo();
+		orderInformationBillTo.firstName = firstName;
+		orderInformationBillTo.lastName = lastName;
+		orderInformationBillTo.address1 = address1;
+		orderInformationBillTo.address2 = address2;
+		orderInformationBillTo.locality = locality;
+		orderInformationBillTo.administrativeArea = administrativeArea;
+		orderInformationBillTo.postalCode = postalCode;
+		orderInformationBillTo.country = country;
+		orderInformationBillTo.email = email;
+		orderInformationBillTo.phoneNumber = phoneNumber;
+		orderInformation.billTo = orderInformationBillTo;
 
-	// 	requestObj.orderInformation = orderInformation;
+		requestObj.orderInformation = orderInformation;
 
-	// 	var instance = new cybersourceRestApi.PaymentsApi(configObject, apiClient);
-	// 	var cap_instance = new cybersourceRestApi.CaptureApi(configObject, apiClient);
+		var instance = new cybersourceRestApi.PaymentsApi(configObject, apiClient);
+		var cap_instance = new cybersourceRestApi.CaptureApi(configObject, apiClient);
 
-	// 	instance.createPayment(requestObj, function (error, data, response) {
-	// 		if (error) {
-	// 			console.log('\nError : ' + JSON.stringify(error));
-	// 		}
-	// 		else if (data) {
-	// 			var id = data['id'];
-	// 			console.log('\n*************** Capture Payment *********************');
-	// 			console.log('Payment ID passing to capturePayment : ' + id);
+		instance.createPayment(requestObj, function (error, data, response) {
+			if (error) {
+				console.log('\nError : ' + JSON.stringify(error));
+			}
+			else if (data) {
+				var id = data['id'];
+				console.log('\n*************** Capture Payment *********************');
+				console.log('Payment ID passing to capturePayment : ' + id);
 
-	// 			cap_instance.capturePayment(requestObj, id, function (error, data, response) {
-	// 				if (error) {
-	// 					console.log('\nError : ' + JSON.stringify(error));
-	// 				}
-	// 				else if (data) {
-	// 					console.log("Capture Payment sucess: \n");
-	// 					console.log('\nData : ' + JSON.stringify(data));
-	// 				}
+				cap_instance.capturePayment(requestObj, id, function (error, data, response) {
+					if (error) {
+						console.log('\nError : ' + JSON.stringify(error));
+					}
+					else if (data) {
+						console.log("Capture Payment sucess: \n");
+						console.log('\nData : ' + JSON.stringify(data));
+					}
 
-	// 				console.log('\nResponse : ' + JSON.stringify(response));
-	//                   console.log('\nResponse Code of Capture a Payment : ' + JSON.stringify(response['status']));
+					console.log('\nResponse : ' + JSON.stringify(response));
+	                  console.log('\nResponse Code of Capture a Payment : ' + JSON.stringify(response['status']));
 
-	//                       resp.json({ success: true });
+	                      resp.json({ success: true });
 
-	// 				callback(error, data, response);
-	// 			});
-	// 		}
+					callback(error, data, response);
+				});
+			}
 
-	// 		console.log('\nResponse : ' + JSON.stringify(response));
-	// 		console.log('\nResponse Code of Process a Payment : ' + JSON.stringify(response['status']));
-	//           resp.json({ success: true });
+			console.log('\nResponse : ' + JSON.stringify(response));
+			console.log('\nResponse Code of Process a Payment : ' + JSON.stringify(response['status']));
+	          resp.json({ success: true });
 
-	//           callback(error, data, response);
-	//           resp.json({ success: true });
+	          callback(error, data, response);
+	          resp.json({ success: true });
 
-	// 	});
-	// }
-	// catch (error) {
-	//       console.log('\nException on calling the API : ' + error);
-	//       resp.json({sucess:false})
-	// }
+		});
+
+		const new_order = await client.query("INSERT INTO orders (cust_id, order_date, status) VALUES(" + request.body.cust_id + ", CURRENT_TIMESTAMP, TRUE) ;");
+		const new_order_results = await client.query("SELECT orders.order_id FROM orders WHERE orders.cust_id = " + request.body.cust_id + " ORDER BY orders.order_id DESC LIMIT 1;");
+		var new_order_id = new_order_results.rows[0].order_id;
+		for (var id = 0; i < request.body.cart.length; id++){
+			client.query("INSERT INTO orderitems (item_id, order_id, quantity) VALUES ( "+ request.body.cart[id].itemId + ","+  new_order_id + ","+request.body.cart[id].quantity +");");
+		}
+
+	}
+	catch (error) {
+	      console.log('\nException on calling the API : ' + error);
+	      resp.json({sucess:false})
+	}
 };
 
 // async function simple_authorization_internet(callback, enable_capture, request) {
