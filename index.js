@@ -221,7 +221,10 @@ app.get('/nearby-merchants', function(request, response) {
 	
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7ba407af175ef39991a96a8069ceaa9d8523a752
 //PUT put in database merch_id, visa merch id, shared key, id
 app.put('/merchant-setting', function(request, response) {
 	var add_query = "UPDATE merchant SET visa_merchant_id='" + request.body.visa_merchant_id + "', key_id='" + request.body.key_id + "', shared_key='" + request.body.shared_key + "' WHERE merch_id='" + request.body.merch_id + "';"
