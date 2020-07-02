@@ -2,19 +2,6 @@
 window.onload = function () {
 
 
-    function get_session() {
-      
-        return fetch('/Session', {
-            headers: { 'Content-Type': 'application/json' },
-            method: 'get'
-        })
-            .then(function(response)  {
-                console.log(response)
-
-                return response
-            })
-
-    }
     function get_items(){
         console.log("Getting items");
         return fetch(`/merchant-items?merch_id=${localStorage.merch_id}`, {
@@ -171,19 +158,7 @@ window.onload = function () {
         })
     
 
-    get_session()
-    .then(function (res) {
-        console.log(res)
-        if (res["status"] == 200) {
-            get_items().then(function(res){
-                console.log(res)
-            })
-            login_view.style.display = "none"
-            item_page_view.style.display = "block"
-            log_out.style.display = "block"
-            header_view.style.display = "block"
-        }
-    })
+
 
 
 
@@ -247,6 +222,7 @@ window.onload = function () {
                 }
 
             })
+            get_items();
 
 
 
