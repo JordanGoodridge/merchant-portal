@@ -24,12 +24,13 @@ window.onload = function () {
 
     function populate_item_table(data){
         // items_table_view
+        let item_table = document.getElementById("items_table_view");
+        item_table.innerHTML = "";
         if(data == undefined)
         {
             return;
         }
-        let item_table = document.getElementById("items_table_view");
-        item_table.innerHTML = "";
+
 
         let item_list = data['items'];
 
@@ -103,7 +104,10 @@ window.onload = function () {
                 console.log(this.parentNode.parentNode.getAttribute("item_id"));
                 let item_id = this.parentNode.parentNode.getAttribute("item_id")
                 console.log(item_id);
-                delete_item(item_id);
+                delete_item(item_id).then(function(e){
+                    get_items();
+                });
+                
             })
 
 
@@ -118,7 +122,6 @@ window.onload = function () {
             method: 'delete',
             body: JSON.stringify({item_id: item_rem_id, merch_id: localStorage.merch_id})
         }).then(function(response)  {
-            get_items();
             return;
         })
 
